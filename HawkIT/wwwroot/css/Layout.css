@@ -1,2 +1,129 @@
-﻿body {
+﻿*{
+    padding: 0;
+    margin: 0;
+
 }
+
+
+body {
+    padding: 1px;
+    font-family: 'Tektur', cursive;
+    background: #000;
+}
+
+
+
+/*  начинается  header  */
+
+
+
+.header{
+    width: 1120px;
+    margin: 0 auto;
+    margin-top: 24px;
+   
+}
+
+
+
+.header__inner{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+/*  лого в header   */
+
+
+.header__inner__logo{
+    width: 128px;
+    height: 24px;
+}
+
+
+
+.header__inner__contact{
+    display: flex; 
+    justify-content: space-between
+}
+
+
+.header__inner__contact__txt{
+    font-size: 16px;
+    color: #fff;
+    margin-top: 3px;
+    margin-right: 32px;
+}
+
+
+
+.header__inner__contact__call{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.header__inner__contact__call__img{
+    width: 16px;
+    height: 16px;
+    margin-top: 6px;
+    margin-right: 8px;
+
+}
+
+
+
+.header__inner__contact__call__number{
+    font-size: 16px;
+    color: #fff;
+    margin-top: 3px;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  footer  */
+
+.footer{
+    width: 1120px;
+    height: 72px;
+    margin: 0 auto;
+    margin-top: 160px;
+}
+
+
+
+.footer__inner{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
+.footer__inner__desc{
+    color: #fff;
+    font-size: 16px;
+    margin-top: 24px;
+}
+
+
+.button__type1{
+    border: 1px solid #fff;
+    padding: 12px 16px;
+    color: #fff;
+    border-radius: 4px;
+    margin-top: 12px;
+}
+

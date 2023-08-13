@@ -5,18 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HawkIT</title>
     <link rel="stylesheet" href="~/css/Layout.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur&display=swap" rel="stylesheet">
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-    <header>
-        
+
+    @*  начинается header   *@
+
+    <header class="header">
+        <div class="header__inner">
+
+            @*  логотип  *@
+
+            <img src="~/img/logo.svg" class="header__inner__logo"/>
+
+            <div class="header__inner__contact">
+                <div class="header__inner__contact__txt">Свяжитесь с нами</div>
+
+                <div class="header__inner__contact__call">
+                    <img src="~/img/phone.svg" class="header__inner__contact__call__img"/>
+
+                    <div class="header__inner__contact__call__number">8 (928) 937–16–30</div>
+                </div>
+            </div>
+        </div>
     </header>
+
+
     <div>
             @RenderBody()
     </div>
 
-    <footer>
 
+    @*  начинается footer   *@
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__inner__desc">© 2023 HAWKIT. All rights reserved.</div>
+
+            @*  button__type1   *@
+
+            <div class="button__type1">Обсудить проект</div>
+        </div>
     </footer>
 
     @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
