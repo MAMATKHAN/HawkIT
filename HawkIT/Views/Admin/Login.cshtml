@@ -1,4 +1,5 @@
-﻿
+﻿@model LoginModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = null;
 }
@@ -14,23 +15,29 @@
 <body>
     <div class="w-25 mx-auto mt-5 pt-5">
         <h2 class="text-center mb-5">Admin Panel</h2>
-        <form>
+        <form method="post">
             <!-- Email input -->
             <div class="form-outline mb-2">
-                <label class="form-label" for="form2Example1">Login</label>
-                <input type="email" id="form2Example1" class="form-control" />
+                <label class="form-label" asp-for="Login">Login</label>
+                <input type="text" id="Login" name="Login" class="form-control" asp-for="Login" />
+                <span asp-validation-for="Login" />
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-2">
-                <label class="form-label" for="form2Example2">Password</label>
-                <input type="password" id="form2Example2" class="form-control" />
+                <label class="form-label" asp-for="Password">Password</label>
+                <input type="password" id="Password" name="Password" class="form-control" asp-for="Password" />
+                <span asp-validation-for="Password" />
             </div>
 
             <!-- Submit button -->
-            <button type="button" class="btn btn-primary btn-block">Sign in</button>
+            <input type="submit" class="btn btn-primary btn-block" value="Sign In"/>
 
         </form>
     </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>
