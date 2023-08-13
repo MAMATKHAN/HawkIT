@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/validation-style.css" />
 </head>
 <body>
     <div class="w-25 mx-auto mt-5 pt-5">
@@ -18,16 +19,14 @@
         <form method="post">
             <!-- Email input -->
             <div class="form-outline mb-2">
-                <label class="form-label" asp-for="Login">Login</label>
+                <label class="form-label" asp-for="Login">Login <span class="ms-3" asp-validation-for="Login" /></label>
                 <input type="text" id="Login" name="Login" class="form-control" asp-for="Login" />
-                <span asp-validation-for="Login" />
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-2">
-                <label class="form-label" asp-for="Password">Password</label>
+                <label class="form-label" asp-for="Password">Password <span class="ms-3" asp-validation-for="Password" /></label>
                 <input type="password" id="Password" name="Password" class="form-control" asp-for="Password" />
-                <span asp-validation-for="Password" />
             </div>
 
             <!-- Submit button -->
@@ -38,6 +37,8 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 </body>
 </html>

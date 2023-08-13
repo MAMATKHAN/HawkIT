@@ -14,8 +14,11 @@ namespace HawkIT.Controllers
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
-
-            return RedirectToAction("Index", "Admin");
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            return View();
         }
 
         public IActionResult Index()
