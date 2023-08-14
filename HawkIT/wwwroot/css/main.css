@@ -1,4 +1,104 @@
 ﻿
+/*  intro   */
 
-body {
+/*  intro   */
+
+
+.intro{
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
+
+
+.intro__gif {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    pointer-events: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+
+.intro__logo{
+    width: 533px;
+    height: 145px;
+    margin: 0 auto;
+}
+
+
+
+.intro__txt{
+    font-size: 24px;
+    margin: 0 auto;
+    margin-top: 17px;
+    color: #fff;        
+}
+
+
+
+.intro__mouse {
+    width: 0px;
+    padding: 8px 10px 18px 10px;
+    position: relative;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    margin: 0 auto;
+    margin-top: 64px;
+}
+
+
+.intro__mouse__scroll {
+    width: 2px;
+    height: 6px;
+    position: absolute;
+    left: 9px;
+    top: 8px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+
+
+.intro__mouse__scroll__active {
+    height: 11px;
+    transition: all 0.3s ease;
+}
+
+
+
+
+/*  made   */
+
+
+.made{
+    margin-top: 172px;
+}
+
+
+
+.made__txt{
+    font-size: 36px;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+
+
+.made__btn__line{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+
+}
+
+
+
