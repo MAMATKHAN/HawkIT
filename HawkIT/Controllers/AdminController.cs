@@ -1,19 +1,25 @@
 ﻿using HawkIT.Models;
+using HawkIT.ViewModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting.Internal;
 using System.Security.Claims;
+
 
 namespace HawkIT.Controllers
 {
     public class AdminController : Controller
     {
         private readonly HawkitDbContext db;
+        private readonly IWebHostEnvironment _env;
 
-        public AdminController(HawkitDbContext context)
+        public AdminController(HawkitDbContext context, IWebHostEnvironment env)
         {
             db = context;
+            _env = env;
         }
 
         [HttpGet]
@@ -65,12 +71,16 @@ namespace HawkIT.Controllers
 
 
         // Tag CRUD
-        [Authorize]
-        public IActionResult ListTags()
+        [Authorize, HttpGet]
+        public IActionResult ListTags(string? searchString)
         {
-            var tags = db.Tags.ToList();
+            List<Tag> tags;
+            if (string.IsNullOrEmpty(searchString)) tags = db.Tags.ToList();
+            else tags = db.Tags.Where(t => t.Name.Contains(searchString)).ToList();
+
             return View(tags);
         }
+
 
         [Authorize, HttpGet]
         public IActionResult AddTag()
@@ -92,9 +102,11 @@ namespace HawkIT.Controllers
         public IActionResult DeleteTag(int id)
         {
             var tag = db.Tags.Find(id);
-            db.Tags.Remove(tag);
-            db.SaveChanges();
-
+            if(tag != null)
+            {
+                db.Tags.Remove(tag);
+                db.SaveChanges();
+            }
             return RedirectToAction("ListTags", "Admin");
         }
 
@@ -115,10 +127,50 @@ namespace HawkIT.Controllers
             return RedirectToAction("ListTags", "Admin");
         }
 
+        // Article CRUD
         [Authorize]
         public IActionResult ListArticles()
         {
+            var a = db.Articles;
+            var articles = db.Articles.Include(a => a.Tags).ToList();
+            var tags = db.Tags.ToList();
+            
+
+
+            var adminArticleViewModel = new AdminArticleViewModel { Articles = articles, Tags = tags };
+            return View(adminArticleViewModel);
+        }
+
+        [Authorize, HttpGet]
+        public IActionResult AddArticle()
+        {
+            var tags = db.Tags.ToList();
+            ViewData["Tags"] = tags;
             return View();
+        }
+
+        [Authorize, HttpPost]
+        public IActionResult AddArticle(Article article)
+        {
+
+            if(article.ImageFile != null)
+            {
+                var uniqueFileName = GetUniqueFileName(article.ImageFile.FileName);
+                var filePath = GetFullPathUpload(uniqueFileName, "articles");
+                article.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                article.ArticleImage = uniqueFileName;
+            }
+
+            foreach (var tag in Request.Form["tags"])
+            {
+                article.Tags.Add(db.Tags.Find(int.Parse(tag)));
+            }
+
+            article.CreatedDate = DateTime.Now;
+
+            db.Articles.Add(article);
+            db.SaveChanges();
+            return RedirectToAction("ListArticles", "Admin");
         }
 
         [Authorize]
@@ -127,9 +179,20 @@ namespace HawkIT.Controllers
             return View();
         }
 
-        
+        private string GetFullPathUpload(string fileName, string folderName = "")
+        {
+            var uploads = Path.Combine(_env.WebRootPath, $"uploads{"\\" + folderName}");
+            var filePath = Path.Combine(uploads, fileName);
+            return filePath;
+        }
 
-
-        
+        private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                      + "_"
+                      + Guid.NewGuid().ToString().Substring(0, 4)
+                      + Path.GetExtension(fileName);
+        }
     }
 }
