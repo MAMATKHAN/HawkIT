@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting.Internal;
+using System.Linq;
 using System.Security.Claims;
+
 
 
 namespace HawkIT.Controllers
@@ -76,7 +78,7 @@ namespace HawkIT.Controllers
         {
             List<Tag> tags;
             if (string.IsNullOrEmpty(searchString)) tags = db.Tags.ToList();
-            else tags = db.Tags.Where(t => t.Name.Contains(searchString)).ToList();
+            else tags = db.Tags.Where(t => t.Name.ToLower().Contains(searchString.ToLower())).ToList();
 
             return View(tags);
         }
@@ -129,12 +131,17 @@ namespace HawkIT.Controllers
 
         // Article CRUD
         [Authorize]
-        public IActionResult ListArticles()
+        public IActionResult ListArticles(string? articleName, int? tagId)
         {
-            var a = db.Articles;
             var articles = db.Articles.Include(a => a.Tags).ToList();
             var tags = db.Tags.ToList();
             
+            if (articleName != null) articles = articles.Where(a => a.Title.ToLower().Contains(articleName.ToLower())).ToList();
+            if (tagId != null && tagId != -1)
+            {
+                var tag = db.Tags.Find(tagId);
+                articles = articles.Where(a => a.Tags.Contains(tag)).ToList();
+            }
 
 
             var adminArticleViewModel = new AdminArticleViewModel { Articles = articles, Tags = tags };
@@ -156,9 +163,9 @@ namespace HawkIT.Controllers
             if(article.ImageFile != null)
             {
                 var uniqueFileName = GetUniqueFileName(article.ImageFile.FileName);
-                var filePath = GetFullPathUpload(uniqueFileName, "articles");
+                var filePath = GetFullPathUploadFile(uniqueFileName, "articles");
                 article.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
-                article.ArticleImage = uniqueFileName;
+                article.ArticleImage = "/uploads/articles/" + uniqueFileName;
             }
 
             foreach (var tag in Request.Form["tags"])
@@ -173,13 +180,65 @@ namespace HawkIT.Controllers
             return RedirectToAction("ListArticles", "Admin");
         }
 
+        [Authorize, HttpGet]
+        public IActionResult EditArticle(int id)
+        {
+            var article = db.Articles.Include(a => a.Tags).ToList().Find(a => a.Id == id);
+
+            var tags = db.Tags.ToList();
+            ViewData["Tags"] = tags;
+
+            return View(article);
+        }
+
+        [Authorize, HttpPost]
+        public IActionResult EditArticle(Article a)
+        {
+            var article = db.Articles.Include(art => art.Tags).First(art => art.Id == a.Id);
+            article.Tags = new List<Tag>();
+            if (a.ImageFile != null)
+            {
+                var imageName = a.ArticleImage.Split("/").Last();
+                DeleteUploadFile(imageName, "articles");
+                var uniqueFileName = GetUniqueFileName(a.ImageFile.FileName);
+                var filePath = GetFullPathUploadFile(uniqueFileName, "articles");
+                a.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                article.ArticleImage = "/uploads/articles/" + uniqueFileName;
+            }
+            
+
+            foreach (var tag in Request.Form["tags"])
+            {
+                article.Tags.Add(db.Tags.Find(int.Parse(tag)));
+            }
+
+            db.Articles.Update(article);
+            db.SaveChanges();
+            return RedirectToAction("ListArticles", "Admin");
+        }
+
+        [Authorize]
+        public IActionResult DeleteArticle(int id)
+        {
+            var article = db.Articles.Find(id);
+
+            if (article != null)
+            {
+                var imageName = article.ArticleImage.Split("/").Last();
+                DeleteUploadFile(imageName, "articles");
+                db.Articles.Remove(article);
+            }
+            db.SaveChanges();
+            return RedirectToAction("ListArticles", "Admin");
+        }
+
         [Authorize]
         public IActionResult AddProject()
         {
             return View();
         }
 
-        private string GetFullPathUpload(string fileName, string folderName = "")
+        private string GetFullPathUploadFile(string fileName, string folderName = "")
         {
             var uploads = Path.Combine(_env.WebRootPath, $"uploads{"\\" + folderName}");
             var filePath = Path.Combine(uploads, fileName);
@@ -193,6 +252,16 @@ namespace HawkIT.Controllers
                       + "_"
                       + Guid.NewGuid().ToString().Substring(0, 4)
                       + Path.GetExtension(fileName);
+        }
+
+        private void DeleteUploadFile(string fileName, string folderName = "")
+        {
+            var uploads = Path.Combine(_env.WebRootPath, $"uploads{"\\" + folderName}");
+            var filePath = Path.Combine(uploads, fileName);
+            if(System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
         }
     }
 }
