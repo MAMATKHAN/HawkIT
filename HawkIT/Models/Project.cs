@@ -1,4 +1,6 @@
-﻿namespace HawkIT.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HawkIT.Models
 {
     public class Project
     {
@@ -7,7 +9,9 @@
         public string? Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Images { get; set; }
-        public List<Tag>? Tags { get; set; }
+        public List<Tag> Tags { get; set; }
         public List<Worker> Workers { get; set; }
+        [NotMapped]
+        public IFormFile formFile { get; set; }
     }
 }

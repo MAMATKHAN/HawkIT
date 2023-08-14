@@ -1,0 +1,94 @@
+﻿@model HawkIT.Models.Project
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+</head>
+<body>
+    <a asp-action="Logout" asp-controller="Admin">Выйти</a>
+
+    <div class="container">
+        <div class="container">
+            <div class="card rounded-0">
+                <ul class="nav nav-pills nav-justified bg-light rounded-0">
+                    <li class="nav-item">
+                        <a class="nav-link rounded-0 active" aria-current="page" asp-action="ListProjects" asp-controller="Admin">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded-0" asp-action="ListWorkers" asp-controller="Admin">Workers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded-0" asp-action="ListTags" asp-controller="Admin">Tags</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link rounded-0" asp-action="ListArticles" asp-controller="Admin">Articles</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container my-4">
+        <div class="container">
+            <div class="card">
+
+                <div class="card-header bg-light">
+                    <strong>Просмотр таблицы Projects</strong>
+                    <a class="float-end btn btn-dark btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                        Добавить проект
+                    </a>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form asp-action="AddProject">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Name" class="control-label"></label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Description" class="control-label"></label>
+                                    <input asp-for="Description" class="form-control" rows="3" />
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Example file input</label>
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div>
+                <a asp-controller="Admin" asp-action="ListProjects">Back to List</a>
+            </div>
+        </div>
+    </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

@@ -12,6 +12,7 @@ namespace HawkIT.Models
 
         public HawkitDbContext(DbContextOptions<HawkitDbContext> options) : base(options)
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
     }

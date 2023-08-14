@@ -1,8 +1,11 @@
-﻿namespace HawkIT.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HawkIT.Models
 {
     public class Tag
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Не указан тэг")]
         public string Name { get; set; }
         public List<Article>? Articles { get; set; }
         public List<Project>? Projects { get; set; }
