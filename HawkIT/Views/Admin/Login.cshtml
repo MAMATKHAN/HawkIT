@@ -17,6 +17,7 @@
     <div class="w-25 mx-auto mt-5 pt-5">
         <h2 class="text-center mb-5">Admin Panel</h2>
         <form method="post">
+            <div asp-validation-summary="All"></div>
             <!-- Email input -->
             <div class="form-outline mb-2">
                 <label class="form-label" asp-for="Login">Login <span class="ms-3" asp-validation-for="Login" /></label>

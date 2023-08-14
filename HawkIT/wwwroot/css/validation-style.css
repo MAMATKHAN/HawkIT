@@ -15,3 +15,9 @@ input.input-validation-error:focus{
 .validation-summary-errors {
     color: #b94a48;
 }
+
+.validation-summary-errors > ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
