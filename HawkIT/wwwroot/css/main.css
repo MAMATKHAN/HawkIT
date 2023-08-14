@@ -1,5 +1,4 @@
 ﻿
-/*  intro   */
 
 /*  intro   */
 
@@ -102,3 +101,174 @@
 
 
 
+.made__cardline{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+
+
+
+.made__card {
+    width: 544px;
+    height: 540px;
+    margin-bottom: 32px;
+    border-radius: 8px;
+    background-color: #151515;
+    
+}
+
+
+
+.made__card__setting {
+    width: 543px;
+    height: 539px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+}
+
+
+
+
+.made__card__setting:hover{
+    border: 1px solid #FFF;
+    transition: all 0.3s ease;
+}
+
+
+
+.made__card:nth-child(2n+1){
+    margin-right: 32px;
+}
+
+
+
+.made__card__inner {
+    margin: 16px;
+}
+
+
+.made__card__inner__recent {
+    width: 100%;
+    font-size: 16px;
+    color: #D1FB52;
+    font-weight: 600;
+    text-align: right;
+
+}
+
+
+
+.made__card__inner__img {
+    width: 328px;
+    height: 360px;
+    margin: 0 auto;
+    margin-top: 26px;
+}
+
+
+
+.made__card__inner__img__in{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.made__card__inner__name {
+    font-size: 24px;
+    font-weight: 400;
+    color: #fff;
+    margin-top: 26px;
+    
+}
+
+
+
+.made__card__inner__type{
+    display: flex;
+    justify-content: left;
+    margin-top: 8px;
+}
+
+
+.made__card__inner__type__txt {
+    padding: 8px 9.72px 8px 8px;
+    background-color: #303030;
+    color: #BBBBBB;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+
+
+/*  Баннер  */
+
+
+
+.banner {
+    width: 1120px;
+    height: 340px;
+    background-color: #151515;
+    overflow: hidden;
+    margin-top: 86px;
+    border-radius: 12px;
+}
+
+
+
+.banner__inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 12px;
+}
+
+
+
+.banner__inner__backgr {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 0;
+    position: absolute;
+    transition: all 0.5s ease;
+    border-radius: 12px;
+}
+
+
+.banner__inner__txt{
+    position: absolute;
+    width: 100%;
+    font-size: 100px;
+    font-weight: 600;
+    text-align: center;
+    top: 16px;
+    color: #fff;
+    z-index: 1;
+
+}
+
+
+
+.banner__inner__img {
+    position: absolute;
+    top: 181px;
+    left: 416.87px;
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+
+
+.banner__inner:hover > .banner__inner__backgr{
+    opacity: 1;
+}
+
+
+.banner__inner:hover > .banner__inner__img {
+    top: 107px;
+}

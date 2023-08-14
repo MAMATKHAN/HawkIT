@@ -21,6 +21,7 @@
 </div>
 
 
+@* Что-то на подобии портфолио *@
 
 @*  made  *@
 
@@ -49,4 +50,52 @@
         <div class="button__type2">Логотипы</div>
     </div>
 
+    <div class="made__cardline">
+        @for(int i = 0; i < 8; i++)
+        {
+
+            @* Карточки с проделанными работами *@
+
+            <a class="made__card">
+                <div class="made__card__setting">
+                    <div class="made__card__inner">
+                        <div class="made__card__inner__recent">new</div>
+
+                        <div class="made__card__inner__img">
+                            <img src="~/img/Kino.svg" class="made__card__inner__img__in">
+                        </div>
+
+                        <div class="made__card__inner__name">Kino</div>
+
+                        <div class="made__card__inner__type">
+                            <div class="made__card__inner__type__txt">Логотип</div>
+
+                            <div class="made__card__inner__type__txt">Мобильное приложение</div>
+
+                            <div class="made__card__inner__type__txt">Аналитика</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
 </div>
+
+
+@*  Баннер  *@
+
+
+<div class="banner">
+    <div class="banner__inner">
+        <img src="~/img/banner_backgr.png" class="banner__inner__backgr"/>
+
+        <div class="banner__inner__txt">Мы в инсте</div>
+
+        <img src="~/img/banner_insta.png" class="banner__inner__img"/>
+    </div>
+</div>
+
+
+
+
+@section Scripts{<script href="~/js/base.js"></script>}
