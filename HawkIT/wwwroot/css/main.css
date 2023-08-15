@@ -272,3 +272,285 @@
 .banner__inner:hover > .banner__inner__img {
     top: 107px;
 }
+
+
+
+
+/*  info   */
+
+
+/*   В самом конце info будет ее состояние info__active   */
+
+
+.info{
+    margin-top: 118px;
+}
+
+
+.info__txt{
+    font-size: 36px;
+    font-weight: 600;
+    color: #fff;
+}
+
+
+.info__line{
+    margin-top: 4px;
+    display: flex;
+    justify-content: left;
+
+}
+
+
+.info__line__btn {
+    padding: 8px 18.2px 7.19px 17px;
+    color: #fff;
+    background-color: #303030;
+    font-size: 16px;
+    margin-right: 16px;
+    border-radius: 4px;
+    margin-top: 16px;
+    transition: all 0.3s ease;
+}
+
+
+.info__line__btn__active {
+    background-color: #fff;
+    color: #151515;
+    font-weight: 400;
+}
+
+
+
+/*     info__service    */
+
+/*     информация о услугах    */
+
+
+.info__service {
+    margin-top: 12px;
+    display: none;
+    opacity: 0;
+    color: #fff;
+    transition: all 0.4s ease;
+}
+
+
+
+.info__service__artic{
+
+}
+
+
+.info__service__artic__title{
+    display: flex;
+    justify-content: left;
+    margin-top: 24px;
+}
+
+
+
+.info__service__artic__title__txt {
+    font-size: 24px;
+    margin-right: 3px;
+    
+    
+}
+
+
+
+.info__service__artic__title__img {
+    
+}
+
+
+
+.info__service__artic__txt {
+    font-size: 20px;
+    color: #BBB;
+    margin-top: 12px;
+}
+
+
+
+
+
+/*   info__team   */
+
+/*   информация о команде   */
+
+
+.info__team {
+    margin-top: 36px;
+    color: #fff;
+    display: none;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.info__team__inner {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.info__team__card{
+    margin-right: 24px;
+    margin-bottom: 24px;
+    width: 256px;
+    height: 312px;
+    padding-top: 1px;
+    position: relative;
+    
+}
+
+
+.info__team__card__img{
+    width: 253px;
+    height: 250px;
+    margin-left: 1px;
+    position: absolute;
+    top: 1px;
+}
+
+
+.info__team__card__block{
+    width: 254px;
+    height: 62px;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    margin-top: 250px;
+}
+
+
+.info__team__card__block__inner{
+    display: flex;
+    justify-content: left;
+    margin-left: 16px;
+    margin-top: 12px;
+}
+
+
+.info__team__card__block__inner__img{
+    width: 37px;
+    height: 37px;
+    margin-right: 12px;
+}
+
+
+
+.info__team__card__block__inner__txt{
+
+}
+
+
+.info__team__card__block__inner__txt__pos {
+    font-size: 16px;
+}
+
+
+.info__team__card__block__inner__txt__name {
+    font-size: 14px;
+    color: #9C9C9C;
+}
+
+
+
+
+/*   info__mission   */
+
+/*   Информация о миссии   */
+
+
+.info__mission {
+    margin-top: 36px;
+    color: #BBB;
+    font-size: 20px;
+    display: none;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+
+
+/*   info__active   */
+
+
+.info__active {
+    display: block;
+    
+}
+
+
+.info__anime {
+    opacity: 1;
+}
+
+
+/*   blog   */
+
+/*   блог   */
+
+
+.blog{
+    margin-top: 116px;
+    color: #fff;
+}
+
+
+.blog__title{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.blog__title__txt {
+    font-size: 36px;
+    font-weight: 600;
+
+}
+
+
+
+.blog__title__btn {
+    border: 1px solid #fff;
+    padding: 12px 16px;
+    color: #fff;
+    border-radius: 4px;
+    margin-top: 12px;
+    transition: all 0.4s ease;
+}
+
+
+.blog__title__btn:hover{
+    color: #000;
+    background-color: #fff;
+}
+
+
+
+.blog__cardline{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+
+.blog__card{
+    width: 352px;
+    height: 389px;
+    margin-right: 32px;
+}
+
+
+.blog__card__img{
+    width: 352px;
+    height: 352px;
+
+}
+
+
+.blog__card__txt {
+    font-size: 16px;
+    margin-top: 16px;
+}
