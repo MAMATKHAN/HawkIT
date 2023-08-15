@@ -24,6 +24,7 @@ namespace HawkIT.Controllers
             _env = env;
         }
 
+        // AUTHENTICATION
         [HttpGet]
         public IActionResult Login()
         {
@@ -59,6 +60,7 @@ namespace HawkIT.Controllers
             return RedirectToAction("Login", "Admin");
         }
 
+        // Project CRUD
         [Authorize]
         public IActionResult ListProjects()
         {
@@ -66,11 +68,136 @@ namespace HawkIT.Controllers
         }
 
         [Authorize]
-        public IActionResult ListWorkers()
+        public IActionResult AddProject()
         {
             return View();
         }
 
+
+        // Worker CRUD
+        [Authorize, HttpGet]
+        public IActionResult ListWorkers(string? name,int? projectId, string? specialization)
+        {
+            var workers = db.Workers.Include(w => w.Projects).ToList();
+            var projects = db.Projects.ToList();
+
+            if(name != null) workers = workers.Where(w => w.Name.ToLower().Contains(name.ToLower())).ToList();
+            if(specialization != null) workers = workers.Where(w => w.Specialization.ToLower().Contains(specialization.ToLower())).ToList();
+            if(projectId != -1)
+            {
+                var project = db.Projects.Find(projectId);
+                workers = workers.Where(w => w.Projects.Contains(project)).ToList();
+            }
+
+            var adminWorkerViewModel = new AdminWorkerViewModel { Workers = workers, Projects = projects };
+            return View(adminWorkerViewModel);
+        }
+
+        [Authorize, HttpGet]
+        public IActionResult AddWorker()
+        {
+            var p = db.Projects.ToList();
+            ViewData["Projects"] = p;
+            return View();
+        }
+
+        [Authorize, HttpPost]
+        public IActionResult AddWorker(Worker worker)
+        {
+            if (worker.ImageFile != null)
+            {
+                var uniqueFileName = GetUniqueFileName(worker.ImageFile.FileName);
+                var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
+                worker.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                worker.WorkerImage = "/uploads/workers/" + uniqueFileName;
+            }
+
+            if (worker.IconFile != null)
+            {
+                var uniqueFileName = GetUniqueFileName(worker.IconFile.FileName);
+                var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
+                worker.IconFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                worker.SpecializationIcon = "/uploads/workers/" + uniqueFileName;
+            }
+
+            foreach (var projectId in Request.Form["projects"])
+            {
+                worker.Projects.Add(db.Projects.Find(int.Parse(projectId)));
+            }
+
+            db.Workers.Add(worker);
+            db.SaveChanges();
+            return RedirectToAction("ListWorkers", "Admin");
+        }
+
+        [Authorize, HttpGet]
+        public IActionResult EditWorker(int id)
+        {
+            var worker = db.Workers.Include(a => a.Projects).ToList().Find(w => w.Id == id);
+
+            var projects = db.Projects.ToList();
+            ViewData["Projects"] = projects;
+
+            return View(worker);
+        }
+
+
+
+        [Authorize, HttpPost]
+        public IActionResult EditWorker(Worker w)
+        {
+            var worker = db.Workers.Include(work => work.Projects).First(work => work.Id == w.Id);
+            worker.Projects = Request.Form["projects"].Count != 0? new List<Project>(): null;
+            if (w.ImageFile != null)
+            {
+                var imageName = worker.WorkerImage.Split("/").Last();
+                DeleteUploadFile(imageName, "workers");
+                var uniqueFileName = GetUniqueFileName(w.ImageFile.FileName);
+                var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
+                w.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                worker.WorkerImage = "/uploads/workers/" + uniqueFileName;
+            }
+
+            if (w.IconFile != null)
+            {
+                var imageName = worker.SpecializationIcon.Split("/").Last();
+                DeleteUploadFile(imageName, "workers");
+                var uniqueFileName = GetUniqueFileName(w.IconFile.FileName);
+                var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
+                w.IconFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                worker.SpecializationIcon = "/uploads/workers/" + uniqueFileName;
+            }
+
+
+            foreach (var project in Request.Form["projects"])
+            {
+                worker.Projects.Add(db.Projects.Find(int.Parse(project)));
+            }
+
+            worker.Name = w.Name;
+            worker.Specialization = w.Specialization;
+            db.Workers.Update(worker);
+            db.SaveChanges();
+
+            return RedirectToAction("ListWorkers", "Admin");
+        }
+
+        [Authorize, HttpGet]
+        public IActionResult DeleteWorker(int id)
+        {
+            var worker = db.Workers.Find(id);
+
+            if (worker != null)
+            {
+                var imageName = worker.WorkerImage.Split("/").Last();
+                var iconName = worker.SpecializationIcon.Split("/").Last();
+                DeleteUploadFile(imageName, "workers");
+                DeleteUploadFile(iconName, "workers");
+                db.Workers.Remove(worker);
+            }
+            db.SaveChanges();
+            return RedirectToAction("ListWorkers", "Admin");
+        }
 
         // Tag CRUD
         [Authorize, HttpGet]
@@ -195,7 +322,7 @@ namespace HawkIT.Controllers
         public IActionResult EditArticle(Article a)
         {
             var article = db.Articles.Include(art => art.Tags).First(art => art.Id == a.Id);
-            article.Tags = new List<Tag>();
+            article.Tags = Request.Form["tags"].Count != 0? new List<Tag>() : null;
             if (a.ImageFile != null)
             {
                 var imageName = a.ArticleImage.Split("/").Last();
@@ -212,6 +339,8 @@ namespace HawkIT.Controllers
                 article.Tags.Add(db.Tags.Find(int.Parse(tag)));
             }
 
+            article.Title = a.Title;
+            article.Text = a.Text;
             db.Articles.Update(article);
             db.SaveChanges();
             return RedirectToAction("ListArticles", "Admin");
@@ -232,12 +361,7 @@ namespace HawkIT.Controllers
             return RedirectToAction("ListArticles", "Admin");
         }
 
-        [Authorize]
-        public IActionResult AddProject()
-        {
-            return View();
-        }
-
+        
         private string GetFullPathUploadFile(string fileName, string folderName = "")
         {
             var uploads = Path.Combine(_env.WebRootPath, $"uploads{"\\" + folderName}");

@@ -29,7 +29,7 @@
                         <a class="nav-link rounded-0" asp-action="ListTags" asp-controller="Admin">Tags</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link rounded-0 active" aria-current="page" asp-action="ListArticles" asp-controller="Admin">Articles</a>
+                        <a class="nav-link rounded-0" asp-action="ListArticles" asp-controller="Admin">Articles</a>
                     </li>
                 </ul>
             </div>
@@ -87,9 +87,12 @@
                                     </label>
                                     <select multiple name="tags" class="form-control">
 
-                                        @foreach(var t in (IEnumerable<Tag>)ViewData["Tags"])
+                                        @if(ViewData["Tags"] != null)
                                         {
-                                            <option value="@t.Id">@t.Name</option>
+                                            @foreach (var t in (IEnumerable<Tag>)ViewData["Tags"])
+                                            {
+                                                <option value="@t.Id">@t.Name</option>
+                                            }
                                         }
                                     </select>
                                 </div>

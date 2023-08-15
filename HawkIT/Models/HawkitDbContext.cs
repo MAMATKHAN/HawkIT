@@ -8,7 +8,7 @@ namespace HawkIT.Models
         public DbSet<Project> Projects { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<Worker> Worker { get; set; }
+        public DbSet<Worker> Workers { get; set; }
 
         public HawkitDbContext(DbContextOptions<HawkitDbContext> options) : base(options)
         {

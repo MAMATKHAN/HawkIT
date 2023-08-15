@@ -136,26 +136,8 @@
                         {
                             <tr>
                                 <td align="center">@a.Id</td>
-                                <td align="center">
-                                    @if (a.Title.Length > 20)
-                                    {
-                                        @a.Title.Substring(0, 20)<span>...</span>
-                                    }
-                                    else
-                                    {
-                                        @a.Title
-                                    }
-                                </td>
-                                <td align="center">
-                                    @if (a.Title.Length > 20)
-                                    {
-                                        @a.Text.Substring(0, 20)<span>...</span>
-                                    }
-                                    else
-                                    {
-                                        @a.Text
-                                    }
-                                </td>
+                                <td align="center" class="text-truncate" style="max-width: 200px;">@a.Title</td>
+                                <td align="center" class="text-truncate" style="max-width: 200px;">@a.Text</td>
                                 <td align="center">@a.CreatedDate.ToLongDateString()</td>
                                 <td align="center">
                                     @if (a.Tags != null)
