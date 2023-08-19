@@ -11,7 +11,7 @@ namespace HawkIT.Models
         [Required(ErrorMessage = "Это поле обязательно должно быть заполнено")]
         public string Text { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string ProjectImage { get; set; }
+        public string? ProjectImage { get; set; }
         public List<Tag>? Tags { get; set; }
         [Required(ErrorMessage = "Это поле обязательно должно быть заполнено")]
         public List<Worker> Workers { get; set; }

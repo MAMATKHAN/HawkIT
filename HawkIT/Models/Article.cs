@@ -10,8 +10,7 @@ namespace HawkIT.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Это поле обязательно должно быть заполнено")]
         public string Text { get; set; }
-        [Required(ErrorMessage = "Это поле обязательно должно быть заполнено")]
-        public string ArticleImage { get; set; }
+        public string? ArticleImage { get; set; }
         public DateTime CreatedDate { get; set; }
         public List<Tag>? Tags { get; set; }
         [NotMapped, Required(ErrorMessage = "Пожалуйста выберите файл")]
