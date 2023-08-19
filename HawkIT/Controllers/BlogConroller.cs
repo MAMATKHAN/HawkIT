@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HawkIT.Controllers
 {
-    public class BlogConroller : Controller
+    public class BlogController : Controller
     {
         private readonly HawkitDbContext db;
-        public BlogConroller(HawkitDbContext context)
+        public BlogController(HawkitDbContext context)
         {
             db = context;
         }
