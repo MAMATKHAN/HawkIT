@@ -39,6 +39,61 @@
     </div>
 
 
+    @*   Форма для обсуждения   *@
+
+
+     <form class="form form__anime" action="GET">
+        <div class="form__title">
+            <div class="form__title__txt">Заполните форму для отправки заявки</div>
+
+            <img src="~/img/form_exit.png" class="form__title__img"/>
+        </div>
+
+        <div class="form__inner">
+            <div class="form__inner__top">
+                <div class="form__inner__top__inp">
+                    <div class="form__inner__top__inp__txt">Ваше имя*</div>
+                    <input id="name" class="form__inner__top__inp__value"/>
+                </div>
+
+                <div class="form__inner__top__inp">
+                    <div class="form__inner__top__inp__txt">Юзернейм в телеграм</div>
+                    <input id="username" class="form__inner__top__inp__value"/> 
+                </div>
+
+                <div class="form__inner__top__inp">
+                    <div class="form__inner__top__inp__txt">Электронная почта*</div>
+                    <input id="email" class="form__inner__top__inp__value"/>
+                </div>
+
+                <div class="form__inner__top__inp">
+                    <div class="form__inner__top__inp__txt">Номер телефона</div>
+                    <input id="number" class="form__inner__top__inp__value"/>
+                </div>
+            </div>
+
+            <div class="form__inner__txt">Расскажите о заявке</div>
+
+            <div class="form__inner__post">Не более 2000 символов</div>
+
+           
+            <div class="form__inner__comm" >
+                <textarea type="text" class="form__inner__comm__txt"></textarea>
+            </div>
+
+            <button type="submit" class="form__inner__btn">Отправить заявку</button>
+
+            <div class="form__inner__info">Нажимая кнопку «Отправить заявку», я даю своё согласие на 
+                <a class="form__inner__info__link">обработку персональных данных</a>
+            </div>
+        </div>
+
+    </form>
+
+
+
+
+
     @*  начинается footer   *@
 
     <footer class="footer">
@@ -55,6 +110,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>*@
 
+
+    <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

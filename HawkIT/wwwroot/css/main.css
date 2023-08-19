@@ -395,13 +395,18 @@
 }
 
 .info__team__card{
-    margin-right: 24px;
-    margin-bottom: 24px;
+    margin-right: 32px;
+    margin-bottom: 32px;
     width: 256px;
     height: 312px;
     padding-top: 1px;
     position: relative;
     
+}
+
+
+.info__team__card:nth-child(4n){
+    margin-right: 0px;
 }
 
 
@@ -495,6 +500,12 @@
 .blog{
     margin-top: 116px;
     color: #fff;
+    transition: all 0.4s ease;
+}
+
+
+.blog__anime{
+    margin-top: 150px;
 }
 
 
