@@ -88,7 +88,7 @@ namespace HawkIT.Controllers
                 var uniqueFileName = GetUniqueFileName(project.ImageFile.FileName);
                 var filePath = GetFullPathUploadFile(uniqueFileName, "projects");
                 project.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
-                project.Images = "/uploads/projects/" + uniqueFileName;
+                project.ProjectImage = "/uploads/projects/" + uniqueFileName;
             }
 
           
@@ -126,12 +126,12 @@ namespace HawkIT.Controllers
             var project = db.Projects.Include(proj => proj.Tags).Include(proj => proj.Workers).First(proj => proj.Id == p.Id);
             if (p.ImageFile != null)
             {
-                var imageName = project.Images.Split("/").Last();
+                var imageName = project.ProjectImage.Split("/").Last();
                 DeleteUploadFile(imageName, "projects");
                 var uniqueFileName = GetUniqueFileName(p.ImageFile.FileName);
                 var filePath = GetFullPathUploadFile(uniqueFileName, "projects");
                 p.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
-                project.Images = "/uploads/projects/" + uniqueFileName;
+                project.ProjectImage = "/uploads/projects/" + uniqueFileName;
             }
 
 
@@ -147,7 +147,7 @@ namespace HawkIT.Controllers
             }
 
             project.Name = p.Name;
-            project.Description = p.Description;
+            project.Text = p.Text;
             db.Projects.Update(project);
             db.SaveChanges();
             return RedirectToAction("ListProjects", "Admin");
@@ -160,7 +160,7 @@ namespace HawkIT.Controllers
 
             if (project != null)
             {
-                var imageName = project.Images.Split("/").Last();
+                var imageName = project.ProjectImage.Split("/").Last();
                 DeleteUploadFile(imageName, "projects");
                 db.Projects.Remove(project);
             }
@@ -359,7 +359,7 @@ namespace HawkIT.Controllers
             var articles = db.Articles.Include(p => p.Tags).ToList();
             var tags = db.Tags.ToList();
             
-            if (articleName != null) articles = articles.Where(a => a.Title.ToLower().Contains(articleName.ToLower())).ToList();
+            if (articleName != null) articles = articles.Where(a => a.Name.ToLower().Contains(articleName.ToLower())).ToList();
             if (tagId != null && tagId != -1)
             {
                 var tag = db.Tags.Find(tagId);
@@ -382,6 +382,7 @@ namespace HawkIT.Controllers
         [Authorize, HttpPost]
         public IActionResult AddArticle(Article article)
         {
+            
 
             if(article.ImageFile != null)
             {
@@ -438,7 +439,7 @@ namespace HawkIT.Controllers
                 article.Tags.Add(db.Tags.Find(int.Parse(tag)));
             }
 
-            article.Title = a.Title;
+            article.Name = a.Name;
             article.Text = a.Text;
             db.Articles.Update(article);
             db.SaveChanges();

@@ -16,5 +16,10 @@ namespace HawkIT.Controllers
             var articles = db.Articles.ToList();
             return View();
         }
+
+        public IActionResult Details()
+        {
+            return View();
+        }
     }
 }

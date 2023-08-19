@@ -135,7 +135,7 @@
                         <tr class="bg-primary text-white">
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Description</th>
+                            <th>Text</th>
                             <th>CreateDate</th>
                             <th>Tags</th>
                             <th>Workers</th>
@@ -149,7 +149,7 @@
                             <tr>
                                 <td align="center">@p.Id</td>
                                 <td align="center">@p.Name</td>
-                                <td align="center" class="text-truncate" style="max-width: 150px;">@p.Description</td>
+                                <td align="center" class="text-truncate" style="max-width: 150px;">@p.Text</td>
                                 <td align="center">@p.CreatedDate.ToLongDateString()</td>
                                 <td>
                                     @if (p.Tags != null && p.Tags.Count != 0)
