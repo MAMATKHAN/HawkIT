@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\uploads\articles\" />
     <Folder Include="wwwroot\uploads\workers\" />
+    <Folder Include="wwwroot\uploads\projects\" />
   </ItemGroup>
 
 </Project>

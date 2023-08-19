@@ -140,15 +140,17 @@
                                 <td align="center" class="text-truncate" style="max-width: 200px;">@a.Text</td>
                                 <td align="center">@a.CreatedDate.ToLongDateString()</td>
                                 <td align="center">
-                                    @if (a.Tags != null)
+                                    @if (a.Tags != null && a.Tags.Count != 0)
                                     {
                                         @foreach(var t in a.Tags)
                                         {
                                             @t.Name<span>   </span>
                                         }
                                     }
-                                    else {
-                                        <span>Not tags</span>}
+                                    else 
+                                    {
+                                        <span>Not tags</span>
+                                    }
                                 </td>
                                 <td align="center">
                                     <a asp-controller="Admin" asp-action="EditArticle" asp-route-id="@a.Id" class="link-primary text-decoration-none">
