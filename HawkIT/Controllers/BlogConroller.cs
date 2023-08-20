@@ -1,4 +1,5 @@
 ﻿using HawkIT.Models;
+using HawkIT.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,9 @@ namespace HawkIT.Controllers
         public IActionResult Details(int? id)
         {
             var article = db.Articles.Find(id);
-            return View(article);
+            var articles = db.Articles.OrderBy(a => a.CreatedDate).Take(3).ToList();
+            var articleDetailsViewModel = new ArticleDetailsViewModel() { Aritcle = article, MoreArticles = articles };
+            return View(articleDetailsViewModel);
         }
     }
 }
