@@ -1,5 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using HawkIT.ViewModel
+@model MainViewModel
+@{
+    ViewData["Title"] = "HawkIT";
+    var activeAll = (Model.ActiveTagId == null) ? "type2__active" : "";
 }
 
 @section Styles{<link rel="stylesheet" href="~/css/main.css" />}
@@ -29,50 +32,48 @@
 <div class="made">
     <div class="made__txt">Разработано в студии</div>
 
-    <div class="made__btn__line">
+    <div  class="made__btn__line">
 
         @*  button__type2   *@
 
-        <div class="button__type2 type2__active">Все</div>
+        <a asp-controller="Home" asp-action="Index" asp-route-id="@null" class="button__type2 @activeAll">Все</a>
+        @foreach(var tag in Model.Tags)
+        {
+            var tagActive = (tag.Id == Model.ActiveTagId) ? "type2__active" : "";
+            <a asp-controller="Home" asp-action="Index" asp-route-id="@tag.Id" class="button__type2 @tagActive">
+                @tag.Name
+            </a>
+        }
 
-        <div class="button__type2">Веб-приложения</div>
-
-        <div class="button__type2">Мобильные приложение</div>
-
-        <div class="button__type2">Аналитика</div>
-
-        <div class="button__type2">Дизайн интерфейсов</div>
-
-        <div class="button__type2">Редизайн</div>
-
-        <div class="button__type2">Инфографика</div>
-
-        <div class="button__type2">Логотипы</div>
     </div>
 
     <div class="made__cardline">
-        @for(int i = 0; i < 8; i++)
+        @foreach(var project in Model.Projects)
         {
 
             @* Карточки с проделанными работами *@
 
-            <a class="made__card">
+            <a asp-controller="Home" asp-action="ProjectDetails" asp-route-id="@project.Id" class="made__card">
                 <div class="made__card__setting">
                     <div class="made__card__inner">
                         <div class="made__card__inner__recent">new</div>
 
                         <div class="made__card__inner__img">
-                            <img src="~/img/Kino.svg" class="made__card__inner__img__in">
+                            <img src="@project.ProjectImage" class="made__card__inner__img__in">
                         </div>
 
-                        <div class="made__card__inner__name">Kino</div>
+                        <div class="made__card__inner__name">@project.Name</div>
 
                         <div class="made__card__inner__type">
-                            <div class="made__card__inner__type__txt">Логотип</div>
-
-                            <div class="made__card__inner__type__txt">Мобильное приложение</div>
-
-                            <div class="made__card__inner__type__txt">Аналитика</div>
+                            @if(project.Tags != null)
+                            {
+                                @foreach (var tag in project.Tags)
+                                {
+                                    <div class="made__card__inner__type__txt">@tag.Name</div>
+                                }
+                            }
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -158,26 +159,25 @@
     <div class="info__team">
         <div class="info__team__inner">
 
-            @*   Карточки с нами    *@
-
-            @for (int i = 0; i < 7; i++)
+            @foreach(var worker in Model.Workers)
             {
                 <div class="info__team__card">
-                    <img src="~/img/designer.png" class="info__team__card__img"/>
+                    <img src="@worker.WorkerImage" class="info__team__card__img" />
 
                     <div class="info__team__card__block">
                         <div class="info__team__card__block__inner">
-                            <img src="~/img/designer_icon.png" class="info__team__card__block__inner__img"/>
+                            <img src="@worker.SpecializationIcon" class="info__team__card__block__inner__img" />
 
                             <div class="info__team__card__block__inner__txt">
-                                <div class="info__team__card__block__inner__txt__pos">Designer</div>
+                                <div class="info__team__card__block__inner__txt__pos">@worker.Specialization</div>
 
-                                <div class="info__team__card__block__inner__txt__name">Магомедрасул</div>
+                                <div class="info__team__card__block__inner__txt__name">@worker.Name</div>
                             </div>
                         </div>
                     </div>
                 </div>
             }
+            
         </div>
     </div>
 
@@ -201,23 +201,16 @@
     </div>
 
     <div class="blog__cardline">
-        <div class="blog__card">
-            <img src="~/img/blog1.png" class="blog__card__img"/>
 
-            <div class="blog__card__txt">О команде</div>
-        </div>
+        @foreach(var article in Model.Articles)
+        {
+            <a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id" class="blog__card">
+                <img src="@article.ArticleImage" class="blog__card__img" />
 
-        <div class="blog__card">
-            <img src="~/img/blog2.png" class="blog__card__img"/>
-
-            <div class="blog__card__txt">Front-end разработка</div>
-        </div>
-
-        <div class="blog__card">
-            <img src="~/img/blog3.png" class="blog__card__img"/>
-
-            <div class="blog__card__txt">Front-end Roadmap</div>
-        </div>
+                <div class="blog__card__txt">@article.Name</div>
+            </a>
+        }
+        
     </div>
 </div>
 
