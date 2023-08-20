@@ -204,11 +204,11 @@
 
         @foreach(var article in Model.Articles)
         {
-            <div class="blog__card">
+            <a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id" class="blog__card">
                 <img src="@article.ArticleImage" class="blog__card__img" />
 
                 <div class="blog__card__txt">@article.Name</div>
-            </div>
+            </a>
         }
         
     </div>

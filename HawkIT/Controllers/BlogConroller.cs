@@ -14,12 +14,13 @@ namespace HawkIT.Controllers
         public IActionResult ListItems()
         {
             var articles = db.Articles.ToList();
-            return View();
+            return View(articles);
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int? id)
         {
-            return View();
+            var article = db.Articles.Find(id);
+            return View(article);
         }
     }
 }

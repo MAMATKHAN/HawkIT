@@ -172,14 +172,14 @@ namespace HawkIT.Controllers
                 return View(project);
             }
 
+            if (Request.Form["tags"].Count == 0) project.Tags.Clear();
             foreach (var tagId in Request.Form["tags"])
             {
-                project.Tags.Clear();
                 project.Tags.Add(db.Tags.Find(int.Parse(tagId)));
             }
+            if (Request.Form["tags"].Count == 0) project.Workers.Clear();
             foreach (var workerId in Request.Form["workers"])
             {
-                project.Workers.Clear();
                 project.Workers.Add(db.Workers.Find(int.Parse(workerId)));
             }
 
@@ -327,9 +327,9 @@ namespace HawkIT.Controllers
                 return View(worker);
             }
 
+            if (Request.Form["projects"].Count == 0) worker.Projects.Clear();
             foreach (var project in Request.Form["projects"])
             {
-                worker.Projects.Clear();
                 worker.Projects.Add(db.Projects.Find(int.Parse(project)));
             }
 
@@ -521,9 +521,9 @@ namespace HawkIT.Controllers
                 return View(article);
             }
 
+            if (Request.Form["tags"].Count == 0) article.Tags.Clear();
             foreach (var tag in Request.Form["tags"])
             {
-                article.Tags.Clear();
                 article.Tags.Add(db.Tags.Find(int.Parse(tag)));
             }
 
