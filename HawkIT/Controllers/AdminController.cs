@@ -110,7 +110,10 @@ namespace HawkIT.Controllers
             {
                 var uniqueFileName = GetUniqueFileName(project.ImageFile.FileName);
                 var filePath = GetFullPathUploadFile(uniqueFileName, "projects");
-                project.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                using(var stream  = new FileStream(filePath, FileMode.Create))
+                {
+                    project.ImageFile.CopyTo(stream);
+                }
                 project.ProjectImage = "/uploads/projects/" + uniqueFileName;
             }
 
@@ -154,7 +157,10 @@ namespace HawkIT.Controllers
                 DeleteUploadFile(imageName, "projects");
                 var uniqueFileName = GetUniqueFileName(p.ImageFile.FileName);
                 var filePath = GetFullPathUploadFile(uniqueFileName, "projects");
-                p.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    p.ImageFile.CopyTo(stream);
+                }
                 project.ProjectImage = "/uploads/projects/" + uniqueFileName;
             }
             else ModelState.Remove("ImageFile");
@@ -241,7 +247,10 @@ namespace HawkIT.Controllers
             {
                 var uniqueFileName = GetUniqueFileName(worker.ImageFile.FileName);
                 var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
-                worker.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    worker.ImageFile.CopyTo(stream);
+                }
                 worker.WorkerImage = "/uploads/workers/" + uniqueFileName;
             }
 
@@ -249,7 +258,10 @@ namespace HawkIT.Controllers
             {
                 var uniqueFileName = GetUniqueFileName(worker.IconFile.FileName);
                 var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
-                worker.IconFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    worker.IconFile.CopyTo(stream);
+                }
                 worker.SpecializationIcon = "/uploads/workers/" + uniqueFileName;
             }
 
@@ -287,7 +299,10 @@ namespace HawkIT.Controllers
                 DeleteUploadFile(imageName, "workers");
                 var uniqueFileName = GetUniqueFileName(w.ImageFile.FileName);
                 var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
-                w.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    w.ImageFile.CopyTo(stream);
+                }
                 worker.WorkerImage = "/uploads/workers/" + uniqueFileName;
             }
             else ModelState.Remove("ImageFile");
@@ -297,7 +312,10 @@ namespace HawkIT.Controllers
                 DeleteUploadFile(imageName, "workers");
                 var uniqueFileName = GetUniqueFileName(w.IconFile.FileName);
                 var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
-                w.IconFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    w.IconFile.CopyTo(stream);
+                }
                 worker.SpecializationIcon = "/uploads/workers/" + uniqueFileName;
             }
             else ModelState.Remove("IconFile");
@@ -443,7 +461,10 @@ namespace HawkIT.Controllers
             {
                 var uniqueFileName = GetUniqueFileName(article.ImageFile.FileName);
                 var filePath = GetFullPathUploadFile(uniqueFileName, "articles");
-                article.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    article.ImageFile.CopyTo(stream);
+                }
                 article.ArticleImage = "/uploads/articles/" + uniqueFileName;
             }
 
@@ -478,11 +499,14 @@ namespace HawkIT.Controllers
             var article = db.Articles.Include(art => art.Tags).First(art => art.Id == a.Id);
             if (a.ImageFile != null)
             {
-                var imageName = a.ArticleImage.Split("/").Last();
+                var imageName = article.ArticleImage.Split("/").Last();
                 DeleteUploadFile(imageName, "articles");
                 var uniqueFileName = GetUniqueFileName(a.ImageFile.FileName);
                 var filePath = GetFullPathUploadFile(uniqueFileName, "articles");
-                a.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    a.ImageFile.CopyTo(stream);
+                }
                 article.ArticleImage = "/uploads/articles/" + uniqueFileName;
             }
             else
