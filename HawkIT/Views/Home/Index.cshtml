@@ -157,117 +157,27 @@
 
     <div class="info__team">
         <div class="info__team__inner">
-            <div class="info__team__card">
-                <img src="~/img/designer.png" class="info__team__card__img"/>
 
-                <div class="info__team__card__block">
-                    <div class="info__team__card__block__inner">
-                        <img src="~/img/designer_icon.png" class="info__team__card__block__inner__img"/>
+            @*   Карточки с нами    *@
 
-                        <div class="info__team__card__block__inner__txt">
-                            <div class="info__team__card__block__inner__txt__pos">Designer</div>
+            @for (int i = 0; i < 7; i++)
+            {
+                <div class="info__team__card">
+                    <img src="~/img/designer.png" class="info__team__card__img"/>
 
-                            <div class="info__team__card__block__inner__txt__name">Магомедрасул</div>
+                    <div class="info__team__card__block">
+                        <div class="info__team__card__block__inner">
+                            <img src="~/img/designer_icon.png" class="info__team__card__block__inner__img"/>
+
+                            <div class="info__team__card__block__inner__txt">
+                                <div class="info__team__card__block__inner__txt__pos">Designer</div>
+
+                                <div class="info__team__card__block__inner__txt__name">Магомедрасул</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="info__team__card">
-                <img src="~/img/back1.png" class="info__team__card__img"/>
-
-                <div class="info__team__card__block">
-                    <div class="info__team__card__block__inner">
-                         <img src="~/img/back_icon.png" class="info__team__card__block__inner__img"/>
-
-                        <div class="info__team__card__block__inner__txt">
-                            <div class="info__team__card__block__inner__txt__pos">Back-end developer</div>
-
-                            <div class="info__team__card__block__inner__txt__name">Абдулджалил</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="info__team__card">
-                <img src="~/img/fron1.png" class="info__team__card__img"/>
-
-                <div class="info__team__card__block">
-                    <div class="info__team__card__block__inner">
-                        <img src="~/img/front_icon.png" class="info__team__card__block__inner__img"/>
-
-                        <div class="info__team__card__block__inner__txt">
-                            <div class="info__team__card__block__inner__txt__pos">Front-end developer</div>
-
-                            <div class="info__team__card__block__inner__txt__name">Магомед</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="info__team__card">
-                <img src="~/img/mobile_dev.png" class="info__team__card__img"/>
-
-                <div class="info__team__card__block">
-                    <div class="info__team__card__block__inner">
-                        <img src="~/img/mobile_dev_icon.png" class="info__team__card__block__inner__img"/>
-
-                        <div class="info__team__card__block__inner__txt">
-                            <div class="info__team__card__block__inner__txt__pos">Android developer</div>
-
-                            <div class="info__team__card__block__inner__txt__name">Темирлан</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info__team__card">
-                <img src="~/img/front2.png" class="info__team__card__img"/>
-
-                <div class="info__team__card__block">
-                    <div class="info__team__card__block__inner">
-                        <img src="~/img/front_icon.png" class="info__team__card__block__inner__img"/>
-
-                        <div class="info__team__card__block__inner__txt">
-                            <div class="info__team__card__block__inner__txt__pos">Front-end developer</div>
-
-                            <div class="info__team__card__block__inner__txt__name">Тимирхан</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info__team__card">
-                <img src="~/img/front3.png" class="info__team__card__img"/>
-
-                <div class="info__team__card__block">
-                    <div class="info__team__card__block__inner">
-                        <img src="~/img/front_icon.png" class="info__team__card__block__inner__img"/>
-
-                        <div class="info__team__card__block__inner__txt">
-                            <div class="info__team__card__block__inner__txt__pos">Front-end developer</div>
-
-                            <div class="info__team__card__block__inner__txt__name">Салам</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info__team__card">
-                <img src="~/img/back2.png" class="info__team__card__img"/>
-
-                <div class="info__team__card__block">
-                    <div class="info__team__card__block__inner">
-                        <img src="~/img/back_icon.png" class="info__team__card__block__inner__img"/>
-
-                        <div class="info__team__card__block__inner__txt">
-                            <div class="info__team__card__block__inner__txt__pos">Back-end developer</div>
-
-                            <div class="info__team__card__block__inner__txt__name">Маматхан</div>
-                        </div>
-                    </div>
-                </div>    
-            </div>
+            }
         </div>
     </div>
 

@@ -1,5 +1,72 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
+@section Styles{<link rel="stylesheet" href="~/css/ListItems.css"/>}
+
+@*   локация -- где находится пользователь   *@
+
+<div class="locat">
+	<div class="locat__main">Главная </div>
+	<img src="~/img/blog_strelocka.png" class="locat__img"/>
+	<div class="locat__case">Кейс Movie</div>
+</div>
+
+
+
+@*   баннер   *@
+
+<img src="~/img/blog__banner.png" class="banner"/>
+
+
+<div class="txt">Привет, Целевая аудитория! Вас ждут айти-рубрики, полезные советы для новичков, свежие обновления и море крутого контента!</div>
+
+
+
+@*   карточки со статьями в блоге   *@
+
+
+<div class="blog">
+	<div class="blog__title">
+		<div class=" blog__title__txt">Блог</div>
+
+		@*   combobox   *@
+
+		<div class="combobox">
+			<div class="combobox__inner">
+				<div class="combobox__inner__txt">Сортировать по</div>
+				<img src="~/img/combobox_strel.svg" class="combobox__inner__btn" src=""/>
+			</div>
+
+			<div class="combobox__list combobox__list__anime">
+
+				@*   выпадающий список   *@
+
+				<div class="combobox__list__item">Дизайну</div>
+				<div class="combobox__list__item">Фронтенду</div>
+				<div class="combobox__list__item">Бэкенду</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="blog__cardlist">
+		@for (int i = 0; i < 11; i++) 
+		{
+			@*   Карточки со статьями в блоге   *@
+		
+			<div class="blog__card">
+				<img src="~/img/blog_card_img.png" class="blog__card__img"/>
+				<div class="blog__card__txt">Следующая остановка - погружение в профессию UX/UI дизайнера.Эта профессия сегодня находится в центре внимания, поскольку пользовательский опыт становится ключевым фактором в успехе любого продукта. Каждое современное приложение, будь то мобильное, веб-сайт или программное обеспечение, стремится к совершенству в интерфейсе и взаимодействии с пользователем. Именно здесь проявляется магия UX/UI дизайнера.Она объединяет эстетику и функциональность, придающие приложению неповторимый облик и обеспечивающие невероятный пользовательский опыт. От создания интуитивных навигаций до гармоничного сочетания цветов и шрифтов - UX/UI дизайнеры играют важную роль в создании привлекательных и удобных в использовании продуктов.</div>
+				<div class="blog__card__desc">
+					<div class="blog__card__desc__date">14 августа</div>
+					<div class="blog__card__desc__type">design</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
+
+
+
+
+
+@section Scripts{<script src="~/js/blog.js"></script>}

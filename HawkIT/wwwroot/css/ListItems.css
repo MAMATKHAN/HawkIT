@@ -1,0 +1,216 @@
+﻿.locat {
+    color: #BBB;
+    display: flex;
+    justify-content: left;
+    margin-top: 62px;
+    font-size: 16px;
+}
+
+
+.locat__main {
+    margin-top: 1.5px;
+    margin-right: 4px;
+}
+
+
+.locat__img{
+    margin-right: 4px;
+    width: 24px;
+    height: 24px;
+}
+
+
+.locat__case {
+    margin-top: 1.5px;
+}
+
+
+
+/*   banner   */
+
+
+.banner{
+    width: 1120px;
+    height: 377px;
+    margin-top: 17.5px;
+}
+
+
+/*   текст после баннера   */
+
+.txt {
+    color: #fff;
+    font-size: 20px;
+    margin-top: 32px;
+}
+
+
+
+/*   blog   */
+
+
+.blog {
+    margin-top: 81px;
+    color: #fff;
+   
+}
+
+
+.blog__title {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.blog__title__txt {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+
+
+/*   combobox в блоге   */
+
+
+
+.combobox {
+    width: 232px;
+    padding: 11px;
+    border-radius: 0px;
+    border: 1px solid #fff;
+    position: relative;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+
+
+.combobox__active{
+    border-radius: 8px 8px 0 0;
+}
+
+
+
+.combobox__inner{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
+
+.combobox__inner__txt {
+    font-size: 16px;
+    line-height: 130%;
+    margin-top: 3px;
+}
+
+
+.combobox__inner__btn {
+    width: 24px;
+    height: 24px;
+}
+
+
+
+.combobox__list {
+    width: 254px;
+    position: absolute;
+    top: 46px;
+    right: -1px;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    border-radius: 0 0 8px 8px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+
+
+.combobox__list__active {
+    
+    opacity: 1;
+}
+
+
+
+.combobox__list__anime{
+    display: none;
+}
+
+
+
+
+.combobox__list__item {
+    border-top: 1px solid #fff;
+    padding-left: 12px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+
+
+.combobox__list__item:hover {
+    background-color: #fff;
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+
+
+/*   карточки со статьями в блоге   */
+
+
+.blog__cardlist{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+
+.blog__card{
+    width: 352px;
+    margin-right: 32px;
+    margin-top: 32px;
+
+}
+
+
+.blog__card:nth-child(3n){
+    margin-right: 0px;
+}
+
+
+.blog__card__img {
+    width: 352px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+
+.blog__card__txt {
+    font-size: 14px;
+    margin-top: 12px;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+
+
+
+.blog__card__desc {
+    display: flex;
+    justify-content: left;
+    margin-top: 4px;
+    color: #BBB;
+}
+
+
+
+.blog__card__desc__date{
+    margin-right: 8px;
+}
+
