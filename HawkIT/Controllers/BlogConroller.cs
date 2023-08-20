@@ -1,5 +1,6 @@
 ﻿using HawkIT.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HawkIT.Controllers
 {
@@ -13,7 +14,7 @@ namespace HawkIT.Controllers
 
         public IActionResult ListItems()
         {
-            var articles = db.Articles.ToList();
+            var articles = db.Articles.Include(a => a.Tags).ToList();
             return View(articles);
         }
 
