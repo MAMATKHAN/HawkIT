@@ -10,8 +10,8 @@ namespace HawkIT.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Это поле обязательно должно быть заполнено")]
         public string Specialization { get; set; }
-        public string SpecializationIcon { get; set; }
-        public string WorkerImage { get; set; }
+        public string? SpecializationIcon { get; set; }
+        public string? WorkerImage { get; set; }
         public List<Project>? Projects { get; set; }
         [NotMapped, Required(ErrorMessage = "Пожалуйста выберите файл")]
         public IFormFile ImageFile { get; set; }

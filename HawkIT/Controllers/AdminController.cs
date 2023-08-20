@@ -62,11 +62,23 @@ namespace HawkIT.Controllers
 
         // Project CRUD
         [Authorize]
-        public IActionResult ListProjects()
+        public IActionResult ListProjects(string? name ,int? tagId, int? workerId)
         {
             var projects = db.Projects.Include(p => p.Tags).Include(p => p.Workers).ToList();
             var tags = db.Tags.ToList();
             var workers = db.Workers.ToList();
+
+            if (name != null) projects = projects.Where(w => w.Name.ToLower().Contains(name.ToLower())).ToList();
+            if (tagId != -1 && tagId != null)
+            {
+                var tag = db.Tags.Find(tagId);
+                projects = projects.Where(p => p.Tags.Contains(tag)).ToList();
+            }
+            if (workerId != -1 && workerId != null)
+            {
+                var worker = db.Workers.Find(workerId);
+                projects = projects.Where(p => p.Workers.Contains(worker)).ToList();
+            }
 
             var adminProjectViewModel = new AdminProjectsViewModel { Projects = projects, Workers = workers, Tags = tags };
             return View(adminProjectViewModel);
@@ -83,6 +95,17 @@ namespace HawkIT.Controllers
         [Authorize, HttpPost]
         public IActionResult AddProject(Project project)
         {
+            if (Request.Form["workers"].Count == 0)
+            {
+                ModelState.AddModelError("Workers", "Это поле обязательно должно быть заполнено");
+            }
+            if (!(ModelState.IsValid))
+            {
+                ViewData["Workers"] = db.Workers.ToList();
+                ViewData["Tags"] = db.Tags.ToList();
+                return View();
+            }
+
             if (project.ImageFile != null)
             {
                 var uniqueFileName = GetUniqueFileName(project.ImageFile.FileName);
@@ -124,6 +147,7 @@ namespace HawkIT.Controllers
         public IActionResult EditProject(Project p)
         {
             var project = db.Projects.Include(proj => proj.Tags).Include(proj => proj.Workers).First(proj => proj.Id == p.Id);
+            
             if (p.ImageFile != null)
             {
                 var imageName = project.ProjectImage.Split("/").Last();
@@ -133,7 +157,14 @@ namespace HawkIT.Controllers
                 p.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
                 project.ProjectImage = "/uploads/projects/" + uniqueFileName;
             }
+            else ModelState.Remove("ImageFile");
+            if (!(ModelState.IsValid))
+            {
+                ViewData["Tags"] = db.Tags.ToList();
+                ViewData["Workers"] = db.Workers.ToList();
 
+                return View(project);
+            }
 
             foreach (var tagId in Request.Form["tags"])
             {
@@ -199,6 +230,13 @@ namespace HawkIT.Controllers
         [Authorize, HttpPost]
         public IActionResult AddWorker(Worker worker)
         {
+            if (!(ModelState.IsValid))
+            {
+                var p = db.Projects.ToList();
+                ViewData["Projects"] = p;
+                return View();
+            }
+
             if (worker.ImageFile != null)
             {
                 var uniqueFileName = GetUniqueFileName(worker.ImageFile.FileName);
@@ -242,7 +280,7 @@ namespace HawkIT.Controllers
         public IActionResult EditWorker(Worker w)
         {
             var worker = db.Workers.Include(work => work.Projects).First(work => work.Id == w.Id);
-            worker.Projects = Request.Form["projects"].Count != 0? new List<Project>(): null;
+            
             if (w.ImageFile != null)
             {
                 var imageName = worker.WorkerImage.Split("/").Last();
@@ -252,7 +290,7 @@ namespace HawkIT.Controllers
                 w.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
                 worker.WorkerImage = "/uploads/workers/" + uniqueFileName;
             }
-
+            else ModelState.Remove("ImageFile");
             if (w.IconFile != null)
             {
                 var imageName = worker.SpecializationIcon.Split("/").Last();
@@ -262,7 +300,14 @@ namespace HawkIT.Controllers
                 w.IconFile.CopyTo(new FileStream(filePath, FileMode.Create));
                 worker.SpecializationIcon = "/uploads/workers/" + uniqueFileName;
             }
+            else ModelState.Remove("IconFile");
+            if (!(ModelState.IsValid))
+            {
+                var projects = db.Projects.ToList();
+                ViewData["Projects"] = projects;
 
+                return View(worker);
+            }
 
             foreach (var project in Request.Form["projects"])
             {
@@ -338,6 +383,7 @@ namespace HawkIT.Controllers
         [Authorize, HttpGet]
         public IActionResult EditTag(int id)
         {
+
             var tag = db.Tags.Find(id);
             return View(tag);
         }
@@ -345,7 +391,11 @@ namespace HawkIT.Controllers
         [Authorize, HttpPost]
         public IActionResult EditTag(Tag tag)
         {
-            if (String.IsNullOrEmpty(tag.Name)) return View();
+            if (!(ModelState.IsValid))
+            {
+                var t = db.Tags.Find(tag.Id);
+                return View(t);
+            }
 
             db.Tags.Update(tag);
             db.SaveChanges();
@@ -382,7 +432,12 @@ namespace HawkIT.Controllers
         [Authorize, HttpPost]
         public IActionResult AddArticle(Article article)
         {
-            
+            if (!(ModelState.IsValid))
+            {
+                var tags = db.Tags.ToList();
+                ViewData["Tags"] = tags;
+                return View();
+            }
 
             if(article.ImageFile != null)
             {
@@ -421,7 +476,6 @@ namespace HawkIT.Controllers
         public IActionResult EditArticle(Article a)
         {
             var article = db.Articles.Include(art => art.Tags).First(art => art.Id == a.Id);
-            article.Tags = Request.Form["tags"].Count != 0? new List<Tag>() : null;
             if (a.ImageFile != null)
             {
                 var imageName = a.ArticleImage.Split("/").Last();
@@ -431,7 +485,17 @@ namespace HawkIT.Controllers
                 a.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
                 article.ArticleImage = "/uploads/articles/" + uniqueFileName;
             }
-            
+            else
+            {
+                ModelState.Remove("ImageFile");
+            }
+            if (!(ModelState.IsValid))
+            {
+                var tags = db.Tags.ToList();
+                ViewData["Tags"] = tags;
+
+                return View(article);
+            }
 
             foreach (var tag in Request.Form["tags"])
             {
