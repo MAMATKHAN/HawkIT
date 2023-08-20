@@ -22,7 +22,7 @@ namespace HawkIT.Controllers
             var projects = db.Projects.Include(p => p.Tags).ToList();
             var tags = db.Tags.ToList();
             var workers = db.Workers.ToList();
-            var articles = db.Articles.ToList();
+            var articles = db.Articles.OrderBy(a => a.CreatedDate).Take(3).ToList();
 
             var t = db.Tags.Find(id);
             if (t != null)
@@ -34,6 +34,10 @@ namespace HawkIT.Controllers
             return View(mainViewModel);
         }
 
+        public IActionResult ProjectDetails(int? id)
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
