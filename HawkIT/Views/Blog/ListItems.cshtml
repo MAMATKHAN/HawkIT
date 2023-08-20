@@ -56,7 +56,6 @@
 				<div class="blog__card__txt">@article.Name</div>
 				<div class="blog__card__desc">
 					<div class="blog__card__desc__date">@article.CreatedDate.ToShortDateString()</div>
-					<br/>
 					@if(article.Tags != null)
 					{
 						@foreach (var tag in article.Tags)
