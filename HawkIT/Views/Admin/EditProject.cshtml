@@ -64,7 +64,7 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <form asp-action="EditProject" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label asp-for="Name" class="control-label">
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Text" class="control-label">
-                                        Текст<span class="text-danger">*</span>
+                                        Текст
                                         <span asp-validation-for="Text" class="ms-2 text-danger"></span>
                                     </label>
                                     <textarea asp-for="Text" class="form-control" rows="3">@Model.Text</textarea>
@@ -90,6 +90,33 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <img height="130" src="@Model.ProjectImage" />
+                                    </div>
+                                </div>
+                                <div class="form-group row mt-2">
+                                    <div class="form-group col-sm-5">
+                                        <label asp-for="BannerImages" class="contorl-label">
+                                            Выберите изображения для баннеров
+                                            <span asp-validation-for="BannerImages" class="ms-2 text-danger"></span>
+                                        </label>
+                                        <input asp-for="BannerImages" class="form-control" />
+                                    </div>
+                                    @foreach(var banner in Model.Banners.Split("||"))
+                                    {
+                                        <div class="col-sm-1">
+                                            <img width="100" height="100" src="@banner" />
+                                        </div>
+                                    }
+                                </div>
+                                <div class="form-group row mt-2">
+                                    <div class="form-group col-sm-5">
+                                        <label asp-for="SpecificationFile" class="contorl-label">
+                                            Выберите PDF файл(тех. задание)
+                                            <span asp-validation-for="SpecificationFile" class="ms-2 text-danger"></span>
+                                        </label>
+                                        <input asp-for="SpecificationFile" class="form-control" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a href="@Model.TechSpecification">@Model.TechSpecification</a>
                                     </div>
                                 </div>
                                 <div class="form-group mt-2">
