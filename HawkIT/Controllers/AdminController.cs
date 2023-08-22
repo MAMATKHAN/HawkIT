@@ -41,7 +41,7 @@ namespace HawkIT.Controllers
 
                 if (user == null)
                 {
-                    ModelState.AddModelError("Name", "Логин или пароль введен неправильно");
+                    ModelState.AddModelError("Incorrect loging or password", "Логин или пароль введен неправильно");
                     return View();
                 };
 
@@ -106,29 +106,17 @@ namespace HawkIT.Controllers
                 return View();
             }
 
-            if (project.ImageFile != null)
-            {
-                var uniqueFileName = GetUniqueFileName(project.ImageFile.FileName);
-                var filePath = GetFullPathUploadFile(uniqueFileName, "projects");
-                using(var stream  = new FileStream(filePath, FileMode.Create))
-                {
-                    project.ImageFile.CopyTo(stream);
-                }
-                project.ProjectImage = "/uploads/projects/" + uniqueFileName;
-            }
-
-          
-
             foreach (var workerId in Request.Form["workers"])
             {
                 project.Workers.Add(db.Workers.Find(int.Parse(workerId)));
             }
             foreach (var tagId in Request.Form["tags"])
             {
-                project.Tags.Add(db.Tags.Find(int.Parse(tagId)));
+                project.Tags?.Add(db.Tags.Find(int.Parse(tagId)));
             }
-            project.CreatedDate = DateTime.Now;
 
+            project.CreatedDate = DateTime.Now;
+            project.ProjectImage = UploadFile(project.ImageFile.FileName, project.ImageFile, "projects");
 
             db.Projects.Add(project);
             db.SaveChanges();
@@ -154,16 +142,11 @@ namespace HawkIT.Controllers
             if (p.ImageFile != null)
             {
                 var imageName = project.ProjectImage.Split("/").Last();
-                DeleteUploadFile(imageName, "projects");
-                var uniqueFileName = GetUniqueFileName(p.ImageFile.FileName);
-                var filePath = GetFullPathUploadFile(uniqueFileName, "projects");
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    p.ImageFile.CopyTo(stream);
-                }
-                project.ProjectImage = "/uploads/projects/" + uniqueFileName;
+                DeleteFile(imageName, "projects");
+                project.ProjectImage = UploadFile(imageName, p.ImageFile, "projects");
             }
             else ModelState.Remove("ImageFile");
+
             if (!(ModelState.IsValid))
             {
                 ViewData["Tags"] = db.Tags.ToList();
@@ -172,10 +155,10 @@ namespace HawkIT.Controllers
                 return View(project);
             }
 
-            if (Request.Form["tags"].Count == 0) project.Tags.Clear();
+            if (Request.Form["tags"].Count == 0) project.Tags?.Clear();
             foreach (var tagId in Request.Form["tags"])
             {
-                project.Tags.Add(db.Tags.Find(int.Parse(tagId)));
+                project.Tags?.Add(db.Tags.Find(int.Parse(tagId)));
             }
             if (Request.Form["tags"].Count == 0) project.Workers.Clear();
             foreach (var workerId in Request.Form["workers"])
@@ -198,7 +181,7 @@ namespace HawkIT.Controllers
             if (project != null)
             {
                 var imageName = project.ProjectImage.Split("/").Last();
-                DeleteUploadFile(imageName, "projects");
+                DeleteFile(imageName, "projects");
                 db.Projects.Remove(project);
             }
             db.SaveChanges();
@@ -243,34 +226,15 @@ namespace HawkIT.Controllers
                 return View();
             }
 
-            if (worker.ImageFile != null)
-            {
-                var uniqueFileName = GetUniqueFileName(worker.ImageFile.FileName);
-                var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    worker.ImageFile.CopyTo(stream);
-                }
-                worker.WorkerImage = "/uploads/workers/" + uniqueFileName;
-            }
-
-            if (worker.IconFile != null)
-            {
-                var uniqueFileName = GetUniqueFileName(worker.IconFile.FileName);
-                var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    worker.IconFile.CopyTo(stream);
-                }
-                worker.SpecializationIcon = "/uploads/workers/" + uniqueFileName;
-            }
-
             foreach (var projectId in Request.Form["projects"])
             {
-                worker.Projects.Add(db.Projects.Find(int.Parse(projectId)));
+                worker.Projects?.Add(db.Projects.Find(int.Parse(projectId)));
             }
 
-            db.Workers.Add(worker);
+			worker.WorkerImage = UploadFile(worker.ImageFile.FileName, worker.ImageFile, "workers");
+			worker.SpecializationIcon = UploadFile(worker.IconFile.FileName, worker.IconFile, "workers");
+
+			db.Workers.Add(worker);
             db.SaveChanges();
             return RedirectToAction("ListWorkers", "Admin");
         }
@@ -296,29 +260,19 @@ namespace HawkIT.Controllers
             if (w.ImageFile != null)
             {
                 var imageName = worker.WorkerImage.Split("/").Last();
-                DeleteUploadFile(imageName, "workers");
-                var uniqueFileName = GetUniqueFileName(w.ImageFile.FileName);
-                var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    w.ImageFile.CopyTo(stream);
-                }
-                worker.WorkerImage = "/uploads/workers/" + uniqueFileName;
+                DeleteFile(imageName, "workers");
+                worker.WorkerImage = UploadFile(imageName, w.ImageFile, "workers");
             }
             else ModelState.Remove("ImageFile");
+
             if (w.IconFile != null)
             {
                 var imageName = worker.SpecializationIcon.Split("/").Last();
-                DeleteUploadFile(imageName, "workers");
-                var uniqueFileName = GetUniqueFileName(w.IconFile.FileName);
-                var filePath = GetFullPathUploadFile(uniqueFileName, "workers");
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    w.IconFile.CopyTo(stream);
-                }
-                worker.SpecializationIcon = "/uploads/workers/" + uniqueFileName;
+                DeleteFile(imageName, "workers");
+                worker.SpecializationIcon = UploadFile(imageName, w.IconFile, "workers");
             }
             else ModelState.Remove("IconFile");
+
             if (!(ModelState.IsValid))
             {
                 var projects = db.Projects.ToList();
@@ -330,7 +284,7 @@ namespace HawkIT.Controllers
             if (Request.Form["projects"].Count == 0) worker.Projects.Clear();
             foreach (var project in Request.Form["projects"])
             {
-                worker.Projects.Add(db.Projects.Find(int.Parse(project)));
+                worker.Projects?.Add(db.Projects.Find(int.Parse(project)));
             }
 
             worker.Name = w.Name;
@@ -350,8 +304,8 @@ namespace HawkIT.Controllers
             {
                 var imageName = worker.WorkerImage.Split("/").Last();
                 var iconName = worker.SpecializationIcon.Split("/").Last();
-                DeleteUploadFile(imageName, "workers");
-                DeleteUploadFile(iconName, "workers");
+				DeleteFile(imageName, "workers");
+                DeleteFile(iconName, "workers");
                 db.Workers.Remove(worker);
             }
             db.SaveChanges();
@@ -457,27 +411,18 @@ namespace HawkIT.Controllers
                 return View();
             }
 
-            if(article.ImageFile != null)
-            {
-                var uniqueFileName = GetUniqueFileName(article.ImageFile.FileName);
-                var filePath = GetFullPathUploadFile(uniqueFileName, "articles");
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    article.ImageFile.CopyTo(stream);
-                }
-                article.ArticleImage = "/uploads/articles/" + uniqueFileName;
-            }
-
             foreach (var tag in Request.Form["tags"])
             {
-                article.Tags.Add(db.Tags.Find(int.Parse(tag)));
+                article.Tags?.Add(db.Tags.Find(int.Parse(tag)));
             }
 
             if (Request.Form["tags"].Count == 0) article.Tags = null;
 
             article.CreatedDate = DateTime.Now;
+			article.ArticleImage = UploadFile(article.ImageFile.FileName, article.ImageFile, "articles");
 
-            db.Articles.Add(article);
+
+			db.Articles.Add(article);
             db.SaveChanges();
             return RedirectToAction("ListArticles", "Admin");
         }
@@ -496,18 +441,12 @@ namespace HawkIT.Controllers
         [Authorize, HttpPost]
         public IActionResult EditArticle(Article a)
         {
-            var article = db.Articles.Include(art => art.Tags).First(art => art.Id == a.Id);
-            if (a.ImageFile != null)
+            var article = db.Articles.Include(art => art.Tags).First(obj => obj.Id == a.Id);
+            if (a.ImageFile != null && article.ArticleImage != null)
             {
                 var imageName = article.ArticleImage.Split("/").Last();
-                DeleteUploadFile(imageName, "articles");
-                var uniqueFileName = GetUniqueFileName(a.ImageFile.FileName);
-                var filePath = GetFullPathUploadFile(uniqueFileName, "articles");
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    a.ImageFile.CopyTo(stream);
-                }
-                article.ArticleImage = "/uploads/articles/" + uniqueFileName;
+                DeleteFile(imageName, "articles");
+                article.ArticleImage = UploadFile(imageName, a.ImageFile, "articles");
             }
             else
             {
@@ -521,10 +460,10 @@ namespace HawkIT.Controllers
                 return View(article);
             }
 
-            if (Request.Form["tags"].Count == 0) article.Tags.Clear();
+            if (Request.Form["tags"].Count == 0) article.Tags?.Clear();
             foreach (var tag in Request.Form["tags"])
             {
-                article.Tags.Add(db.Tags.Find(int.Parse(tag)));
+                article.Tags?.Add(db.Tags.Find(int.Parse(tag)));
             }
 
             article.Name = a.Name;
@@ -539,16 +478,26 @@ namespace HawkIT.Controllers
         {
             var article = db.Articles.Find(id);
 
-            if (article != null)
+            if (article != null && article.ArticleImage != null)
             {
                 var imageName = article.ArticleImage.Split("/").Last();
-                DeleteUploadFile(imageName, "articles");
+                DeleteFile(imageName, "articles");
                 db.Articles.Remove(article);
             }
             db.SaveChanges();
             return RedirectToAction("ListArticles", "Admin");
         }
 
+        private string UploadFile(string fileName, IFormFile file, string folderName = "")
+        {
+			var uniqueFileName = GetUniqueFileName(fileName);
+			var filePath = GetFullPathUploadFile(uniqueFileName, folderName);
+			using (var stream = new FileStream(filePath, FileMode.Create))
+			{
+				file.CopyTo(stream);
+			}
+			return $"/uploads/{folderName + "/"}" + uniqueFileName;
+		}
         
         private string GetFullPathUploadFile(string fileName, string folderName = "")
         {
@@ -566,7 +515,7 @@ namespace HawkIT.Controllers
                       + Path.GetExtension(fileName);
         }
 
-        private void DeleteUploadFile(string fileName, string folderName = "")
+        private void DeleteFile(string fileName, string folderName = "")
         {
             var uploads = Path.Combine(_env.WebRootPath, $"uploads{"\\" + folderName}");
             var filePath = Path.Combine(uploads, fileName);

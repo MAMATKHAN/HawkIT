@@ -20,14 +20,14 @@ namespace HawkIT.Controllers
         public IActionResult Index(int? id)
         {
             var projects = db.Projects.Include(p => p.Tags).ToList();
-            var tags = db.Tags.ToList();
+            var tags = db.Tags.Include(t => t.Projects).Where(t => t.Projects.Count != 0).ToList();
             var workers = db.Workers.ToList();
             var articles = db.Articles.OrderBy(a => a.CreatedDate).Take(3).ToList();
 
-            var t = db.Tags.Find(id);
-            if (t != null)
+            var tag = db.Tags.Find(id);
+            if (tag != null)
             {
-                projects = projects.Where(p => p.Tags.Contains(t)).ToList();
+                projects = projects.Where(p => p.Tags.Contains(tag)).ToList();
             }
 
             var mainViewModel = new MainViewModel { Articles = articles, Projects = projects, Tags = tags, Workers = workers, ActiveTagId = id };

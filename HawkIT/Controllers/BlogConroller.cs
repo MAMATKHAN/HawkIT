@@ -22,8 +22,8 @@ namespace HawkIT.Controllers
         public IActionResult Details(int? id)
         {
             var article = db.Articles.Find(id);
-            var articles = db.Articles.OrderBy(a => a.CreatedDate).Take(3).ToList();
-            var articleDetailsViewModel = new ArticleDetailsViewModel() { Aritcle = article, MoreArticles = articles };
+            var lastThreeArticle = db.Articles.OrderBy(a => a.CreatedDate).Take(3).ToList();
+            var articleDetailsViewModel = new ArticleDetailsViewModel() { Aritcle = article, MoreArticles = lastThreeArticle };
             return View(articleDetailsViewModel);
         }
     }
