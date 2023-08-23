@@ -1,4 +1,5 @@
 ﻿using HawkIT.Models;
+using HawkIT.Services;
 using HawkIT.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +11,13 @@ namespace HawkIT.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly HawkitDbContext db;
+        private readonly SmtpHandling _smtp;
 
         public HomeController(ILogger<HomeController> logger, HawkitDbContext context)
         {
             _logger = logger;
             db = context;
+            _smtp = new SmtpHandling();
         }
 
         public IActionResult Index(int? id)
@@ -34,6 +37,21 @@ namespace HawkIT.Controllers
             return View(mainViewModel);
         }
 
+        [HttpPost]
+        public IActionResult Index(string name, string email, string phone, string telegram, string message)
+        {
+            var sender = new SenderInfo();
+            sender.Name = name;
+            sender.Email = email;
+            sender.Phone = phone;
+            sender.Telegram = telegram;
+            sender.Message = message;
+
+            _smtp.SendMessage(sender);
+
+            return RedirectToAction("Index", "Home");
+        }
+
         public IActionResult ProjectDetails(int? id)
         {
             return View();
@@ -43,6 +61,12 @@ namespace HawkIT.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult TestSmtp()
+        {
+            
+            return new OkResult();
         }
     }
 }

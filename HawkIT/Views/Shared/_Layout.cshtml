@@ -44,7 +44,7 @@
     @*   Форма для обсуждения   *@
 
 
-     <form class="form form__anime" action="GET">
+     <form class="form form__anime" method="post">
         <div class="form__title">
             <div class="form__title__txt">Заполните форму для отправки заявки</div>
 
@@ -55,22 +55,22 @@
             <div class="form__inner__top">
                 <div class="form__inner__top__inp">
                     <div class="form__inner__top__inp__txt">Ваше имя*</div>
-                    <input id="name" class="form__inner__top__inp__value"/>
+                    <input name="name" id="name" class="form__inner__top__inp__value"/>
                 </div>
 
                 <div class="form__inner__top__inp">
                     <div class="form__inner__top__inp__txt">Юзернейм в телеграм</div>
-                    <input id="username" class="form__inner__top__inp__value"/> 
+                    <input name="telegram" id="username" class="form__inner__top__inp__value"/> 
                 </div>
 
                 <div class="form__inner__top__inp">
                     <div class="form__inner__top__inp__txt">Электронная почта*</div>
-                    <input id="email" class="form__inner__top__inp__value"/>
+                    <input name="email" id="email" class="form__inner__top__inp__value"/>
                 </div>
 
                 <div class="form__inner__top__inp">
                     <div class="form__inner__top__inp__txt">Номер телефона</div>
-                    <input id="number" class="form__inner__top__inp__value"/>
+                    <input name="phone" id="number" class="form__inner__top__inp__value"/>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@
 
            
             <div class="form__inner__comm" >
-                <textarea type="text" class="form__inner__comm__txt"></textarea>
+                <textarea name="message" type="text" class="form__inner__comm__txt"></textarea>
             </div>
 
             <button type="submit" class="form__inner__btn">Отправить заявку</button>
