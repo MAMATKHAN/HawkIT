@@ -23,7 +23,7 @@
 @*   Картинки связанные с проектом   *@
 @if(Model.Project.Banners != null)
 {
-	@foreach (var banner in Model.Project.Banners)
+	@foreach (var banner in Model.Project.Banners.Split("||"))
 	{
 		<img src="@banner" class="case__img" />
 	}
