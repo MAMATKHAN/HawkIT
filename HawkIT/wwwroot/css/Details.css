@@ -4,12 +4,15 @@
     justify-content: left;
     margin-top: 62px;
     font-size: 16px;
+
 }
 
 
 .locat__main {
     margin-top: 1.5px;
     margin-right: 4px;
+    text-decoration: none;
+    color: #BBB;
 }
 
 
@@ -20,14 +23,18 @@
 }
 
 
-.locat__blog {
+.locat__case {
     margin-top: 1.5px;
     margin-right: 4px;
+    text-decoration: none;
+    color: #BBB;
 }
 
 
 .locat__state {
     margin-top: 1.5px;
+    text-decoration: none;
+    color: #BBB;
 }
 
 

@@ -23,6 +23,9 @@
 	<div class="article__txt">@Model.Aritcle.Text</div>
 </div>
 
+
+
+<div class="another__state">Другие статьи</div>
 @foreach (var article in Model.MoreArticles)
 {
 	<a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id" class="blog__card">

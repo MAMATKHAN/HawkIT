@@ -10,6 +10,8 @@
 .locat__main {
     margin-top: 1.5px;
     margin-right: 4px;
+    text-decoration: none;
+    color: #BBB;
 }
 
 
@@ -22,6 +24,8 @@
 
 .locat__case {
     margin-top: 1.5px;
+    color: #BBB;
+    text-decoration: none;
 }
 
 
