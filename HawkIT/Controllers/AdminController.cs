@@ -547,29 +547,36 @@ namespace HawkIT.Controllers
                       + Path.GetExtension(fileName);
         }
 
-        private void DeleteFile(string fileName)
+        private void DeleteFile(string? fileName)
         {
-            fileName = fileName.TrimStart('/').Replace("/", "\\");
-            var filePath = Path.Combine(_env.WebRootPath, fileName);
-            if(System.IO.File.Exists(filePath))
+            if(fileName != null)
             {
-                System.IO.File.Delete(filePath);
-            }
-        }
-
-        private void DeleteFile(IEnumerable<string> filesName)
-        {
-            string fileName;
-            string filePath;
-            foreach (var file in filesName)
-            {
-                fileName = file.Replace("/", "\\");
-                filePath = Path.Combine(_env.WebRootPath + fileName);
+                fileName = fileName.TrimStart('/').Replace("/", "\\");
+                var filePath = Path.Combine(_env.WebRootPath, fileName);
                 if (System.IO.File.Exists(filePath))
                 {
                     System.IO.File.Delete(filePath);
                 }
             }
+        }
+
+        private void DeleteFile(IEnumerable<string>? filesName)
+        {
+            if(filesName != null)
+            {
+                string fileName;
+                string filePath;
+                foreach (var file in filesName)
+                {
+                    fileName = file.Replace("/", "\\");
+                    filePath = Path.Combine(_env.WebRootPath + fileName);
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                }
+            }
+            
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿@section Styles{<link rel="stylesheet" href="~/css/ProjectDetails.css"/>}
+﻿@using HawkIT.ViewModel
+@model ProjectDetailsViewModel
+
+@section Styles{<link rel="stylesheet" href="~/css/ProjectDetails.css"/>}
 
 
 @*   локация -- где находится пользователь   *@
@@ -6,23 +9,26 @@
 <div class="locat">
 	<a asp-controller="Home" asp-action="Index" class="locat__main">Главная </a>
 	<img src="~/img/blog_strelocka.png" class="locat__img"/>
-	<a class="locat__case">Кейс Movie</a>
+	<a class="locat__case">@Model.Project.Name</a>
 </div>
 
 @*   Название проекта   *@
 
-<div class="name">Movie</div>
+<div class="name">@Model.Project.Name</div>
 
 @*   Описание проекта   *@
 
-<div class="desc">Проект по разработке приложения "Movie" представляет собой амбициозную и инновационную инициативу в сфере онлайн-кинематографии. Основной целью данного проекта является создание современной, удобной и интерактивной платформы, которая позволит пользователям наслаждаться широким спектром кинофильмов и сериалов на своих устройствах в любое удобное время. Проект "Movie" сосредотачивается на объединении технической инновативности, уникального пользовательского опыта и богатства контента для достижения гармоничного взаимодействия между киноманами и цифровой технологией.</div>
+<div class="desc">@Model.Project.Text</div>
 
 @*   Картинки связанные с проектом   *@
-
-@for (int i = 0; i < 4; i++)
+@if(Model.Project.Banners != null)
 {
-	<img src="~/img/case_img.png" class="case__img"/>
+	@foreach (var banner in Model.Project.Banners)
+	{
+		<img src="@banner" class="case__img" />
+	}
 }
+
 
 
 @*   Документы   *@
@@ -31,9 +37,13 @@
 <div class="doc">
 	<div class="doc__txt">Документы проекта</div>
 
-	<a class="doc__link">
-		<img src="~/img/doc.png" class="doc__link__img"/>
+	@if (!(String.IsNullOrEmpty(Model.Project.TechSpecification)))
+	{
+		<a href="@Model.Project.TechSpecification" class="doc__link">
+			<img src="~/img/doc.png" class="doc__link__img" />
 
-		<div class="doc__link__txt">Тех-задание.pdf</div>
-	</a>
+			<div class="doc__link__txt">@Model.Project.TechSpecification.Split("/").Last()</div>
+		</a>
+	}
+	
 </div>

@@ -52,9 +52,13 @@ namespace HawkIT.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult ProjectDetails(int? id)
+        public IActionResult ProjectDetails(int id)
         {
-            return View();
+            var project = db.Projects.Find(id);
+            var lastThreeAddedProjects = db.Projects.OrderByDescending(p => p.CreatedDate).Take(3).ToList();
+
+            var model = new ProjectDetailsViewModel { Project = project, MoreProjects = lastThreeAddedProjects };
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

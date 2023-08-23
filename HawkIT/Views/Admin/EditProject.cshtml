@@ -100,11 +100,14 @@
                                         </label>
                                         <input asp-for="BannerImages" class="form-control" />
                                     </div>
-                                    @foreach(var banner in Model.Banners.Split("||"))
+                                    @if(Model.Banners != null)
                                     {
-                                        <div class="col-sm-1">
-                                            <img width="100" height="100" src="@banner" />
-                                        </div>
+                                        @foreach (var banner in Model.Banners.Split("||"))
+                                        {
+                                            <div class="col-sm-1">
+                                                <img width="100" height="100" src="@banner" />
+                                            </div>
+                                        }
                                     }
                                 </div>
                                 <div class="form-group row mt-2">
