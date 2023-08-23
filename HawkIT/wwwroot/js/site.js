@@ -47,6 +47,14 @@ document.addEventListener('click', function (e) {
 let openBtn = document.querySelector('.button__type1');
 let closeBtn = document.querySelector('.form__title__img');
 let form = document.querySelector('.form');
+let footerInner = document.querySelector('.footer__inner');
+
+if (openBtn == null) {
+    console.log(openBtn);
+    footerInner.style.justifyContent = "center";
+}
+
+
 
 
 openBtn.addEventListener('click', openForm);
@@ -76,3 +84,7 @@ function closeForm() {
         form.classList.add('form__anime');
     }, 200)
 }
+
+
+
+

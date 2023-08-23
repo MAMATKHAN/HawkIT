@@ -78,3 +78,41 @@
     color: #BBB;
     margin-top: 12px;
 }
+
+
+
+.another__state{
+    margin-top: 64px;
+    font-size: 24px;
+    color: #fff;
+}
+
+
+
+.blog__cardline {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+
+.blog__card {
+    width: 352px;
+    height: 389px;
+    margin-right: 32px;
+    text-decoration: none;
+}
+
+
+.blog__card__img {
+    width: 352px;
+    height: 352px;
+}
+
+
+.blog__card__txt {
+    font-size: 16px;
+    margin-top: 16px;
+    text-decoration: none;
+    color: #fff;
+}
