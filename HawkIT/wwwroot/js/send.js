@@ -1,7 +1,7 @@
-let url = GetHostUrl();
+
 
 //let send = TrySendBid("test", "test@mail.ru", "phone", "tg", "message");
-//send.then(value => test(value));
+
 
 async function TrySendBid(name, email, phone, telegram, message) {
     let url = GetHostUrl();
