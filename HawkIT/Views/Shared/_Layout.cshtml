@@ -44,7 +44,7 @@
     @*   Форма для обсуждения   *@
 
 
-     <form class="form form__anime" method="post">
+     <div class="form form__anime">
         <div class="form__title">
             <div class="form__title__txt">Заполните форму для отправки заявки</div>
 
@@ -83,14 +83,14 @@
                 <textarea name="message" type="text" class="form__inner__comm__txt"></textarea>
             </div>
 
-            <button type="submit" class="form__inner__btn">Отправить заявку</button>
+            <button class="form__inner__btn">Отправить заявку</button>
 
             <div class="form__inner__info">Нажимая кнопку «Отправить заявку», я даю своё согласие на 
                 <a class="form__inner__info__link">обработку персональных данных</a>
             </div>
         </div>
 
-    </form>
+    </div>
 
 
 
@@ -104,7 +104,7 @@
 
             @*  button__type1   *@
 
-            @await RenderSectionAsync("FooterContent", required: false)
+            <div class="button__type1">Обсудить проект</div>
             
         </div>
     </footer>
@@ -115,6 +115,7 @@
 
 
     <script src="~/js/site.js"></script>
+    <script src="~/js/send.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

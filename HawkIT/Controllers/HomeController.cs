@@ -4,6 +4,7 @@ using HawkIT.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace HawkIT.Controllers
 {
@@ -52,9 +53,13 @@ namespace HawkIT.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult ProjectDetails(int? id)
+        public IActionResult ProjectDetails(int id)
         {
-            return View();
+            var project = db.Projects.Find(id);
+            var lastThreeAddedProjects = db.Projects.OrderByDescending(p => p.CreatedDate).Take(3).ToList();
+
+            var model = new ProjectDetailsViewModel { Project = project, MoreProjects = lastThreeAddedProjects };
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -63,10 +68,26 @@ namespace HawkIT.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult TestSmtp()
+        public string TrySendBid(string name, string email, string phone, string telegram, string message)
         {
-            
-            return new OkResult();
+            string status = "ok";
+            var sender = new SenderInfo();
+            sender.Name = name;
+            sender.Email = email;
+            sender.Phone = phone;
+            sender.Telegram = telegram;
+            sender.Message = message;
+
+            try
+            {
+                _smtp.SendMessage(sender);
+            }
+            catch
+            {
+                status = "error";
+            }
+
+            return status;
         }
     }
 }
