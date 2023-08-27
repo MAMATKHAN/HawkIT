@@ -7,6 +7,8 @@
 
 @section Styles{<link rel="stylesheet" href="~/css/main.css" />}
 
+@*AJAX script*@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 @*  intro   *@
 
@@ -36,18 +38,17 @@
 
         @*  button__type2   *@
 
-        <a asp-controller="Home" asp-action="Index" asp-route-id="@null" class="button__type2 @activeAll">Все</a>
+        <a class="button__type2 type2__active" tagId="-1">Все</a>
         @foreach(var tag in Model.Tags)
         {
-            var tagActive = (tag.Id == Model.ActiveTagId) ? "type2__active" : "";
-            <a asp-controller="Home" asp-action="Index" asp-route-id="@tag.Id" class="button__type2 @tagActive">
+            <a class="button__type2" tagId="@tag.Id">
                 @tag.Name
             </a>
         }
 
     </div>
 
-    <div class="made__cardline">
+    <div class="made__cardline" id="projectsList">
         @foreach(var project in Model.Projects)
         {
 
@@ -56,7 +57,10 @@
             <a asp-controller="Home" asp-action="ProjectDetails" asp-route-id="@project.Id" class="made__card">
                 <div class="made__card__setting">
                     <div class="made__card__inner">
-                        <div class="made__card__inner__recent">new</div>
+                        @if (project.IsNewProject())
+                        {
+                            <div class="made__card__inner__recent">new</div>
+                        }
 
                         <div class="made__card__inner__img">
                             <img src="@project.ProjectImage" class="made__card__inner__img__in">
@@ -215,4 +219,39 @@
 </div>
 
 
-@section Scripts{<script src="~/js/base.js"></script>}
+@section Scripts{
+    <script src="~/js/base.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".button__type2").click(function (e) {
+
+                ResetActiveButton();
+                $(this).addClass("type2__active")
+                let id = $(this).attr('tagId');
+
+                e.preventDefault();
+                $('#projectsList').load('@Url.Action("PartialProjectsList", "Home")?id=' + id)
+
+                //AJAX
+                //$.ajax({
+                //    type: "GET",
+                //    url: "Home/PartialProjectsList?id=" + id,
+                //    succes: function (response) {
+                //        $("#projectsList").empty();
+                //        alert("good")
+                //        //$("#projectsList").html(response);
+                //    },
+                //    error: function (response) {
+                //        alert(response.responseText);
+                //    }
+                //});
+
+
+            });
+        });
+        function ResetActiveButton(){
+            var buttons = document.querySelectorAll(".button__type2");
+            buttons.forEach(item => item.classList.remove("type2__active"))
+        }
+    </script>
+}

@@ -111,3 +111,81 @@
     text-decoration: none;
     font-size: 14px;
 }
+
+/*Блок с людьми которые работали над проектом*/
+
+.info__team {
+    margin-top: 36px;
+    color: #fff;
+    transition: all 0.4s ease;
+}
+
+.info__team__inner {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.info__team__card {
+    margin-right: 32px;
+    margin-bottom: 32px;
+    width: 256px;
+    height: 312px;
+    padding-top: 1px;
+    position: relative;
+}
+
+
+    .info__team__card:nth-child(4n) {
+        margin-right: 0px;
+    }
+
+
+.info__team__card__img {
+    width: 256px;
+    height: 250px;
+    margin-left: 1px;
+    position: absolute;
+    top: 1px;
+}
+
+
+.info__team__card__block {
+    width: 254px;
+    height: 62px;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    margin-top: 250px;
+}
+
+
+.info__team__card__block__inner {
+    display: flex;
+    justify-content: left;
+    margin-left: 16px;
+    margin-top: 12px;
+}
+
+
+.info__team__card__block__inner__img {
+    width: 37px;
+    height: 37px;
+    margin-right: 12px;
+}
+
+
+
+.info__team__card__block__inner__txt {
+}
+
+
+.info__team__card__block__inner__txt__pos {
+    font-size: 16px;
+}
+
+
+.info__team__card__block__inner__txt__name {
+    font-size: 14px;
+    color: #9C9C9C;
+}
+
