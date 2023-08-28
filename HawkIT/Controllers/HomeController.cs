@@ -23,7 +23,7 @@ namespace HawkIT.Controllers
 
         public IActionResult Index(int? id)
         {
-            var projects = db.Projects.Include(p => p.Tags).ToList();
+            var projects = db.Projects.Include(p => p.Tags).OrderByDescending(p => p.CreatedDate).ToList();
             var tags = db.Tags.Include(t => t.Projects).Where(t => t.Projects.Count != 0).ToList();
             var workers = db.Workers.ToList();
             var articles = db.Articles.OrderBy(a => a.CreatedDate).Take(3).ToList();
@@ -38,26 +38,13 @@ namespace HawkIT.Controllers
             return View(mainViewModel);
         }
 
-        [HttpPost]
-        public IActionResult Index(string name, string email, string phone, string telegram, string message)
-        {
-            var sender = new SenderInfo();
-            sender.Name = name;
-            sender.Email = email;
-            sender.Phone = phone;
-            sender.Telegram = telegram;
-            sender.Message = message;
-
-            _smtp.SendMessage(sender);
-
-            return RedirectToAction("Index", "Home");
-        }
 
         public IActionResult ProjectDetails(int id)
         {
-            var project = db.Projects.Find(id);
-            var lastThreeAddedProjects = db.Projects.OrderByDescending(p => p.CreatedDate).Take(3).ToList();
+            var project = db.Projects.Include(p => p.Workers).ToList().Find(p => p.Id == id);
+            var lastThreeAddedProjects = db.Projects.Include(p => p.Tags).OrderByDescending(p => p.CreatedDate).Take(3).ToList();
 
+            if(project == null) return View("~/Views/Shared/NotFound.cshtml");
             var model = new ProjectDetailsViewModel { Project = project, MoreProjects = lastThreeAddedProjects };
             return View(model);
         }
@@ -66,6 +53,19 @@ namespace HawkIT.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult PartialProjectsList(int id)
+        {
+            var projects = db.Projects.Include(p => p.Tags).OrderByDescending(p => p.CreatedDate).ToList();
+
+            var tag = db.Tags.Find(id);
+            if (tag != null)
+            {
+                projects = projects.Where(p => p.Tags.Contains(tag)).ToList();
+
+            }
+            return PartialView("_PartialProjectsList", projects);
         }
 
         public string TrySendBid(string name, string email, string phone, string telegram, string message)

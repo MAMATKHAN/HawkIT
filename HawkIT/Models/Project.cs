@@ -23,5 +23,13 @@ namespace HawkIT.Models
         public IEnumerable<IFormFile>? BannerImages { get; set; }
 		[NotMapped, Required(ErrorMessage = "Пожалуйста выберите файл")]
 		public IFormFile ImageFile { get; set; }
+
+        public bool IsNewProject()
+        {
+            var monthAgo = DateTime.Now.AddMonths(-1);
+            int result = DateTime.Compare(monthAgo, CreatedDate);
+            if (result <= 0) return true;
+            return false;
+        }
 	}
 }
