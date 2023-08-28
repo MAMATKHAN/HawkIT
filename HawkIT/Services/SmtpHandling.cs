@@ -17,7 +17,7 @@ namespace HawkIT.Services
                 _smtpClient.EnableSsl = true;
 
                 NetworkCredential basicAutheticationInfo = new
-                    NetworkCredential("mamat.magomednabiyev@gmail.com", "");
+                    NetworkCredential("mamat.magomednabiyev@gmail.com", "bfoncyvrgasicfzs");
                 _smtpClient.Credentials = basicAutheticationInfo;
 
                 MailAddress senderMail = new MailAddress("mamat.magomednabiyev@gmail.com", sender.Email);
