@@ -370,6 +370,180 @@ svg path {
 
 
 
+/*   успешный попат   */
+
+
+
+.popat__succ {
+    width: 631px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+    background: #151515;
+    transition: all 0.4s ease;
+}
+
+
+.popat__succ__active {
+    opacity: 1;
+    top: 50%;
+}
+
+
+.popat__succ__anime{
+    display: none;
+}
+
+
+.popat__succ__inner{
+    margin-top: 32px;
+    margin-left: 32px;
+    width: 567px;
+    position: relative;
+}
+
+
+.popat__succ__face{
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+
+.popat__succ__close{
+    width: 32px;
+    height: 32px;
+    margin-left: 535px;
+}
+
+
+.popat__succ__main {
+    font-size: 32px;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 100px;
+    text-align: center;
+}
+
+
+
+.popat__succ__post {
+    font-size: 20px;
+    color: #BBB;
+    margin-top: 4px;
+    text-align: center;
+}
+
+
+.popat__succ__btn {
+    margin-top: 24px;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    padding: 11px 248.5px;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 32px;
+    transition: all 0.4s ease;
+}
+
+
+.popat__succ__btn:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+
+/*   ошибочный попат   */
+
+.popat__err {
+    width: 631px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+    background: #151515;
+}
+
+
+.popat__err__active {
+    opacity: 1;
+    top: 50%;
+}
+
+
+.popat__err__anime {
+    display: none;
+}
+
+
+.popat__err__inner {
+    margin-top: 32px;
+    margin-left: 32px;
+    width: 567px;
+    position: relative;
+}
+
+
+.popat__err__face {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.popat__err__close {
+    width: 32px;
+    height: 32px;
+    margin-left: 535px;
+}
+
+
+.popat__err__main {
+    font-size: 32px;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 100px;
+    text-align: center;
+}
+
+
+
+.popat__err__post {
+    font-size: 20px;
+    color: #BBB;
+    margin-top: 4px;
+    text-align: center;
+    
+}
+
+
+.popat__err__btn {
+    margin-top: 24px;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    padding: 11px 212.5px;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 32px;
+    transition: all 0.4s ease;
+}
+
+
+.popat__err__btn:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+
+
 /*  footer  */
 
 .footer{

@@ -180,3 +180,61 @@ const regNumSym = /^\+[^0-9]/
 
 
 console.log(input[0].value.match(regName))
+
+
+/*   работа с успешным попатом   */
+
+
+let succPopat = document.querySelector('.popat__succ');
+let succCloseBtn = document.querySelector('.popat__succ__close');
+let succBtn = document.querySelector('.popat__succ__btn');
+
+
+succCloseBtn.addEventListener('click', closeSuccPopat);
+succBtn.addEventListener('click', closeSuccPopat);
+
+
+
+function closeSuccPopat() {
+    succPopat.classList.remove('popat__succ__active');
+    setTimeOut(function () {
+        succPopat.classList.add('popat__succ__anime');
+    }, 200);
+}
+
+
+function openSuccPopat() {
+    succPopat.classList.remove('popat__succ__anime');
+    setTimeOut(function () {
+        succPopat.classList.add('popat__succ__active');
+    }, 200);
+}
+
+
+/*   работа с ошибочным попатом   */
+
+
+let errPopat = document.querySelector('.popat__err');
+let errCloseBtn = document.querySelector('.popat__err__close');
+let errBtn = document.querySelector('.popat__err__btn');
+
+
+errCloseBtn.addEventListener('click', closeErrPopat);
+errBtn.addEventListener('click', closeErrPopat);
+
+
+
+function closeErrPopat() {
+    errPopat.classList.remove('popat__err__active');
+    setTimeOut(function () {
+        errPopat.classList.add('popat__err__anime');
+    }, 200);
+}
+
+
+function openErrPopat() {
+    errPopat.classList.remove('popat__err__anime');
+    setTimeOut(function () {
+        errPopat.classList.add('popat__err__active');
+    }, 200);
+}

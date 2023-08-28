@@ -1,6 +1,8 @@
 ﻿body {
     background-color: #000;
     padding-top: 1px;
+    font-family: 'Tektur', cursive;
+    
 }
 
 
@@ -15,7 +17,7 @@
 .info{
     width: 440px;
     margin: 0 auto;
-    margin-top: 400px;
+    margin-top: 350px;
 }
 
 
@@ -34,9 +36,11 @@
 
 .info__link{
     width: 261px;
+    margin: 0 auto;
     display: flex;
     justify-content: left;
     margin-top: 16px;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -51,6 +55,10 @@
 
 
 .moon{
-    width: 564px;
-    margin-top: 78px;
+
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
 }
