@@ -156,6 +156,14 @@ function closeForm() {
     }, 200)
 }
 
+function cleanForm() {
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("telegram").value = "";
+    document.getElementById("message").value = "";
+
+}
 
 
 /*   работа с регулярными выражениями   */
@@ -220,13 +228,16 @@ let errBtn = document.querySelector('.popat__err__btn');
 
 
 errCloseBtn.addEventListener('click', closeErrPopat);
-errBtn.addEventListener('click', closeErrPopat);
+errBtn.addEventListener('click', () => {
+    closeErrPopat();
+    openForm();
+});
 
 
 
 function closeErrPopat() {
     errPopat.classList.remove('popat__err__active');
-    setTimeOut(function () {
+    setTimeout(function () {
         errPopat.classList.add('popat__err__anime');
     }, 200);
 }
@@ -235,7 +246,7 @@ function closeErrPopat() {
 
 function openErrPopat() {
     errPopat.classList.remove('popat__err__anime');
-    setTimeOut(function () {
+    setTimeout(function () {
         errPopat.classList.add('popat__err__active');
     }, 200);
 }
@@ -269,6 +280,7 @@ btn.addEventListener("click", () => {
         closeForm();
         if (result) openSuccPopat();
         else openErrPopat();
+        cleanForm();
     });
 
 });

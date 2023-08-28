@@ -376,7 +376,7 @@ svg path {
 
 .popat__succ {
     width: 631px;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -462,7 +462,7 @@ svg path {
 
 .popat__err {
     width: 631px;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
