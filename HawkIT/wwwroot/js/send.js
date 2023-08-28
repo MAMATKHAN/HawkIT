@@ -17,3 +17,10 @@ function GetHostUrl() {
     return document.location.protocol + "//" + document.location.host;
 }
 
+
+
+
+
+
+
+

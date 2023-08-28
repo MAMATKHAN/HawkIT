@@ -210,6 +210,34 @@ svg path {
 }
 
 
+.form__inner__top__inp__x {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: none;
+}
+
+
+
+.form__inner__top__inp__mark {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: none;
+}
+
+
+
+.mark__active{
+    display: block;
+}
+
+
+
 
 .label__active {
     font-size: 12px;
@@ -308,13 +336,21 @@ svg path {
     border: 1px solid #4F4F4F;
     border-radius: 4px;
     background: #151515;
-    
+    transition: all 0.4s ease;
 }
 
 
 
-.form__inner__btn__enable{
+.form__inner__btn__enable {
+    border-color: #fff;
+    color: #fff;
+    transition: all 0.4s ease;
+}
 
+
+.form__inner__btn__enable:hover{
+    background-color: #fff;
+    color: #000;
 }
 
 

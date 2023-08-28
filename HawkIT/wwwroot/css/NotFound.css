@@ -1,0 +1,56 @@
+﻿body {
+    background-color: #000;
+    padding-top: 1px;
+}
+
+
+
+.container {
+    width: 1120px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+
+.info{
+    width: 440px;
+    margin: 0 auto;
+    margin-top: 400px;
+}
+
+
+.info__404 {
+    width: 439.209px;
+    margin: 0 auto;
+}
+
+
+.info__txt {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 36px;
+}
+
+
+.info__link{
+    width: 261px;
+    display: flex;
+    justify-content: left;
+    margin-top: 16px;
+    text-decoration: none;
+}
+
+
+
+.info__link__txt{
+    font-size: 24px;
+    margin-left: 44px;
+}
+
+
+
+
+.moon{
+    width: 564px;
+    margin-top: 78px;
+}
