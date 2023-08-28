@@ -93,7 +93,7 @@ document.addEventListener('click', function (e) {
 })
 
 document.addEventListener('click', function (e) {
-    let box = e.composedPath().includes(document.querySelector('#username'));
+    let box = e.composedPath().includes(document.querySelector('#telegram'));
     if (!box && (input[1].value == "" || input[1].value == null)) {
         label[1].classList.remove('label__active')
     }
@@ -107,7 +107,7 @@ document.addEventListener('click', function (e) {
 })
 
 document.addEventListener('click', function (e) {
-    let box = e.composedPath().includes(document.querySelector('#number'));
+    let box = e.composedPath().includes(document.querySelector('#phone'));
     if (!box && (input[3].value == "" || input[3].value == null)) {
         label[3].classList.remove('label__active')
     }
@@ -197,7 +197,7 @@ succBtn.addEventListener('click', closeSuccPopat);
 
 function closeSuccPopat() {
     succPopat.classList.remove('popat__succ__active');
-    setTimeOut(function () {
+    setTimeout(function () {
         succPopat.classList.add('popat__succ__anime');
     }, 200);
 }
@@ -205,7 +205,7 @@ function closeSuccPopat() {
 
 function openSuccPopat() {
     succPopat.classList.remove('popat__succ__anime');
-    setTimeOut(function () {
+    setTimeout(function () {
         succPopat.classList.add('popat__succ__active');
     }, 200);
 }
@@ -232,9 +232,43 @@ function closeErrPopat() {
 }
 
 
+
 function openErrPopat() {
     errPopat.classList.remove('popat__err__anime');
     setTimeOut(function () {
         errPopat.classList.add('popat__err__active');
     }, 200);
 }
+
+
+//Заявка
+async function TrySendBid(name, email, phone, telegram, message) {
+    let url = GetHostUrl();
+    let response = await fetch(`${url}/Home/TrySendBid?name=${name}&email=${email}&phone=${phone}&telegram=${telegram}&message=${message}`);
+    if (response.ok) {
+        let text = await response.text();
+        if (text == "ok") return true;
+    }
+    return false;
+}
+
+function GetHostUrl() {
+    return document.location.protocol + "//" + document.location.host;
+}
+
+btn.addEventListener("click", () => {
+    let name = document.getElementById("name");
+    let email = document.getElementById("email");
+    let phone = document.getElementById("phone");
+    let telegram = document.getElementById("telegram");
+    let message = document.getElementById("message");
+    
+    let send = TrySendBid(name.value, email.value, phone.value, telegram.value, message.value);
+    send.then(function (result) {
+        console.log("message is" + result);
+        closeForm();
+        if (result) openSuccPopat();
+        else openErrPopat();
+    });
+
+});
