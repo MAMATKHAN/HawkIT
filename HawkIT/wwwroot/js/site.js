@@ -12,7 +12,6 @@ for (let i = 0; i < input.length; i++) {
     console.log("1");
     input[i].addEventListener('click', function () {
         label[i].classList.add('label__active');
-        console.log("add");
         if (label[0].classList.contains('label__active')){
             document.addEventListener('click', function () {
                 if (input[0].value.match(regName) == null || input[0].value.match(regNameSym) != null) {
@@ -25,6 +24,9 @@ for (let i = 0; i < input.length; i++) {
                     if (mark[0].classList.contains('mark__active') && mark[1].classList.contains('mark__active') && mark[2].classList.contains('mark__active') && mark[3].classList.contains('mark__active')) {
                         btn.classList.add("form__inner__btn__enable")
                         btn.disabled = false;
+                    } else {
+                        btn.classList.remove("form__inner__btn__enable")
+                        btn.disabled = true;
                     }
                 }
             })
@@ -41,6 +43,9 @@ for (let i = 0; i < input.length; i++) {
                     if (mark[0].classList.contains('mark__active') && mark[1].classList.contains('mark__active') && mark[2].classList.contains('mark__active') && mark[3].classList.contains('mark__active')) {
                         btn.classList.add("form__inner__btn__enable")
                         btn.disabled = false;
+                    } else {
+                        btn.classList.remove("form__inner__btn__enable")
+                        btn.disabled = true;
                     }
                 }
             })
@@ -57,6 +62,9 @@ for (let i = 0; i < input.length; i++) {
                     if (mark[0].classList.contains('mark__active') && mark[1].classList.contains('mark__active') && mark[2].classList.contains('mark__active') && mark[3].classList.contains('mark__active')) {
                         btn.classList.add("form__inner__btn__enable")
                         btn.disabled = false;
+                    } else {
+                        btn.classList.remove("form__inner__btn__enable")
+                        btn.disabled = true;
                     }
                 }
             })
@@ -64,18 +72,29 @@ for (let i = 0; i < input.length; i++) {
 
         if (label[3].classList.contains('label__active')) {
             document.addEventListener('click', function () {
-                if (input[3].value.match(regNum) == null && input[3].value.match(regNumT2) == null || input[3].value.match(regNumSym) != null) {
-                    mark[3].classList.remove('mark__active');
-                    console.log(input[3].value.match(regNum))
-                    x[3].classList.add('mark__active');
-                } else {
-                    
+                if (input[3].value.match(regNum) != null && input[3].value.match(regNum)[0].length == 12 && input[3].value.match(regNumSym) == null) {
                     x[3].classList.remove('mark__active');
                     mark[3].classList.add('mark__active');
                     if (mark[0].classList.contains('mark__active') && mark[1].classList.contains('mark__active') && mark[2].classList.contains('mark__active') && mark[3].classList.contains('mark__active')) {
                         btn.classList.add("form__inner__btn__enable")
                         btn.disabled = false;
+                    } else {
+                        btn.classList.remove("form__inner__btn__enable")
+                        btn.disabled = true;
                     }
+                } else if (input[3].value.match(regNumT2) != null && input[3].value.match(regNumT2)[0].length == 11 && input[3].value.match(regNumSym) == null) {
+                    x[3].classList.remove('mark__active');
+                    mark[3].classList.add('mark__active');
+                    if (mark[0].classList.contains('mark__active') && mark[1].classList.contains('mark__active') && mark[2].classList.contains('mark__active') && mark[3].classList.contains('mark__active')) {
+                        btn.classList.add("form__inner__btn__enable")
+                        btn.disabled = false;
+                    } else {
+                        btn.classList.remove("form__inner__btn__enable")
+                        btn.disabled = true;
+                    }
+                } else {
+                    mark[3].classList.remove('mark__active');
+                    x[3].classList.add('mark__active');       
                 }
             })
         }

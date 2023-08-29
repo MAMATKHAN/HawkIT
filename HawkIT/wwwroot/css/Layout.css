@@ -377,12 +377,13 @@ svg path {
 .popat__succ {
     width: 631px;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 12px;
     background: #151515;
     transition: all 0.4s ease;
+    opacity: 0;
 }
 
 
@@ -463,11 +464,12 @@ svg path {
 .popat__err {
     width: 631px;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 12px;
     background: #151515;
+    opacity: 0;
 }
 
 
