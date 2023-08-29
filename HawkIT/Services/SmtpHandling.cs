@@ -6,7 +6,7 @@ namespace HawkIT.Services
 {
     public class SmtpHandling
     {
-        private SmtpClient _smtpClient;
+        private SmtpClient? _smtpClient;
         
         public void SendMessage(SenderInfo sender)
         {
