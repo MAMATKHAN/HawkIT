@@ -30,20 +30,66 @@
 }
 
 
+@*  Информация о комманде   *@
+
+<div class="info__team">
+    <div class="info__team__inner">
+
+        @foreach (var worker in Model.Project.Workers)
+        {
+            <div class="info__team__card">
+                <img src="@worker.WorkerImage" class="info__team__card__img" />
+
+                <div class="info__team__card__block">
+                    <div class="info__team__card__block__inner">
+                        <img src="@worker.SpecializationIcon" class="info__team__card__block__inner__img" />
+
+                        <div class="info__team__card__block__inner__txt">
+                            <div class="info__team__card__block__inner__txt__pos">@worker.Specialization</div>
+
+                            <div class="info__team__card__block__inner__txt__name">@worker.Name</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
 
 @*   Документы   *@
 
-
+@if (!(String.IsNullOrEmpty(Model.Project.TechSpecification)))
+{
 <div class="doc">
 	<div class="doc__txt">Документы проекта</div>
 
-	@if (!(String.IsNullOrEmpty(Model.Project.TechSpecification)))
-	{
+	
 		<a href="@Model.Project.TechSpecification" class="doc__link">
 			<img src="~/img/doc.png" class="doc__link__img" />
 
 			<div class="doc__link__txt">@Model.Project.TechSpecification.Split("/").Last()</div>
 		</a>
-	}
+	
 	
 </div>
+}
+
+@*Ссылки на другие проекты*@
+
+@foreach(var project in Model.MoreProjects)
+{
+    <a asp-controller="Home" asp-action="ProjectDetails" asp-route-id="@project.Id">@* Ссылка на проект*@
+        <img src="@project.ProjectImage" /> @*Изображение проекта*@
+        <div>@project.Name</div> @*Название проекта*@
+        @if(project.Tags != null)  @*Тэги проекта*@
+        {
+            @foreach (var tag in project.Tags)
+            {
+                <div>@tag.Name</div>
+            }
+        }
+        
+    </a>
+}
