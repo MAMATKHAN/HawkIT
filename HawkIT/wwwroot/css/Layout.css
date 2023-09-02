@@ -584,6 +584,7 @@ svg path {
     margin-top: 12px;
     transition: all 0.4s ease;
     text-decoration: none;
+    cursor: pointer;
 }
 
 
@@ -609,6 +610,7 @@ svg path {
     margin-top: 16px;
     transition: all 0.3s ease;
     text-decoration: none;
+    cursor: pointer;
 }
 
 
