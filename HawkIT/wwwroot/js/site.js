@@ -9,97 +9,59 @@ console.log(label)
 
 
 for (let i = 0; i < input.length; i++) {
-    console.log("1");
     input[i].addEventListener('click', function () {
         label[i].classList.add('label__active');
-        if (label[0].classList.contains('label__active')){
-            document.addEventListener('click', function () {
-                if (input[0].value.match(regName) == null || input[0].value.match(regNameSym) != null) {
-                    mark[0].classList.remove('mark__active');
-                    x[0].classList.add('mark__active');
-                } else {
-                    console.log('правильно');
-                    x[0].classList.remove('mark__active');
-                    mark[0].classList.add('mark__active');
-                    if (mark[0].classList.contains('mark__active') && mark[1].classList.contains('mark__active') && mark[2].classList.contains('mark__active') && mark[3].classList.contains('mark__active')) {
-                        btn.classList.add("form__inner__btn__enable")
-                        btn.disabled = false;
-                    } else {
-                        btn.classList.remove("form__inner__btn__enable")
-                        btn.disabled = true;
-                    }
-                }
-            })
-        }
-
-        if (label[1].classList.contains('label__active')) {
-            document.addEventListener('click', function () {
-                if (input[1].value.match(regUser) == null || input[1].value.match(regUser)[0].length <= 6 || input[1].value.match(regUserSym) != null) {
-                    mark[1].classList.remove('mark__active');
-                    x[1].classList.add('mark__active');
-                } else {
-                    x[1].classList.remove('mark__active');
-                    mark[1].classList.add('mark__active');
-                    if (mark[0].classList.contains('mark__active') && mark[1].classList.contains('mark__active') && mark[2].classList.contains('mark__active') && mark[3].classList.contains('mark__active')) {
-                        btn.classList.add("form__inner__btn__enable")
-                        btn.disabled = false;
-                    } else {
-                        btn.classList.remove("form__inner__btn__enable")
-                        btn.disabled = true;
-                    }
-                }
-            })
-        }
-
-        if (label[2].classList.contains('label__active')) {
-            document.addEventListener('click', function () {
-                if (input[2].value.match(regEmail) == null || input[2].value.match(regEmailSym) != null) {
-                    mark[2].classList.remove('mark__active');
-                    x[2].classList.add('mark__active');
-                } else {
-                    x[2].classList.remove('mark__active');
-                    mark[2].classList.add('mark__active');
-                    if (mark[0].classList.contains('mark__active') && mark[1].classList.contains('mark__active') && mark[2].classList.contains('mark__active') && mark[3].classList.contains('mark__active')) {
-                        btn.classList.add("form__inner__btn__enable")
-                        btn.disabled = false;
-                    } else {
-                        btn.classList.remove("form__inner__btn__enable")
-                        btn.disabled = true;
-                    }
-                }
-            })
-        }
-
-        if (label[3].classList.contains('label__active')) {
-            document.addEventListener('click', function () {
-                if (input[3].value.match(regNum) != null && input[3].value.match(regNum)[0].length == 12 && input[3].value.match(regNumSym) == null) {
-                    x[3].classList.remove('mark__active');
-                    mark[3].classList.add('mark__active');
-                    if (mark[0].classList.contains('mark__active') && mark[1].classList.contains('mark__active') && mark[2].classList.contains('mark__active') && mark[3].classList.contains('mark__active')) {
-                        btn.classList.add("form__inner__btn__enable")
-                        btn.disabled = false;
-                    } else {
-                        btn.classList.remove("form__inner__btn__enable")
-                        btn.disabled = true;
-                    }
-                } else if (input[3].value.match(regNumT2) != null && input[3].value.match(regNumT2)[0].length == 11 && input[3].value.match(regNumSym) == null) {
-                    x[3].classList.remove('mark__active');
-                    mark[3].classList.add('mark__active');
-                    if (mark[0].classList.contains('mark__active') && mark[1].classList.contains('mark__active') && mark[2].classList.contains('mark__active') && mark[3].classList.contains('mark__active')) {
-                        btn.classList.add("form__inner__btn__enable")
-                        btn.disabled = false;
-                    } else {
-                        btn.classList.remove("form__inner__btn__enable")
-                        btn.disabled = true;
-                    }
-                } else {
-                    mark[3].classList.remove('mark__active');
-                    x[3].classList.add('mark__active');       
-                }
-            })
-        }
     });
 }
+
+
+
+for (let i = 0; i < input.length; i++) {
+    input[i].addEventListener('input', () => {
+        enableBtn();
+    });
+}
+
+
+function enableBtn() {
+    let nameIsValid = regCheck(input[0], mark[0], x[0], regName);
+    let userNameIsValid = regCheck(input[1], mark[1], x[1], regUser);
+    let mailIsValid = regCheck(input[2], mark[2], x[2], regMail);
+    let numberIsValid = (regCheck(input[3], mark[3], x[3], regNum) || regCheck(input[3], mark[3], x[3], regNumT2));
+    console.log(nameIsValid, userNameIsValid, mailIsValid, numberIsValid);
+    if (nameIsValid && userNameIsValid && mailIsValid && numberIsValid) {
+        btn.classList.add("form__inner__btn__enable")
+        btn.disabled = false;
+        console.log('enable');
+
+    } else {
+        btn.classList.remove("form__inner__btn__enable")
+        btn.disabled = true;
+        console.log('disable');
+        
+    }
+}
+
+
+function regCheck(input, mark, x, regExp) {
+    if (input.value.length == 0) {
+        return false;
+    }
+
+    if (input.value.match(regExp) == null) {
+        mark.classList.remove('mark__active');
+        x.classList.add('mark__active');
+
+        return false;
+    }
+    x.classList.remove('mark__active');
+    mark.classList.add('mark__active');
+
+    return true
+
+}
+
+
 
 
 
@@ -191,18 +153,16 @@ function cleanForm() {
 let x = document.querySelectorAll('.form__inner__top__inp__x')
 let mark = document.querySelectorAll('.form__inner__top__inp__mark')
 
-const regName = /[a-zA-zа-яА-Я]{1,}/
-const regNameSym = /[^a-zA-zа-яА-Я]/
+const regName = /^[a-zA-zа-яА-Я]+$/
 
-const regUser = /@([a-zA-zа-яА-Я0-9]{1,})/
-const regUserSym = /[^@a-zA-zа-яА-Я0-9]/
 
-const regEmail = /[a-zA-z]{1,}@[a-zA-z]{1,}\.[a-zA-z]{1,}/
-const regEmailSym = /^[^a-zA-z]{1,}^@[a-zA-z]{1,}\^.[a-zA-z]{1,}/
+const regUser = /^[@]([a-zA-zа-яА-Я0-9]{5,})$/
 
-const regNum = /\+7\d{10}/
-const regNumT2 = /8\d{10}/
-const regNumSym = /^\+[^0-9]/
+const regMail = /^[a-zA-z][a-zA-Z0-9]+@[a-zA-z]+\.[a-zA-z]+$/
+
+const regNum = /^\+7\d{10}$/
+const regNumT2 = /8\d{10}$/
+
 
 
 
