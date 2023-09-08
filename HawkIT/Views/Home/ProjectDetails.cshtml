@@ -78,18 +78,26 @@
 
 @*Ссылки на другие проекты*@
 
-@foreach(var project in Model.MoreProjects)
-{
-    <a asp-controller="Home" asp-action="ProjectDetails" asp-route-id="@project.Id">@* Ссылка на проект*@
-        <img src="@project.ProjectImage" /> @*Изображение проекта*@
-        <div>@project.Name</div> @*Название проекта*@
-        @if(project.Tags != null)  @*Тэги проекта*@
-        {
-            @foreach (var tag in project.Tags)
+<div class="project__txt">Другие кейсы</div>
+
+<div class="project__cardlist">
+
+    @foreach(var project in Model.MoreProjects)
+    {
+        <a class="project__card" asp-controller="Home" asp-action="ProjectDetails" asp-route-id="@project.Id">@* Ссылка на проект*@
+            <img class="project__card__img" src="@project.ProjectImage" /> @*Изображение проекта*@
+            <div class="project__card__name" >@project.Name</div> @*Название проекта*@
+            @if(project.Tags != null)  @*Тэги проекта*@
             {
-                <div>@tag.Name</div>
+                <div class="project__card__taglist">
+                    @foreach (var tag in project.Tags)
+                    {
+                        <div class="project__card__tag">@tag.Name</div>
+                    }
+                </div>
             }
-        }
         
-    </a>
-}
+        </a>
+    }
+
+</div>
