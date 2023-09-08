@@ -21,7 +21,7 @@ body {
     width: 1120px;
     margin: 0 auto;
     margin-top: 24px;
-   
+    max-width: 95%;
 }
 
 
@@ -91,7 +91,8 @@ svg path {
 
 /*  container   */
 
-.container{
+.container {
+    max-width: 95%;
     width: 1120px;
     margin: 0 auto;
 }
@@ -548,8 +549,9 @@ svg path {
 
 /*  footer  */
 
-.footer{
+.footer {
     width: 1120px;
+    max-width: 95%;
     height: 72px;
     margin: 0 auto;
     margin-top: 160px;
