@@ -342,6 +342,9 @@ svg path {
 }
 
 
+
+
+
 .form__inner__btn__block {
     position: absolute;
     width: 100%;
@@ -349,6 +352,7 @@ svg path {
     top: 0px;
     background-color: #fff;
     border-radius: 4px;
+    display: none;
 }
 
 
@@ -357,16 +361,16 @@ svg path {
     width: 22px;
     height: 22px;
     position: relative;
-    animation: rotate 4s linear infinite;
-    
+    animation: rotate 2s linear infinite;
 }
 
 
 
 @keyframes rotate {
-    0%{
+    0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -375,32 +379,32 @@ svg path {
 
 
 .form__btn__loader {
-    position: absolute;
     width: 100%;
     height: 100%;
     fill: none;
     stroke-width: 1;
     stroke: #000;
     stroke-linecap: round;
-    stroke-dasharray: 440;
-    stroke-dashoffset: 440;
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
     transform: translate(0.5px, 0.5px);
-    animation: loader 4s linear infinite;
-    
+    animation: loader 3s linear infinite;
 }
 
 @keyframes loader {
-    0%, 100%{
-        stroke-dashoffset: 440;
+    0%, 100% {
+        stroke-dashoffset: 50;
     }
+
     50% {
         stroke-dashoffset: 0;
     }
+
     50.1% {
-        stroke-dashoffset: 880;
+        stroke-dashoffset: 100;
     }
-    
 }
+
 
 
 .form__inner__btn__enable {
@@ -415,6 +419,11 @@ svg path {
     color: #000;
 }
 
+
+.form__inner__btn__enable:active {
+    background: #DDD;
+    transition: all 0.4s ease;
+}
 
 
 .form__inner__info {
