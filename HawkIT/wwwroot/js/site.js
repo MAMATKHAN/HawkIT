@@ -136,7 +136,6 @@ function closeForm() {
         form.classList.add('form__anime');
     }, 200)
     loader.style.display = "none";
-    enableBtn();
 }
 
 function cleanForm() {
@@ -145,7 +144,9 @@ function cleanForm() {
     document.getElementById("phone").value = "";
     document.getElementById("telegram").value = "";
     document.getElementById("message").value = "";
-    
+
+    btn.classList.remove("form__inner__btn__enable")
+    btn.disabled = true;
 
 }
 
