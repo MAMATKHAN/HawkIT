@@ -148,6 +148,9 @@ function cleanForm() {
     btn.classList.remove("form__inner__btn__enable")
     btn.disabled = true;
 
+    x.forEach(item => item.classList.remove('mark__active'));
+    mark.forEach(item => item.classList.remove('mark__active'));
+    
 }
 
 
