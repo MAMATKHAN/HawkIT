@@ -91,7 +91,16 @@
                 <textarea name="message" id="message" type="text" class="form__inner__comm__txt"></textarea>
             </div>
 
-            <button class="form__inner__btn" disabled>Отправить заявку</button>
+            <button class="form__inner__btn" disabled>
+                <div class="form__inner__btn__block">
+                    <svg class="form__btn__setting">
+                        <circle class="form__btn__loader" cx=70 cy=70 r=70></circle>
+                    </svg>
+                </div>
+
+                Отправить заявку
+
+            </button>
 
             <div class="form__inner__info">Нажимая кнопку «Отправить заявку», я даю своё согласие на 
                 <a class="form__inner__info__link">обработку персональных данных</a>
