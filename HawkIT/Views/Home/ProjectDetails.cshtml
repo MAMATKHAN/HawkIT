@@ -82,8 +82,16 @@
 
 <div class="project__cardlist">
 
+
+
     @foreach(var project in Model.MoreProjects)
     {
+
+        @*@if (project.IsNewProject())
+        {
+            <div class="">new</div>
+        }*@
+
         <a class="project__card" asp-controller="Home" asp-action="ProjectDetails" asp-route-id="@project.Id">@* Ссылка на проект*@
             <img class="project__card__img" src="@project.ProjectImage" /> @*Изображение проекта*@
             <div class="project__card__name" >@project.Name</div> @*Название проекта*@

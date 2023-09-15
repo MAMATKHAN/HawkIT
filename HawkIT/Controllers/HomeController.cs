@@ -25,7 +25,7 @@ namespace HawkIT.Controllers
         {
             var projects = db.Projects.Include(p => p.Tags).OrderByDescending(p => p.CreatedDate).ToList();
             var tags = db.Tags.Include(t => t.Projects)
-                .Where(t => (t.Projects != null)? t.Projects.Count != 0 : false)
+                .Where(t => t.Projects.Count != 0)
                 .ToList();
             var workers = db.Workers.ToList();
             var articles = db.Articles.OrderBy(a => a.CreatedDate).Take(3).ToList();
@@ -47,6 +47,7 @@ namespace HawkIT.Controllers
         {
             var project = db.Projects.Include(p => p.Workers).ToList().Find(p => p.Id == id);
             var lastThreeAddedProjects = db.Projects
+                .Where(p => p.Id !=  id)
                 .Include(p => p.Tags)
                 .OrderByDescending(p => p.CreatedDate)
                 .Take(3)
@@ -68,11 +69,11 @@ namespace HawkIT.Controllers
             var projects = db.Projects.Include(p => p.Tags).OrderByDescending(p => p.CreatedDate).ToList();
 
             var tag = db.Tags.Find(id);
-            if (tag != null)
-            {
-                projects = projects.Where(p => (p.Tags != null)? p.Tags.Contains(tag) : false).ToList();
+            if (tag != null) projects = projects
+                                        .Where(p => (p.Tags != null)? p.Tags.Contains(tag) : false)
+                                        .ToList();
 
-            }
+
             return PartialView("_PartialProjectsList", projects);
         }
 
