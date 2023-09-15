@@ -128,6 +128,7 @@
     border-radius: 8px;
     transition: all 0.3s ease;
     margin: 0 auto;
+    padding-top: 1px;
 }
 
 
@@ -148,6 +149,8 @@
 
 .made__card__inner {
     margin: 16px;
+    position: relative;
+    margin-top: 60px;
 }
 
 
@@ -157,6 +160,8 @@
     color: #D1FB52;
     font-weight: 600;
     text-align: right;
+    position: absolute;
+    top: -45px;
 
 }
 
