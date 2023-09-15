@@ -215,6 +215,7 @@
     border-radius: 4px;
     margin-right: 32px;
     transition: all 0.4s ease;
+    position: relative;
 }
 
 
@@ -222,6 +223,19 @@
     border: 1px solid #fff;
     transition: all 0.4s ease;
 }
+
+
+.project__card__recent {
+    width: 100%;
+    font-size: 16px;
+    color: #D1FB52;
+    font-weight: 600;
+    text-align: right;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
 
 
 .project__card:nth-child(3n) {
