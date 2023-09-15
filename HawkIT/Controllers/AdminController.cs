@@ -1,4 +1,4 @@
-﻿using HawkIT.Models;
+﻿    using HawkIT.Models;
 using HawkIT.ViewModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -60,7 +60,8 @@ namespace HawkIT.Controllers
             return RedirectToAction("Login", "Admin");
         }
 
-        // Project CRUD
+        // PROJECT CRUD
+        // READ PROJECTS
         [Authorize]
         public IActionResult ListProjects(string? name ,int? tagId, int? workerId)
         {
@@ -68,22 +69,29 @@ namespace HawkIT.Controllers
             var tags = db.Tags.ToList();
             var workers = db.Workers.ToList();
 
-            if (name != null) projects = projects.Where(w => w.Name.ToLower().Contains(name.ToLower())).ToList();
+            if (name != null) projects = projects
+                    .Where(w => w.Name.ToLower().Contains(name.ToLower()))
+                    .ToList();
             if (tagId != -1 && tagId != null)
             {
                 var tag = db.Tags.Find(tagId);
-                projects = projects.Where(p => p.Tags.Contains(tag)).ToList();
+                if(tag != null) projects = projects
+                        .Where(p => (p.Tags != null)? p.Tags.Contains(tag) : false)
+                        .ToList();
             }
             if (workerId != -1 && workerId != null)
             {
                 var worker = db.Workers.Find(workerId);
-                projects = projects.Where(p => p.Workers.Contains(worker)).ToList();
+                if(worker != null) projects = projects
+                        .Where(p => p.Workers.Contains(worker))
+                        .ToList();
             }
 
             var adminProjectViewModel = new AdminProjectsViewModel { Projects = projects, Workers = workers, Tags = tags };
             return View(adminProjectViewModel);
         }
 
+        // CREATE PROJECT
         [Authorize, HttpGet]
         public IActionResult AddProject()
         {
@@ -95,10 +103,8 @@ namespace HawkIT.Controllers
         [Authorize, HttpPost]
         public IActionResult AddProject(Project project)
         {
-            if (Request.Form["workers"].Count == 0)
-            {
-                ModelState.AddModelError("Workers", "Это поле обязательно должно быть заполнено");
-            }
+            if (Request.Form["workers"].Count == 0) ModelState.AddModelError("Workers", "Это поле обязательно должно быть заполнено");
+
             if (!(ModelState.IsValid))
             {
                 ViewData["Workers"] = db.Workers.ToList();
@@ -108,32 +114,26 @@ namespace HawkIT.Controllers
 
             foreach (var workerId in Request.Form["workers"])
             {
-                project.Workers.Add(db.Workers.Find(int.Parse(workerId)));
+                var worker = (workerId != null) ? db.Workers.Find(int.Parse(workerId)) : null;
+                if (worker != null) project.Workers.Add(worker);
             }
             foreach (var tagId in Request.Form["tags"])
             {
-                project.Tags?.Add(db.Tags.Find(int.Parse(tagId)));
+                var tag = (tagId != null) ? db.Tags.Find(int.Parse(tagId)) : null;
+                if (tag != null) project.Tags?.Add(tag);
             }
 
             project.CreatedDate = DateTime.Now;
-            project.ProjectImage = UploadFile(project.ImageFile.FileName, project.ImageFile, "projects");
-            if (project.SpecificationFile != null)
-                project.TechSpecification = UploadFile(project.SpecificationFile.FileName, project.SpecificationFile, "specifications");
-            if (project.BannerImages != null)
-            {
-                var banners = new List<string>();
-                foreach (var banner in project.BannerImages)
-                {
-                    banners.Add(UploadFile(banner.FileName, banner, "banners"));
-                }
-                project.Banners = String.Join("||", banners);
-            }
+            project.ProjectImage = UploadFile(project.ImageFile, "projects");
+            project.TechSpecification = UploadFile(project.SpecificationFile, "specifications");
+            project.Banners = UploadFile(project.BannerImages, "banners");
 
             db.Projects.Add(project);
             db.SaveChanges();
             return RedirectToAction("ListProjects", "Admin");
         }
 
+        // UPDATE PROJECT
         [Authorize, HttpGet]
         public IActionResult EditProject(int id)
         {
@@ -146,17 +146,11 @@ namespace HawkIT.Controllers
         }
 
         [Authorize, HttpPost]
-        public IActionResult EditProject(Project p)
+        public IActionResult EditProject(Project projectFormModel)
         {
-            var project = db.Projects.Include(proj => proj.Tags).Include(proj => proj.Workers).First(proj => proj.Id == p.Id);
-            
-            if (p.ImageFile != null)
-            {
-                DeleteFile(project.ProjectImage);
-                project.ProjectImage = UploadFile(p.ImageFile.FileName, p.ImageFile, "projects");
-            }
-            else ModelState.Remove("ImageFile");
-
+            ModelState.Remove("ImageFile");
+            var project = db.Projects.Include(p => p.Tags).Include(p => p.Workers).First(p => p.Id == projectFormModel.Id);
+  
             if (!(ModelState.IsValid))
             {
                 ViewData["Tags"] = db.Tags.ToList();
@@ -165,42 +159,31 @@ namespace HawkIT.Controllers
                 return View(project);
             }
 
-            if(p.SpecificationFile != null)
-            {
-                DeleteFile(project.TechSpecification);
-                project.TechSpecification = UploadFile(p.SpecificationFile.FileName, p.SpecificationFile, "specifications");
-            }
-
-            if(p.BannerImages != null)
-            {
-                DeleteFile(project.Banners.Split("||"));
-
-                var banners = new List<string>();
-                foreach (var banner in p.BannerImages)
-                {
-                    banners.Add(UploadFile(banner.FileName, banner, "banners"));
-                }
-                project.Banners = String.Join("||", banners);
-            }
-
             if (Request.Form["tags"].Count == 0) project.Tags?.Clear();
             foreach (var tagId in Request.Form["tags"])
             {
-                project.Tags?.Add(db.Tags.Find(int.Parse(tagId)));
+                var tag = (tagId != null)? db.Tags.Find(int.Parse(tagId)) : null;
+                if(tag != null) project.Tags?.Add(tag);
             }
+
             if (Request.Form["tags"].Count == 0) project.Workers.Clear();
             foreach (var workerId in Request.Form["workers"])
             {
-                project.Workers.Add(db.Workers.Find(int.Parse(workerId)));
+                var worker = (workerId != null)? db.Workers.Find(int.Parse(workerId)) : null;
+                if(worker != null) project.Workers.Add(worker);
             }
 
-            project.Name = p.Name;
-            project.Text = p.Text;
+            project.Banners = UploadFile(projectFormModel.BannerImages, "banners", project.Banners);
+            project.TechSpecification = UploadFile(projectFormModel.SpecificationFile, "specifications", project.TechSpecification);
+            project.ProjectImage = UploadFile(projectFormModel.ImageFile, "projects", project.ProjectImage);
+            project.Name = projectFormModel.Name;
+            project.Text = projectFormModel.Text;
             db.Projects.Update(project);
             db.SaveChanges();
             return RedirectToAction("ListProjects", "Admin");
         }
 
+        // DELETE PROJECT
         [Authorize]
         public IActionResult DeleteProject(int id)
         {
@@ -218,30 +201,38 @@ namespace HawkIT.Controllers
 
         }
 
-        // Worker CRUD
+        // WORKER CRUD
+        // READ WORKERS
         [Authorize, HttpGet]
-        public IActionResult ListWorkers(string? name,int? projectId, string? specialization)
+        public IActionResult ListWorkers(string? name,int projectId, string? specialization)
         {
             var workers = db.Workers.Include(w => w.Projects).ToList();
             var projects = db.Projects.ToList();
 
-            if(name != null) workers = workers.Where(w => w.Name.ToLower().Contains(name.ToLower())).ToList();
-            if(specialization != null) workers = workers.Where(w => w.Specialization.ToLower().Contains(specialization.ToLower())).ToList();
-            if(projectId != -1 && projectId != null)
+            if(name != null) workers = workers
+                    .Where(w => w.Name.ToLower().Contains(name.ToLower()))
+                    .ToList();
+            if(specialization != null) workers = workers
+                    .Where(w => w.Specialization.ToLower().Contains(specialization.ToLower()))
+                    .ToList();
+            if(projectId != -1)
             {
                 var project = db.Projects.Find(projectId);
-                workers = workers.Where(w => w.Projects.Contains(project)).ToList();
+                if(project != null) workers = workers
+                    .Where(w => (w.Projects != null)? w.Projects.Contains(project) : false)
+                    .ToList();
             }
 
             var adminWorkerViewModel = new AdminWorkerViewModel { Workers = workers, Projects = projects };
             return View(adminWorkerViewModel);
         }
 
+        // CREATE WORKER
         [Authorize, HttpGet]
         public IActionResult AddWorker()
         {
-            var p = db.Projects.ToList();
-            ViewData["Projects"] = p;
+            var project = db.Projects.ToList();
+            ViewData["Projects"] = project;
             return View();
         }
 
@@ -250,24 +241,26 @@ namespace HawkIT.Controllers
         {
             if (!(ModelState.IsValid))
             {
-                var p = db.Projects.ToList();
-                ViewData["Projects"] = p;
+                var projects = db.Projects.ToList();
+                ViewData["Projects"] = projects;
                 return View();
             }
 
             foreach (var projectId in Request.Form["projects"])
             {
-                worker.Projects?.Add(db.Projects.Find(int.Parse(projectId)));
+                var project = (projectId != null) ? db.Projects.Find(int.Parse(projectId)) : null;
+                if (project != null) worker.Projects?.Add(project);
             }
 
-			worker.WorkerImage = UploadFile(worker.ImageFile.FileName, worker.ImageFile, "workers");
-			worker.SpecializationIcon = UploadFile(worker.IconFile.FileName, worker.IconFile, "workers");
+			worker.WorkerImage = UploadFile(worker.ImageFile, "workers");
+			worker.SpecializationIcon = UploadFile(worker.IconFile, "workers");
 
 			db.Workers.Add(worker);
             db.SaveChanges();
             return RedirectToAction("ListWorkers", "Admin");
         }
 
+        // UPDATE WORKER
         [Authorize, HttpGet]
         public IActionResult EditWorker(int id)
         {
@@ -282,23 +275,13 @@ namespace HawkIT.Controllers
 
 
         [Authorize, HttpPost]
-        public IActionResult EditWorker(Worker w)
+        public IActionResult EditWorker(Worker workerFormModel)
         {
-            var worker = db.Workers.Include(work => work.Projects).First(work => work.Id == w.Id);
-            
-            if (w.ImageFile != null)
-            {
-                worker.WorkerImage = UploadFile(w.ImageFile.FileName, w.ImageFile, "workers", worker.WorkerImage);
-            }
-            else ModelState.Remove("ImageFile");
-
-            if (w.IconFile != null)
-            {
-                worker.SpecializationIcon = UploadFile(w.IconFile.FileName, w.IconFile, "workers", worker.SpecializationIcon);
-            }
-            else ModelState.Remove("IconFile");
-
-            if (!(ModelState.IsValid))
+            ModelState.Remove("IconFile");
+            ModelState.Remove("ImageFile");
+            var worker = db.Workers.Include(w => w.Projects).First(w => w.Id == workerFormModel.Id);
+           
+            if (!ModelState.IsValid)
             {
                 var projects = db.Projects.ToList();
                 ViewData["Projects"] = projects;
@@ -306,20 +289,24 @@ namespace HawkIT.Controllers
                 return View(worker);
             }
 
-            if (Request.Form["projects"].Count == 0) worker.Projects.Clear();
-            foreach (var project in Request.Form["projects"])
+            if (Request.Form["projects"].Count == 0) worker.Projects?.Clear();
+            foreach (var projectId in Request.Form["projects"])
             {
-                worker.Projects?.Add(db.Projects.Find(int.Parse(project)));
+                var project = (projectId != null)? db.Projects.Find(int.Parse(projectId)) : null;
+                if (project != null) worker.Projects?.Add(project);
             }
 
-            worker.Name = w.Name;
-            worker.Specialization = w.Specialization;
+            worker.WorkerImage = UploadFile(workerFormModel.ImageFile, "workers", worker.WorkerImage);
+            worker.SpecializationIcon = UploadFile(workerFormModel.IconFile, "workers", worker.SpecializationIcon);
+            worker.Name = workerFormModel.Name;
+            worker.Specialization = workerFormModel.Specialization;
             db.Workers.Update(worker);
             db.SaveChanges();
 
             return RedirectToAction("ListWorkers", "Admin");
         }
 
+        // DELETE WORKER
         [Authorize, HttpGet]
         public IActionResult DeleteWorker(int id)
         {
@@ -336,6 +323,7 @@ namespace HawkIT.Controllers
         }
 
         // Tag CRUD
+        // READ TAGS
         [Authorize, HttpGet]
         public IActionResult ListTags(string? searchString)
         {
@@ -346,7 +334,7 @@ namespace HawkIT.Controllers
             return View(tags);
         }
 
-
+        // CREATE TAG
         [Authorize, HttpGet]
         public IActionResult AddTag()
         {
@@ -363,18 +351,7 @@ namespace HawkIT.Controllers
             return RedirectToAction("ListTags", "Admin");
         }
 
-        [Authorize]
-        public IActionResult DeleteTag(int id)
-        {
-            var tag = db.Tags.Find(id);
-            if(tag != null)
-            {
-                db.Tags.Remove(tag);
-                db.SaveChanges();
-            }
-            return RedirectToAction("ListTags", "Admin");
-        }
-
+        // UPDATE TAG
         [Authorize, HttpGet]
         public IActionResult EditTag(int id)
         {
@@ -397,7 +374,21 @@ namespace HawkIT.Controllers
             return RedirectToAction("ListTags", "Admin");
         }
 
-        // Article CRUD
+        // DELETE TAG
+        [Authorize]
+        public IActionResult DeleteTag(int id)
+        {
+            var tag = db.Tags.Find(id);
+            if (tag != null)
+            {
+                db.Tags.Remove(tag);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ListTags", "Admin");
+        }
+
+        // ARTICLE CRUD
+        // READ ARTICLES
         [Authorize]
         public IActionResult ListArticles(string? articleName, int? tagId)
         {
@@ -408,7 +399,9 @@ namespace HawkIT.Controllers
             if (tagId != null && tagId != -1)
             {
                 var tag = db.Tags.Find(tagId);
-                articles = articles.Where(a => a.Tags.Contains(tag)).ToList();
+                if (tag != null) articles = articles
+                        .Where(a => (a.Tags != null)? a.Tags.Contains(tag) : false)
+                        .ToList();
             }
 
 
@@ -416,6 +409,7 @@ namespace HawkIT.Controllers
             return View(adminArticleViewModel);
         }
 
+        // CREATE ARTICLE
         [Authorize, HttpGet]
         public IActionResult AddArticle()
         {
@@ -427,29 +421,29 @@ namespace HawkIT.Controllers
         [Authorize, HttpPost]
         public IActionResult AddArticle(Article article)
         {
-            if (!(ModelState.IsValid))
+            if (!ModelState.IsValid)
             {
                 var tags = db.Tags.ToList();
                 ViewData["Tags"] = tags;
                 return View();
             }
 
-            foreach (var tag in Request.Form["tags"])
+            foreach (var tagId in Request.Form["tags"])
             {
-                article.Tags?.Add(db.Tags.Find(int.Parse(tag)));
+                var tag = (tagId != null) ? db.Tags.Find(int.Parse(tagId)) : null;
+                if (tag != null) article.Tags?.Add(tag);
             }
 
-            if (Request.Form["tags"].Count == 0) article.Tags = null;
-
             article.CreatedDate = DateTime.Now;
-			article.ArticleImage = UploadFile(article.ImageFile.FileName, article.ImageFile, "articles");
+			article.ArticleImage = UploadFile(article.ImageFile, "articles");
 
 
 			db.Articles.Add(article);
             db.SaveChanges();
             return RedirectToAction("ListArticles", "Admin");
         }
-
+        
+        // UPDATE ARTICLE
         [Authorize, HttpGet]
         public IActionResult EditArticle(int id)
         {
@@ -462,18 +456,11 @@ namespace HawkIT.Controllers
         }
 
         [Authorize, HttpPost]
-        public IActionResult EditArticle(Article a)
+        public IActionResult EditArticle(Article articleFormModel)
         {
-            var article = db.Articles.Include(art => art.Tags).First(obj => obj.Id == a.Id);
-            if (a.ImageFile != null && article.ArticleImage != null)
-            {
-                article.ArticleImage = UploadFile(a.ImageFile.FileName, a.ImageFile, "articles", article.ArticleImage);
-            }
-            else
-            {
-                ModelState.Remove("ImageFile");
-            }
-            if (!(ModelState.IsValid))
+            ModelState.Remove("ImageFile");
+            var article = db.Articles.Include(a => a.Tags).First(a => a.Id == articleFormModel.Id);            
+            if (!ModelState.IsValid)
             {
                 var tags = db.Tags.ToList();
                 ViewData["Tags"] = tags;
@@ -482,18 +469,22 @@ namespace HawkIT.Controllers
             }
 
             if (Request.Form["tags"].Count == 0) article.Tags?.Clear();
-            foreach (var tag in Request.Form["tags"])
+            foreach (var tagId in Request.Form["tags"])
             {
-                article.Tags?.Add(db.Tags.Find(int.Parse(tag)));
+                var tag = (tagId != null)? db.Tags.Find(int.Parse(tagId)) : null;
+                if (tag != null) article.Tags?.Add(tag);
             }
 
-            article.Name = a.Name;
-            article.Text = a.Text;
+            article.ArticleImage = UploadFile(articleFormModel.ImageFile, "articles", article.ArticleImage);
+            article.Name = articleFormModel.Name;
+            article.Text = articleFormModel.Text;
             db.Articles.Update(article);
             db.SaveChanges();
+
             return RedirectToAction("ListArticles", "Admin");
         }
 
+        // DELETE ARTICLE
         [Authorize]
         public IActionResult DeleteArticle(int id)
         {
@@ -508,30 +499,43 @@ namespace HawkIT.Controllers
             return RedirectToAction("ListArticles", "Admin");
         }
 
-        //public IActionResult GetFile(string fileName, string folderName = "")
-        //{
-        //    var path = GetFullPathUploadFile(fileName, folderName);
-        //    FileStreamResult streamResult;
-        //    using (var stream = new FileStream(path, System.IO.FileMode.Open))
-        //    {
-        //        streamResult = new FileStreamResult(stream, "application/pdf");
-        //    }
-        //    return streamResult;
-        //}
+        
 
-        private string UploadFile(string fileName, IFormFile file, string folderName = "", string oldFileName = "")
+        private string UploadFile(IFormFile? file, string? folderName = "", string? oldFileName = null)
         {
-            if(!(String.IsNullOrEmpty(oldFileName))) DeleteFile(oldFileName);
-			var uniqueFileName = GetUniqueFileName(fileName);
+            if (file == null) return oldFileName ?? "";
+            if(!String.IsNullOrEmpty(oldFileName)) DeleteFile(oldFileName);
+
+			var uniqueFileName = GetUniqueFileName(file.FileName);
 			var filePath = GetFullPathUploadFile(uniqueFileName, folderName);
 			using (var stream = new FileStream(filePath, FileMode.Create))
 			{
-				file.CopyTo(stream);
+				file?.CopyTo(stream);
 			}
 			return $"/uploads/{folderName + "/"}" + uniqueFileName;
 		}
-        
-        private string GetFullPathUploadFile(string fileName, string folderName = "")
+
+        private string UploadFile(IEnumerable<IFormFile>? files, string folderName, string? oldFiles = null)
+        {
+            if (files == null || files.Count() == 0) 
+                return oldFiles ?? "";
+            if(oldFiles != null) DeleteFile(oldFiles.Split("||"));
+
+            var fileNames = new List<string>();
+            foreach(var file in files)
+            {
+                var uniqueFileName = GetUniqueFileName(file.FileName);
+                var filePath = GetFullPathUploadFile(uniqueFileName, folderName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    file?.CopyTo(stream);
+                }
+                fileNames.Add($"/uploads/{folderName + "/"}" + uniqueFileName);
+            }
+            return string.Join("||", fileNames);
+        }
+
+        private string GetFullPathUploadFile(string fileName, string? folderName)
         {
             var uploads = Path.Combine(_env.WebRootPath, $"uploads{"\\" + folderName}");
             var filePath = Path.Combine(uploads, fileName);
@@ -549,34 +553,29 @@ namespace HawkIT.Controllers
 
         private void DeleteFile(string? fileName)
         {
-            if(fileName != null)
+            if (fileName == null) return;
+
+            fileName = fileName.TrimStart('/').Replace("/", "\\");
+            var filePath = Path.Combine(_env.WebRootPath, fileName);
+            if (System.IO.File.Exists(filePath))
             {
-                fileName = fileName.TrimStart('/').Replace("/", "\\");
-                var filePath = Path.Combine(_env.WebRootPath, fileName);
-                if (System.IO.File.Exists(filePath))
-                {
-                    System.IO.File.Delete(filePath);
-                }
+                System.IO.File.Delete(filePath);
             }
         }
 
         private void DeleteFile(IEnumerable<string>? filesName)
         {
-            if(filesName != null)
+            if (filesName == null) return;
+
+            foreach (var file in filesName)
             {
-                string fileName;
-                string filePath;
-                foreach (var file in filesName)
+                string fileName = file.Replace("/", "\\");
+                string filePath = Path.Combine(_env.WebRootPath + fileName);
+                if (System.IO.File.Exists(filePath))
                 {
-                    fileName = file.Replace("/", "\\");
-                    filePath = Path.Combine(_env.WebRootPath + fileName);
-                    if (System.IO.File.Exists(filePath))
-                    {
-                        System.IO.File.Delete(filePath);
-                    }
+                    System.IO.File.Delete(filePath);
                 }
             }
-            
         }
     }
 }

@@ -22,7 +22,7 @@ namespace HawkIT.Controllers
         public IActionResult Details(int? id)
         {
             var article = db.Articles.Find(id);
-            var lastThreeArticle = db.Articles.OrderByDescending(a => a.CreatedDate).Take(3).ToList();
+            var lastThreeArticle = db.Articles.Where(a => a.Id != id).OrderByDescending(a => a.CreatedDate).Take(3).ToList();
 
             if(article == null) { return View("~/Views/Shared/NotFound.cshtml"); }
 

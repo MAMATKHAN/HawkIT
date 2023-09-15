@@ -135,6 +135,7 @@ function closeForm() {
     setTimeout(function () {
         form.classList.add('form__anime');
     }, 200)
+    loader.style.display = "none";
 }
 
 function cleanForm() {
@@ -144,6 +145,12 @@ function cleanForm() {
     document.getElementById("telegram").value = "";
     document.getElementById("message").value = "";
 
+    btn.classList.remove("form__inner__btn__enable")
+    btn.disabled = true;
+
+    x.forEach(item => item.classList.remove('mark__active'));
+    mark.forEach(item => item.classList.remove('mark__active'));
+    
 }
 
 
@@ -246,7 +253,14 @@ function GetHostUrl() {
     return document.location.protocol + "//" + document.location.host;
 }
 
+
+
+let loader = document.querySelector('.form__inner__btn__block');
+
+
 btn.addEventListener("click", () => {
+    loader.style.display = 'block';
+
     let name = document.getElementById("name");
     let email = document.getElementById("email");
     let phone = document.getElementById("phone");
@@ -263,3 +277,12 @@ btn.addEventListener("click", () => {
     });
 
 });
+
+
+
+
+
+
+
+
+
