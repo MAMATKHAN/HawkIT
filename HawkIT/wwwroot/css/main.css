@@ -113,7 +113,7 @@
 
 .made__card {
     width: 544px;
-    height: 540px;
+    
     margin-bottom: 32px;
     border-radius: 8px;
     background-color: #151515;
@@ -124,7 +124,7 @@
 
 .made__card__setting {
     width: 543px;
-    height: 539px;
+    
     border-radius: 8px;
     transition: all 0.3s ease;
     margin: 0 auto;
@@ -183,12 +183,12 @@
 
 
 
+
 .made__card__inner__name {
     font-size: 24px;
     font-weight: 400;
     color: #fff;
     margin-top: 26px;
-    
 }
 
 
@@ -197,6 +197,7 @@
     display: flex;
     justify-content: left;
     margin-top: 8px;
+    
 }
 
 
@@ -206,6 +207,7 @@
     color: #BBBBBB;
     border-radius: 4px;
     margin-right: 8px;
+    margin-bottom: 10px;
 }
 
 
@@ -221,6 +223,7 @@
     overflow: hidden;
     margin-top: 86px;
     border-radius: 12px;
+    max-width: 95%;
 }
 
 
@@ -548,10 +551,13 @@
 
 
 
-.blog__cardline{
+.blog__cardline {
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
     margin-top: 32px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 

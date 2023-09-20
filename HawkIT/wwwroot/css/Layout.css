@@ -89,6 +89,31 @@ svg path {
 }
 
 
+/*   header в мобильной версии   */
+
+.header__mobile {
+    position: fixed;
+    width: 100%;
+    height: 52px;
+    top: 0px;
+    border-bottom: 1px solid #2B2B2B;
+    background: rgba(0, 0, 0, 0.84);
+    display: none;
+}
+
+
+
+.header__inner__logo__mobile {
+    width: 106px;
+    height: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    top: 16px;
+    
+}
+
+
 /*  container   */
 
 .container {
@@ -617,8 +642,90 @@ svg path {
 
 
 
-/*  footer  */
+/*   footer  для мобильной версии   */
 
+
+.footer__mobile{
+    width: 100%;
+    margin-top: 150px;
+    margin-bottom: 12px;
+    display: none;
+}
+
+
+
+.footer__btn__mobile {
+    padding: 12px 100px;
+    border: 1px solid #fff;
+    font-size: 16px;
+    color: #fff;
+    margin: 0 auto;
+    width: 141px;
+    border-radius: 4px;
+}
+
+
+
+.footer__btn__mobile:hover{
+    color: #000;
+    background-color: #fff;
+
+}
+
+
+.footer__inner__mobile{
+    width: 230px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 32px;
+}
+
+
+.footer__inner__txt__mobile {
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+
+}
+
+
+
+
+.footer__inner__call__mobile{
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+
+}
+
+
+.footer__inner__call__img{
+    margin-top: 1px;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+
+
+.footer__inner__call__number {
+    font-size: 14px;
+    color: #FFF;
+}
+
+
+
+.footer__inner__desc__mobile {
+    color: #FFF;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 32px;
+}
+
+
+
+/*  footer  */
 .footer {
     width: 1120px;
     max-width: 95%;
