@@ -86,8 +86,17 @@
 }
 
 
-.doc__link {
+
+.doc__inner {
     margin-top: 24px;
+    display: flex;
+    justify-content: left;
+}
+
+
+
+.doc__link {
+    
     text-decoration: none;
     width: 198px;
     height: 54px;
@@ -95,6 +104,15 @@
     border-radius: 4px;
     display: flex;
     justify-content: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 30px;
+}
+
+
+.doc__link:nth-child(5){
+    margin-right: 0px;
 }
 
 
@@ -213,9 +231,19 @@
     padding: 12px;
     padding-top: 20px;
     border-radius: 4px;
-    margin-right: 32px;
     transition: all 0.4s ease;
     position: relative;
+}
+
+
+
+.project__card:nth-child(3n - 2){
+    margin-right: 32px;
+}
+
+
+.project__card:nth-child(3n - 1){
+    margin-right: 32px;
 }
 
 

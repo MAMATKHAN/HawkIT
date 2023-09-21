@@ -85,16 +85,20 @@
 
 .blog__card{
     width: 352px;
-    margin-right: 32px;
-    margin-top: 32px;
     text-decoration: none;
     color: #fff;
 
 }
 
 
-.blog__card:nth-child(3n){
-    margin-right: 0px;
+
+.blog__card:nth-child(3n - 2){
+    margin-right: 32px;
+}
+
+
+.blog__card:nth-child(3n - 1){
+    margin-right: 32px;
 }
 
 

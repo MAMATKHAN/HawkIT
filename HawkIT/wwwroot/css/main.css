@@ -553,7 +553,7 @@
 
 .blog__cardline {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     margin: 0 auto;
     margin-top: 32px;
     margin-bottom: 20px;
@@ -564,15 +564,27 @@
 .blog__card {
     width: 352px;
     height: 389px;
-    margin-right: 32px;
+   
     text-decoration: none;
+    margin-bottom: 20px;
 }
 
 
-.blog__card__img{
+.blog__card:nth-child(3n - 2){
+    margin-right: 32px;
+    
+
+}
+
+
+.blog__card:nth-child(3n - 1){
+    margin-right: 32px;
+}
+
+
+.blog__card__img {
     width: 352px;
     height: 352px;
-
 }
 
 
