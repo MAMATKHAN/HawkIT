@@ -643,92 +643,12 @@ svg path {
 
 
 
-/*   footer  для мобильной версии   */
-
-
-.footer__mobile {
-    width: 100%;
-    margin-top: 150px;
-    margin-bottom: 12px;
-    display: none;
-    transition: all 0.4s ease;
-    z-index: 1000000000000000000000000000000000000000000000;
-}
-
-
-
-.footer__btn__mobile {
-    padding: 12px 100px;
-    border: 1px solid #fff;
-    font-size: 16px;
-    color: #fff;
-    margin: 0 auto;
-    width: 141px;
-    border-radius: 4px;
-}
-
-
-
-.footer__btn__mobile:hover{
-    color: #000;
-    background-color: #fff;
-
-}
-
-
-.footer__inner__mobile{
-    width: 230px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0 auto;
-    margin-top: 32px;
-}
-
-
-.footer__inner__txt__mobile {
-    font-size: 14px;
-    color: #fff;
-    text-align: center;
-
-}
-
-
-
-
-.footer__inner__call__mobile{
-    display: flex;
-    justify-content: center;
-    margin-top: 12px;
-
-}
-
-
-.footer__inner__call__img{
-    margin-top: 1px;
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
-}
-
-
-.footer__inner__call__number {
-    font-size: 14px;
-    color: #FFF;
-}
-
-
-
-.footer__inner__desc__mobile {
-    color: #FFF;
-    font-size: 12px;
-    text-align: center;
-    margin-top: 32px;
-}
 
 
 
 /*  footer  */
+
+
 .footer {
     width: 1120px;
     max-width: 95%;
@@ -752,6 +672,48 @@ svg path {
     margin-top: 24px;
 }
 
+
+.footer__inner__txt {
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    display: none;
+}
+
+
+
+
+.footer__inner__call {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    display: none;
+}
+
+
+.footer__inner__call__img {
+    margin-top: 1px;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+
+
+.footer__inner__call__number {
+    font-size: 14px;
+    color: #FFF;
+}
+
+
+.footer__btn__mobile {
+    padding: 12px 100px;
+    border: 1px solid #fff;
+    font-size: 16px;
+    color: #fff;
+    margin: 0 auto;
+    width: 141px;
+    border-radius: 4px;
+}
 
 
 /*  button__type1   */

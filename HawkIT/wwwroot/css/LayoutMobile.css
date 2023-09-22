@@ -1,17 +1,11 @@
 ﻿@media (max-width: 537px){
     .header{
-        display: none;
+       
     }
 
-    .header__mobile{
-        display: block;
-    }
+   
 
     .footer{
-        display: none;
-    }
-
-    .footer__mobile{
-        display: block;
+        
     }
 }
