@@ -16,10 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\uploads\articles\" />
+    <Folder Include="wwwroot\uploads\docs\" />
     <Folder Include="wwwroot\uploads\banners\" />
+    <Folder Include="wwwroot\uploads\articles\" />
     <Folder Include="wwwroot\uploads\projects\" />
-    <Folder Include="wwwroot\uploads\specifications\" />
     <Folder Include="wwwroot\uploads\workers\" />
   </ItemGroup>
 

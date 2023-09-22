@@ -112,14 +112,20 @@
                                 </div>
                                 <div class="form-group row mt-2">
                                     <div class="form-group col-sm-5">
-                                        <label asp-for="SpecificationFile" class="contorl-label">
+                                        <label asp-for="DocumentFiles" class="contorl-label">
                                             Выберите PDF файл(тех. задание)
-                                            <span asp-validation-for="SpecificationFile" class="ms-2 text-danger"></span>
+                                            <span asp-validation-for="DocumentFiles" class="ms-2 text-danger"></span>
                                         </label>
-                                        <input asp-for="SpecificationFile" class="form-control" />
+                                        <input asp-for="DocumentFiles" class="form-control" />
                                     </div>
                                     <div class="col-sm-3">
-                                        <a href="@Model.TechSpecification">@Model.TechSpecification</a>
+                                        @if(Model.Documents != null)
+                                        {
+                                            @foreach (var doc in Model.Documents.Split("||"))
+                                            {
+                                                <a class="me-2" href="@doc">@doc.Split("/").Last()</a>
+                                            }
+                                        }
                                     </div>
                                 </div>
                                 <div class="form-group mt-2">

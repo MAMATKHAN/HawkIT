@@ -125,7 +125,7 @@ namespace HawkIT.Controllers
 
             project.CreatedDate = DateTime.Now;
             project.ProjectImage = UploadFile(project.ImageFile, "projects");
-            project.TechSpecification = UploadFile(project.SpecificationFile, "specifications");
+            project.Documents = UploadFile(project.DocumentFiles, "docs");
             project.Banners = UploadFile(project.BannerImages, "banners");
 
             db.Projects.Add(project);
@@ -174,7 +174,7 @@ namespace HawkIT.Controllers
             }
 
             project.Banners = UploadFile(projectFormModel.BannerImages, "banners", project.Banners);
-            project.TechSpecification = UploadFile(projectFormModel.SpecificationFile, "specifications", project.TechSpecification);
+            project.Documents = UploadFile(projectFormModel.DocumentFiles, "docs", project.Documents);
             project.ProjectImage = UploadFile(projectFormModel.ImageFile, "projects", project.ProjectImage);
             project.Name = projectFormModel.Name;
             project.Text = projectFormModel.Text;
@@ -192,7 +192,7 @@ namespace HawkIT.Controllers
             if (project != null)
             {
                 DeleteFile(project.ProjectImage);
-                DeleteFile(project.TechSpecification);
+                DeleteFile(project.Documents);
                 DeleteFile(project.Banners);
                 db.Projects.Remove(project);
             }

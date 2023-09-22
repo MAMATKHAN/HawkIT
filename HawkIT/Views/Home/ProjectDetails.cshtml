@@ -60,22 +60,20 @@
 
 @*   Документы   *@
 
-@if (!(String.IsNullOrEmpty(Model.Project.TechSpecification)))
+@if (!(String.IsNullOrEmpty(Model.Project.Documents)))
 {
-<div class="doc">
-	<div class="doc__txt">Документы проекта</div>
+    @foreach(var doc in Model.Project.Documents.Split("||"))
+    {
+        <div class="doc">
+            <div class="doc__txt">Документы проекта</div>
+            <a href="@doc" class="doc__link">
+                <img src="~/img/doc.png" class="doc__link__img" />
 
-	<div class="doc__inner">
-        <a href="@Model.Project.TechSpecification" class="doc__link">
-			<img src="~/img/doc.png" class="doc__link__img" />
-
-			<div class="doc__link__txt">Тех задание</div>
-		</a>
-    </div>
-		
-	
-	
-</div>
+                <div class="doc__link__txt">@doc.Split("/").Last()</div>
+            </a>
+        </div>
+    }
+    
 }
 
 @*Ссылки на другие проекты*@
