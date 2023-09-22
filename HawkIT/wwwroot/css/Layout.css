@@ -99,6 +99,7 @@ svg path {
     border-bottom: 1px solid #2B2B2B;
     background: rgba(0, 0, 0, 0.84);
     display: none;
+    transition: all 0.4s ease;
 }
 
 
@@ -645,11 +646,13 @@ svg path {
 /*   footer  для мобильной версии   */
 
 
-.footer__mobile{
+.footer__mobile {
     width: 100%;
     margin-top: 150px;
     margin-bottom: 12px;
     display: none;
+    transition: all 0.4s ease;
+    z-index: 1000000000000000000000000000000000000000000000;
 }
 
 
