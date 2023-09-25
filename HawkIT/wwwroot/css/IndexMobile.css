@@ -30,6 +30,10 @@
         justify-content: space-around;
     }
 
+    .made__txt{
+        text-align: center;
+    }
+
     .made__card{
         margin-top: 20px;
     }
@@ -42,7 +46,7 @@
         
         width: 100%;
         flex-wrap: nowrap;
-
+        justify-content: center;
     }
     
     
@@ -107,6 +111,7 @@
 /*   intro мобильная версия   */
 
 
+
 @media (max-width: 530px){
     .intro__gif{
         width: 350px;
@@ -157,6 +162,27 @@
 
 /*   info мобильная версия   */
 
+
+@media (max-width: 1180px) {
+    .info__txt{
+        text-align: center;
+    }
+
+    .info__line{
+        justify-content: center;
+    }
+
+    .info__team__inner{
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 901px){
+    .info__service__artic__txt{
+        text-align: left;
+    }
+}
 
 
 @media (max-width: 594px){
