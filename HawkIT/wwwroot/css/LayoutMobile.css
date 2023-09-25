@@ -1,11 +1,79 @@
-﻿@media (max-width: 537px){
+﻿
+
+/*   header и footer   */
+
+
+@media (max-width: 537px){
+
+    /*   header для экранов с 537px   */
+
     .header{
-       
+       position: fixed;
+       border-bottom: 1px solid #2B2B2B;
+       background-color: rgba(0, 0, 0, 0.84); 
+       z-index: 1000000000000;
+       margin-top: 0px;
+       width: 100%;
+       max-width: 100%;
     }
 
-   
+    .header__inner{
+        justify-content: center;
+    }
 
-    .footer{
+
+    .header__inner__logo{
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+
+    .header__inner__contact {
+        display: none;
+    }
+
+    .header__inner__contact__call{
+        display: none;
+    }
+
+    /*   footer для экранов с 537px   */
+
+    .footer__inner{
+        justify-content: center;
+        flex-direction: column-reverse;
+    }
+
+    .footer__inner__desc{
+        text-align: center;
+        margin-bottom: 20px
+    }
+
+    .footer__inner__txt{
+        display: block;
+        margin-top: 32px;
+    }
+
+
+    .footer__inner__call{
+        display: flex;
+    }
+
+    .button__type1 {
+        padding: 12px 100px;
+        border: 1px solid #fff;
+        font-size: 16px;
+        color: #fff;
+        margin: 0 auto;
+        width: 141px;
+        border-radius: 4px;
+    }
+
+
+    .container{
         
+        
+        max-width: 90%;
+        padding-top: 1px;
     }
+
 }

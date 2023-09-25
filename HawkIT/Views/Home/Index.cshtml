@@ -5,9 +5,13 @@
     var activeAll = (Model.ActiveTagId == null) ? "type2__active" : "";
 }
 
-@section Styles{<link rel="stylesheet" href="~/css/main.css" />}
+@section Styles{<link rel="stylesheet" href="~/css/Index.css" /> 
+                <link rel="stylesheet" href="~/css/IndexMobile.css" />
+}
+
 
 @*AJAX script*@
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 @*  intro   *@
@@ -34,18 +38,20 @@
 <div class="made">
     <div id="caseList" class="made__txt">Разработано в студии</div>
 
-    <div  class="made__btn__line">
+    <div class="made__btn__line__setting">
+        <div  class="made__btn__line">
 
-        @*  button__type2   *@
+            @*  button__type2   *@
 
-        <a class="button__type2 type2__active" tagId="-1">Все</a>
-        @foreach(var tag in Model.Tags)
-        {
-            <a class="button__type2" tagId="@tag.Id">
-                @tag.Name
-            </a>
-        }
+            <a class="button__type2 type2__active" tagId="-1">Все</a>
+            @foreach(var tag in Model.Tags)
+            {
+                <a class="button__type2" tagId="@tag.Id">
+                    @tag.Name
+                </a>
+            }
 
+        </div>
     </div>
 
     <div class="made__cardline" id="projectsList">
@@ -108,15 +114,17 @@
 
     <div class="info__txt">О нас</div>
 
-    <div class="info__line">
+    <div class="info__line__setting">
+        <div class="info__line">
 
-        @*  button__type2   *@
+            @*  button__type2   *@
 
-        <div class="info__line__btn info__line__btn__active">Наши услуги</div>
+            <div class="info__line__btn info__line__btn__active">Наши услуги</div>
             
-        <div class="info__line__btn">Наша команда</div>
+            <div class="info__line__btn">Наша команда</div>
 
-        <div class="info__line__btn">Наша миссия</div>
+            <div class="info__line__btn">Наша миссия</div>
+        </div>
     </div>
 
     @*  Информация о нас  *@
@@ -221,6 +229,7 @@
 
 @section Scripts{
     <script src="~/js/base.js"></script>
+    <script src="~/js/IndexMobile.js"></script>
     <script type="text/javascript">
         $(function () {
             $(".button__type2").click(function (e) {

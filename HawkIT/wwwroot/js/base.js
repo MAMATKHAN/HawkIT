@@ -96,3 +96,25 @@ infoBtns[2].addEventListener("click", function () {
         }, 100);
     }, 200);
 })
+
+
+btnT2 = document.querySelectorAll('.button__type2');
+
+
+
+console.log('p');
+let coutrize = 0;
+
+for (let i = 0; i < btnT2.length; i++) {
+    
+    let b
+    if (i != 0) {
+        b = parseInt(window.getComputedStyle(btnT2[i - 1], null).getPropertyValue('width').slice(0, 2)) + 35.2 + 16;
+    } else {
+        b = 0;
+    }
+    coutrize = coutrize + b;
+    let a = coutrize.toString() + 'px';
+    console.log(coutrize);
+    btnT2[i].style.left = a;
+}
