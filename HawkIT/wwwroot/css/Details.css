@@ -94,6 +94,7 @@
     display: flex;
     justify-content: left;
     margin-top: 12px;
+    flex-wrap: wrap;
 }
 
 
@@ -101,6 +102,7 @@
     width: 352px;
     height: 389px;
     text-decoration: none;
+    margin-top: 20px;
 }
 
 
@@ -117,7 +119,7 @@
 
 .blog__card__img {
     width: 352px;
-    height: 352px;
+    
 }
 
 

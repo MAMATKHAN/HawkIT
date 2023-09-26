@@ -1,7 +1,9 @@
 ﻿@using HawkIT.ViewModel
 @model ProjectDetailsViewModel
 
-@section Styles{<link rel="stylesheet" href="~/css/ProjectDetails.css"/>}
+@section Styles{<link rel="stylesheet" href="~/css/ProjectDetails.css"/>
+                <link rel="stylesheet" href="~/css/ProjectDetailsMobile.css"/>
+}
 
 
 @*   локация -- где находится пользователь   *@
@@ -33,6 +35,8 @@
 @*  Информация о комманде   *@
 
 <div class="info__team">
+    <div class="info__team__txt">Над проектом работали</div>
+
     <div class="info__team__inner">
 
         @foreach (var worker in Model.Project.Workers)
@@ -65,18 +69,20 @@
     <div class="doc">
             <div class="doc__txt">Документы проекта</div>
 
-    @foreach(var doc in Model.Project.Documents.Split("||"))
-    {
-        
         <div class="doc__inner">
-            <a href="@doc" class="doc__link">
-                <img src="~/img/doc.png" class="doc__link__img" />
-
-                <div class="doc__link__txt">@doc.Split("/").Last()</div>
-            </a>
-        </div>
+            @foreach(var doc in Model.Project.Documents.Split("||"))
+            {
         
-    }
+        
+                    <a href="@doc" class="doc__link">
+                        <img src="~/img/doc.png" class="doc__link__img" />
+
+                        <div class="doc__link__txt">@doc.Split("/").Last()</div>
+                    </a>
+        
+        
+            }
+        </div>
     </div>
 }
 
