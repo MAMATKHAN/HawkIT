@@ -14,13 +14,26 @@ body {
 
 
 
+.fam__backgr{
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+
+.fam__backgr__active{
+    display: block;
+}
+
 
 
 /*  начинается  header  */
 
 
 
-.header{
+.header{ jkl                                      
     width: 1120px;
     margin: 0 auto;
     margin-top: 24px;
