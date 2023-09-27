@@ -3,8 +3,6 @@ let label = document.querySelectorAll(".form__inner__top__inp__txt");
 let btn = document.querySelector(".form__inner__btn");
 btn.disabled = true;
 
-console.log('test')
-console.log(label)
 
 
 
@@ -100,6 +98,9 @@ let openBtn = document.querySelector('.button__type1');
 let closeBtn = document.querySelector('.form__title__img');
 let form = document.querySelector('.form');
 let footerInner = document.querySelector('.footer__inner');
+let body = document.querySelector('body');
+let famBackgr = document.querySelector(".fam__backgr");
+
 
 if (openBtn == null) {
     console.log(openBtn);
@@ -123,19 +124,23 @@ document.addEventListener('click', function (e) {
 
 
 function openForm() {
+    body.style.overflow = "hidden";
     form.classList.remove('form__anime');
     setTimeout(function () {
         form.classList.add('form__active');
     }, 200)
+    famBackgr.style.display = "block";
 }
 
 
 function closeForm() {
+    famBackgr.style.display = 'none'
     form.classList.remove('form__active');
     setTimeout(function () {
         form.classList.add('form__anime');
     }, 200)
     loader.style.display = "none";
+    body.style.overflow = "inherit";
 }
 
 function cleanForm() {
@@ -279,6 +284,51 @@ btn.addEventListener("click", () => {
 });
 
 
+/*   работа с формой в мобильной версии   */ 
+
+
+let formM = document.querySelector('.form');
+let formTouch = document.querySelector('.form__touch');
+
+
+
+formTouch.addEventListener('touchstart', handleTouch);
+formTouch.addEventListener('touchmove', handleMove);
+formTouch.addEventListener('touchend', handleEnd);
+
+console.log(formM);
+
+
+
+let y1 = null;
+let way;
+
+function handleTouch(event) {
+    const firstTouch = event.touches[0];
+    y1 = firstTouch.clientY;
+}
+
+function handleMove(event) {
+    if (!y1) {
+        return false;
+    }
+    let y2 = event.touches[0].clientY;
+    let yDiff = y2 - y1;
+    way = 0 - yDiff;
+    if (yDiff > 0) {
+        formM.style.bottom = way.toString() + "px";
+    }
+
+
+
+}
+
+
+function handleEnd() {
+    if (way <= -100) {
+        closeForm();
+    }
+}
 
 
 
