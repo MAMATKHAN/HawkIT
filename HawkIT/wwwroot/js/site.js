@@ -306,12 +306,14 @@ let way;
 function handleTouch(event) {
     const firstTouch = event.touches[0];
     y1 = firstTouch.clientY;
+    console.log('click');
 }
 
 function handleMove(event) {
     if (!y1) {
         return false;
     }
+    formM.style.transition = "all 0s ease";
     let y2 = event.touches[0].clientY;
     let yDiff = y2 - y1;
     way = 0 - yDiff;
@@ -325,9 +327,31 @@ function handleMove(event) {
 
 
 function handleEnd() {
-    if (way <= -100) {
-        closeForm();
+    if (way <= -200) {
+        formM.style.transition = "all 0.4s ease";
+        closeFormMobile();
+        
+    } else {
+        formM.style.transition = "all 0.4s ease";
+        formM.style.bottom = "0";
     }
+    
+    
+}
+
+
+
+function closeFormMobile() {
+    famBackgr.style.display = 'none'
+    form.style.bottom = "-700px";
+    form.classList.remove('form__active');
+    
+    setTimeout(function () {
+        form.classList.add('form__anime');
+        form.style.bottom = "0";
+    }, 200)
+    loader.style.display = "none";
+    body.style.overflow = "inherit";
 }
 
 

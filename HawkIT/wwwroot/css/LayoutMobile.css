@@ -142,7 +142,7 @@
 @media (max-width: 669px){
     .form {
         width: 100%;
-        bottom: 0;
+        bottom: -700px;
         top: inherit;
         border-radius: 16px 16px 0 0;
         transform: translate(-50%);
@@ -150,6 +150,7 @@
 
     .form__active {
         top: inherit;
+        bottom: 0;
     }
 
     .form__title {
