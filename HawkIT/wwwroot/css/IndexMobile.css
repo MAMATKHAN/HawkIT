@@ -192,6 +192,13 @@
 }
 
 
+@media (max-width: 534px) {
+    .info__team__card {
+        margin-right: 0px;
+    }
+}
+
+
 
 
 

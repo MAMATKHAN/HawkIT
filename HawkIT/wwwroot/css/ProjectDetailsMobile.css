@@ -24,6 +24,14 @@
     .info__team__txt{
         text-align: center;
     }
+
+    .info__team__inner{
+        justify-content: center;
+    }
+
+    .doc__inner{
+        justify-content: center;
+    }
 }
 
 @media (max-width: 912px){

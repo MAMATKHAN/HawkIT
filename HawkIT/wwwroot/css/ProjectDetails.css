@@ -90,7 +90,7 @@
 .doc__inner {
     margin-top: 24px;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     flex-wrap: wrap;
 }
 
@@ -147,12 +147,12 @@
     color: #fff;
     font-size: 24px;
     margin-bottom: 20px;
-    text-align: center;
+    text-align: left;
 }
 
 .info__team__inner {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     flex-wrap: wrap;
 }
 
