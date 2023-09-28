@@ -1,6 +1,15 @@
 ﻿@using HawkIT.ViewModel
 @model ProjectDetailsViewModel
 
+@functions
+{
+    public string UniqueFileNameToUsualFileName(string uniqueFileName)
+    {
+        int lenFileName = uniqueFileName.Length;
+        return uniqueFileName.Substring(0, lenFileName - 9) + uniqueFileName.Substring(lenFileName - 4);
+    }
+}
+
 @section Styles{<link rel="stylesheet" href="~/css/ProjectDetails.css"/>
                 <link rel="stylesheet" href="~/css/ProjectDetailsMobile.css"/>
 }
@@ -77,7 +86,7 @@
                     <a href="@doc" class="doc__link">
                         <img src="~/img/doc.png" class="doc__link__img" />
 
-                        <div class="doc__link__txt">@doc.Split("/").Last()</div>
+                        <div class="doc__link__txt">@UniqueFileNameToUsualFileName(doc.Split("/").Last())</div>
                     </a>
         
         
