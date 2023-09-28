@@ -308,20 +308,22 @@ let way;
 /*   ивенты связанный с формой   */
 
 formTouch.addEventListener('touchstart', handleTouch);
-formTouch.addEventListener('touchmove', handleMove(form));
-formTouch.addEventListener('touchend', handleEnd(formM));
+formTouch.addEventListener('touchmove', handleMoveForm);
+formTouch.addEventListener('touchend', handleEndForm);
 
 /*   ивенты связанный с формой   */
 
-//succPopatTouch.addEventListener('touchstart', handleTouch);
-//succPopatTouch.addEventListener('touchmove', handleMove(succPopat));
-//succPopatTouch.addEventListener('touchend', handleEnd(succPopat));
+succPopatTouch.addEventListener('touchstart', handleTouch);
+succPopatTouch.addEventListener('touchmove', handleMoveSuccPopat);
+succPopatTouch.addEventListener('touchend', handleEndSuccPopat);
 
-///*   ивенты связанный с формой   */
+console.log(succPopatTouch);
 
-//errPopatTouch.addEventListener('touchstart', handleTouch);
-//errPopatTouch.addEventListener('touchmove', handleMove(errPopat));
-//errPopatTouch.addEventListener('touchend', handleEnd(errPopat));
+/*   ивенты связанный с формой   */
+
+errPopatTouch.addEventListener('touchstart', handleTouch);
+errPopatTouch.addEventListener('touchmove', handleMoveErrPopat);
+errPopatTouch.addEventListener('touchend', handleEndErrPopat);
 
 
 
@@ -331,10 +333,13 @@ formTouch.addEventListener('touchend', handleEnd(formM));
 function handleTouch(event) {
     const firstTouch = event.touches[0];
     y1 = firstTouch.clientY;
-    console.log('click');
 }
 
-function handleMove(event) {
+
+// Функции связанные с формой
+
+
+function handleMoveForm(event) {
     if (!y1) {
         return false;
     }
@@ -351,12 +356,11 @@ function handleMove(event) {
 }
 
 
-function handleEnd() {
+function handleEndForm() {
     if (way <= -200) {
         form.style.transition = "all 0.4s ease";
-        if (obj == formM) {
-            closeFormMobile();
-        }
+        closeFormMobile();
+        
         
     } else {
         form.style.transition = "all 0.4s ease";
@@ -364,6 +368,74 @@ function handleEnd() {
     }
     
     
+}
+
+// Функции связанные с успешным попатом
+
+function handleMoveSuccPopat(event) {
+    if (!y1) {
+        return false;
+    }
+    succPopat.style.transition = "all 0s ease";
+    let y2 = event.touches[0].clientY;
+    let yDiff = y2 - y1;
+    way = 0 - yDiff;
+    if (yDiff > 0) {
+        succPopat.style.bottom = way.toString() + "px";
+    }
+
+
+
+}
+
+
+
+function handleEndSuccPopat() {
+    if (way <= -200) {
+        succPopat.style.transition = "all 0.4s ease";
+        closePopatSuccMobile();
+        
+
+    } else {
+        succPopat.style.transition = "all 0.4s ease";
+        succPopat.style.bottom = "0";
+    }
+
+
+}
+
+// Функции связанные с провальным попатом
+
+
+function handleMoveErrPopat(event) {
+    if (!y1) {
+        return false;
+    }
+    errPopat.style.transition = "all 0s ease";
+    let y2 = event.touches[0].clientY;
+    let yDiff = y2 - y1;
+    way = 0 - yDiff;
+    if (yDiff > 0) {
+        errPopat.style.bottom = way.toString() + "px";
+    }
+
+
+
+}
+
+
+function handleEndErrPopat() {
+    if (way <= -200) {
+        errPopat.style.transition = "all 0.4s ease";
+        closePopatErrMobile();
+        
+
+    } else {
+        errPopat.style.transition = "all 0.4s ease";
+        errPopat.style.bottom = "0";
+    }
+
+
 }
 
 
