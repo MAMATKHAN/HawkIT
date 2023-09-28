@@ -210,3 +210,124 @@
         display: none;
     }
 }
+
+
+
+/*   popat__succ   */
+
+
+@media (max-width: 690px){
+    .popat__succ{
+        width: 100%;
+        position: absolute;
+        bottom: -600px;
+        transform: inherit;
+        top: inherit;
+        height: inherit;
+        left: inherit;
+    }
+
+    .popat__succ__active {
+        opacity: 1;
+        bottom: 0;
+    }
+
+
+    .popat__succ__anime {
+        display: none;
+    }
+
+    .popat__succ__close{
+        display: none;
+
+    }
+
+    .popat__succ__face{
+        position: inherit;
+    }
+
+    .popat__succ__inner{
+        width: 345px;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+
+    .popat__succ__main{
+        font-size: 16px;
+        margin-top: 8px;
+    }
+
+    .popat__succ__post{
+        font-size: 12px;
+    }
+
+    .popat__succ__btn{
+        width: 343px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 0;
+    }
+}
+
+
+/*   popat__err   */
+
+
+@media (max-width: 690px) {
+    .popat__err {
+        width: 100%;
+        position: absolute;
+        bottom: -600px;
+        transform: inherit;
+        top: inherit;
+        height: inherit;
+        left: inherit;
+        opacity: 0;
+    }
+
+    .popat__err__active {
+        opacity: 1;
+        bottom: 0;
+    }
+
+
+    .popat__err__anime {
+        display: noen;
+    }
+
+    .popat__err__close {
+        display: none;
+    }
+
+    .popat__err__face {
+        position: inherit;
+    }
+
+    .popat__err__inner {
+        width: 345px;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+
+    .popat__err__main {
+        font-size: 16px;
+        margin-top: 8px;
+    }
+
+    .popat__err__post {
+        font-size: 12px;
+    }
+
+    .popat__err__btn {
+        width: 343px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 0;
+    }
+}

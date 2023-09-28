@@ -195,18 +195,22 @@ succBtn.addEventListener('click', closeSuccPopat);
 
 
 function closeSuccPopat() {
+    famBackgr.style.display = 'none';
     succPopat.classList.remove('popat__succ__active');
     setTimeout(function () {
         succPopat.classList.add('popat__succ__anime');
     }, 200);
+    body.style.overflow = "inherit";
 }
 
 
 function openSuccPopat() {
+    body.style.overflow = "hidden";
     succPopat.classList.remove('popat__succ__anime');
     setTimeout(function () {
         succPopat.classList.add('popat__succ__active');
     }, 200);
+    famBackgr.style.display = "block";
 }
 
 
@@ -227,19 +231,23 @@ errBtn.addEventListener('click', () => {
 
 
 function closeErrPopat() {
+    famBackgr.style.display = 'none';
     errPopat.classList.remove('popat__err__active');
     setTimeout(function () {
         errPopat.classList.add('popat__err__anime');
     }, 200);
+    body.style.overflow = "inherit";
 }
 
 
 
 function openErrPopat() {
+    body.style.overflow = "hidden";
     errPopat.classList.remove('popat__err__anime');
     setTimeout(function () {
         errPopat.classList.add('popat__err__active');
     }, 200);
+    famBackgr.style.display = "block";
 }
 
 
@@ -284,24 +292,41 @@ btn.addEventListener("click", () => {
 });
 
 
-/*   работа с формой в мобильной версии   */ 
-
-
-let formM = document.querySelector('.form');
-let formTouch = document.querySelector('.form__touch');
+/*   работа с формой и попапами в мобильной версии   */
 
 
 
-formTouch.addEventListener('touchstart', handleTouch);
-formTouch.addEventListener('touchmove', handleMove);
-formTouch.addEventListener('touchend', handleEnd);
-
-console.log(formM);
 
 
+let formTouch = document.querySelector('.form__title');
+let succPopatTouch = document.querySelector('.popat__succ__block');
+let errPopatTouch = document.querySelector('.popat__err__block');
 
 let y1 = null;
 let way;
+
+/*   ивенты связанный с формой   */
+
+formTouch.addEventListener('touchstart', handleTouch);
+formTouch.addEventListener('touchmove', handleMove(form));
+formTouch.addEventListener('touchend', handleEnd(formM));
+
+/*   ивенты связанный с формой   */
+
+//succPopatTouch.addEventListener('touchstart', handleTouch);
+//succPopatTouch.addEventListener('touchmove', handleMove(succPopat));
+//succPopatTouch.addEventListener('touchend', handleEnd(succPopat));
+
+///*   ивенты связанный с формой   */
+
+//errPopatTouch.addEventListener('touchstart', handleTouch);
+//errPopatTouch.addEventListener('touchmove', handleMove(errPopat));
+//errPopatTouch.addEventListener('touchend', handleEnd(errPopat));
+
+
+
+
+
 
 function handleTouch(event) {
     const firstTouch = event.touches[0];
@@ -313,12 +338,12 @@ function handleMove(event) {
     if (!y1) {
         return false;
     }
-    formM.style.transition = "all 0s ease";
+    form.style.transition = "all 0s ease";
     let y2 = event.touches[0].clientY;
     let yDiff = y2 - y1;
     way = 0 - yDiff;
     if (yDiff > 0) {
-        formM.style.bottom = way.toString() + "px";
+        form.style.bottom = way.toString() + "px";
     }
 
 
@@ -328,17 +353,44 @@ function handleMove(event) {
 
 function handleEnd() {
     if (way <= -200) {
-        formM.style.transition = "all 0.4s ease";
-        closeFormMobile();
+        form.style.transition = "all 0.4s ease";
+        if (obj == formM) {
+            closeFormMobile();
+        }
         
     } else {
-        formM.style.transition = "all 0.4s ease";
-        formM.style.bottom = "0";
+        form.style.transition = "all 0.4s ease";
+        form.style.bottom = "0";
     }
     
     
 }
 
+
+function closePopatSuccMobile() {
+    famBackgr.style.display = 'none'
+    succPopat.style.bottom = "-600px";
+    succPopat.classList.remove('popat__succ__active');
+
+    setTimeout(function () {
+        succPopat.classList.add('popat__succ__anime');
+        succPopat.style.bottom = "0";
+    }, 200)
+    body.style.overflow = "inherit";
+}
+
+
+function closePopatErrMobile() {
+    famBackgr.style.display = 'none'
+    errPopat.style.bottom = "-600px";
+    errPopat.classList.remove('popat__err__active');
+    setTimeout(function () {
+        errPopat.classList.add('popat__err__anime');
+        errPopat.style.bottom = "0";
+    }, 200);
+
+    body.style.overflow = "inherit";
+}
 
 
 function closeFormMobile() {

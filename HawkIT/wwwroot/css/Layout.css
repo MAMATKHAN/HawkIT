@@ -490,6 +490,7 @@ svg path {
     background: #151515;
     transition: all 0.4s ease;
     opacity: 0;
+    z-index: 5000;
 }
 
 
@@ -503,6 +504,23 @@ svg path {
     display: none;
 }
 
+
+.popat__succ__block{
+    position:absolute;
+    width: 100%;
+    top: 0;
+    height: 40px;
+}
+
+.popat__succ__block__touch {
+    width: 40px;
+    height: 4px;
+    margin: 0 auto;
+    margin-top: 16px;
+    border-radius: 28px;
+    opacity: 0.24;
+    background: #FFF;
+}
 
 .popat__succ__inner{
     margin-top: 32px;
@@ -576,6 +594,7 @@ svg path {
     border-radius: 12px;
     background: #151515;
     opacity: 0;
+    z-index: 5000;
 }
 
 
@@ -589,6 +608,23 @@ svg path {
     display: none;
 }
 
+
+.popat__succ__block {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 40px;
+}
+
+.popat__succ__block__touch {
+    width: 40px;
+    height: 4px;
+    margin: 0 auto;
+    margin-top: 16px;
+    border-radius: 28px;
+    opacity: 0.24;
+    background: #FFF;
+}
 
 .popat__err__inner {
     margin-top: 32px;
