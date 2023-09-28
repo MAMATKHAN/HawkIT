@@ -1,9 +1,9 @@
 ﻿
 /*   анимация мышки   */
 
-console.log('curre');
+
 let scroll = document.querySelector('.intro__mouse__scroll');
-console.log('curre');
+
 
 
 
@@ -26,7 +26,7 @@ let infoTeam = document.querySelector(".info__team");
 let infoMiss = document.querySelector(".info__mission");
 let blog = document.querySelector('.blog');
 
-console.log(infoMiss);
+
 
 infoBtns[0].addEventListener("click", function () {
     infoBtns[1].classList.remove('info__line__btn__active');
@@ -55,7 +55,6 @@ infoBtns[1].addEventListener("click", function () {
     infoBtns[2].classList.remove('info__line__btn__active');
     infoBtns[1].classList.add('info__line__btn__active');
 
-    console.log(infoMiss);
 
     infoServ.classList.remove('info__anime');
     infoMiss.classList.remove('info__anime');
@@ -101,8 +100,6 @@ infoBtns[2].addEventListener("click", function () {
 btnT2 = document.querySelectorAll('.button__type2');
 
 
-
-console.log('p');
 let coutrize = 0;
 
 for (let i = 0; i < btnT2.length; i++) {
@@ -115,6 +112,5 @@ for (let i = 0; i < btnT2.length; i++) {
     }
     coutrize = coutrize + b;
     let a = coutrize.toString() + 'px';
-    console.log(coutrize);
     btnT2[i].style.left = a;
 }

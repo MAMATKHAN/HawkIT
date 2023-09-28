@@ -26,16 +26,15 @@ function enableBtn() {
     let userNameIsValid = regCheck(input[1], mark[1], x[1], regUser);
     let mailIsValid = regCheck(input[2], mark[2], x[2], regMail);
     let numberIsValid = (regCheck(input[3], mark[3], x[3], regNum) || regCheck(input[3], mark[3], x[3], regNumT2));
-    console.log(nameIsValid, userNameIsValid, mailIsValid, numberIsValid);
     if (nameIsValid && userNameIsValid && mailIsValid && numberIsValid) {
         btn.classList.add("form__inner__btn__enable")
         btn.disabled = false;
-        console.log('enable');
+ 
 
     } else {
         btn.classList.remove("form__inner__btn__enable")
         btn.disabled = true;
-        console.log('disable');
+       
         
     }
 }
@@ -103,7 +102,7 @@ let famBackgr = document.querySelector(".fam__backgr");
 
 
 if (openBtn == null) {
-    console.log(openBtn);
+   
     footerInner.style.justifyContent = "center";
 }
 
@@ -177,8 +176,6 @@ const regNumT2 = /8\d{10}$/
 
 
 
-
-console.log(input[0].value.match(regName))
 
 
 /*   работа с успешным попатом   */
@@ -282,7 +279,6 @@ btn.addEventListener("click", () => {
     
     let send = TrySendBid(name.value, email.value, phone.value, telegram.value, message.value);
     send.then(function (result) {
-        console.log("message is" + result);
         closeForm();
         if (result) openSuccPopat();
         else openErrPopat();
@@ -317,7 +313,6 @@ succPopatTouch.addEventListener('touchstart', handleTouch);
 succPopatTouch.addEventListener('touchmove', handleMoveSuccPopat);
 succPopatTouch.addEventListener('touchend', handleEndSuccPopat);
 
-console.log(succPopatTouch);
 
 /*   ивенты связанный с формой   */
 
@@ -350,9 +345,6 @@ function handleMoveForm(event) {
     if (yDiff > 0) {
         form.style.bottom = way.toString() + "px";
     }
-
-
-
 }
 
 
