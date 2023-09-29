@@ -213,7 +213,6 @@
 }
 
 
-
 /*   popat__succ   */
 
 
@@ -236,6 +235,10 @@
 
     .popat__succ__anime {
         display: none;
+    }
+
+    .popat__succ__block{
+        display: block;
     }
 
     .popat__succ__close{
@@ -287,6 +290,10 @@
         height: inherit;
         left: inherit;
         opacity: 0;
+    }
+
+    .popat__err__block{
+        display: block;
     }
 
     .popat__err__active {
