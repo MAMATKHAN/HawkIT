@@ -537,7 +537,7 @@ namespace HawkIT.Controllers
 
         private string GetFullPathUploadFile(string fileName, string? folderName)
         {
-            var uploads = Path.Combine(_env.WebRootPath, $"uploads{"\\" + folderName}");
+            var uploads = Path.Combine(_env.WebRootPath, $"uploads{"/" + folderName}");
             var filePath = Path.Combine(uploads, fileName);
             return filePath;
         }
@@ -555,7 +555,7 @@ namespace HawkIT.Controllers
         {
             if (fileName == null) return;
 
-            fileName = fileName.TrimStart('/').Replace("/", "\\");
+            fileName = fileName.TrimStart('/').Replace("\\", "/");
             var filePath = Path.Combine(_env.WebRootPath, fileName);
             if (System.IO.File.Exists(filePath))
             {
@@ -569,7 +569,7 @@ namespace HawkIT.Controllers
 
             foreach (var file in filesName)
             {
-                string fileName = file.Replace("/", "\\");
+                string fileName = file.Replace("\\", "/");
                 string filePath = Path.Combine(_env.WebRootPath + fileName);
                 if (System.IO.File.Exists(filePath))
                 {
