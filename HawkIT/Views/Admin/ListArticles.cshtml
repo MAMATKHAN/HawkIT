@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Panel</title>
+    <title>List Articles</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
@@ -102,12 +102,12 @@
                                                 </svg>
                                                 Найти
                                             </button>
-                                            <a class="btn btn-danger">
+                                            <a class="btn btn-danger" asp-controller="Admin" asp-action="ListArticles">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
                                                     <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
                                                     <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
                                                 </svg>
-                                                Очистить
+                                                Сбросить
                                             </a>
                                         </div>
                                     </div>
@@ -138,19 +138,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(var a in Model.Articles)
+                        @foreach(var article in Model.Articles)
                         {
                             <tr>
-                                <td align="center">@a.Id</td>
-                                <td align="center" class="text-truncate" style="max-width: 200px;">@a.Name</td>
-                                <td align="center" class="text-truncate" style="max-width: 200px;">@a.Text</td>
-                                <td align="center">@a.CreatedDate.ToLongDateString()</td>
-                                <td align="center">
-                                    @if (a.Tags != null && a.Tags.Count != 0)
+                                <td align="center">@article.Id</td>
+                                <td align="center" class="text-truncate" style="max-width: 200px;">@article.Name</td>
+                                <td align="center" class="text-truncate" style="max-width: 200px;">@article.Text</td>
+                                <td align="center">@article.CreatedDate.ToLongDateString()</td>
+                                <td align="center" class="text-truncate" style="max-width: 330px;">
+                                    @if (article.Tags != null && article.Tags.Count != 0)
                                     {
-                                        @foreach(var t in a.Tags)
+                                        @foreach(var tag in article.Tags)
                                         {
-                                            @t.Name<span>   </span>
+                                            @(tag.Name + ((tag.Id != article.Tags.Last().Id) ? " | " : ""))
                                         }
                                     }
                                     else 
@@ -159,14 +159,14 @@
                                     }
                                 </td>
                                 <td align="center">
-                                    <a asp-controller="Admin" asp-action="EditArticle" asp-route-id="@a.Id" class="link-primary text-decoration-none">
+                                    <a asp-controller="Admin" asp-action="EditArticle" asp-route-id="@article.Id" class="link-primary text-decoration-none">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                         </svg>
                                         Изменить
                                     </a> <span class="mx-1">|</span>
-                                    <a asp-controller="Admin" asp-action="DeleteArticle" asp-route-id="@a.Id" class="link-danger text-decoration-none">
+                                    <a asp-controller="Admin" asp-action="DeleteArticle" asp-route-id="@article.Id" class="link-danger text-decoration-none">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                             <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                                         </svg>
@@ -177,9 +177,7 @@
                             </tr>
                         }
 
-                        @*<tr>
-                            <td colspan="7" align="center">Not Data!!!</td>
-                        </tr>*@
+                       
                     </tbody>
                 </table>
             </div>

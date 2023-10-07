@@ -1,6 +1,10 @@
 ﻿@using HawkIT.ViewModel
 @model ProjectDetailsViewModel
 
+@{
+    ViewData["Title"] = Model.Project.Name;
+}
+
 @functions
 {
     public string UniqueFileNameToUsualFileName(string uniqueFileName)

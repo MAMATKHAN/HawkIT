@@ -1,4 +1,4 @@
-﻿    using HawkIT.Models;
+﻿using HawkIT.Models;
 using HawkIT.ViewModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -57,7 +57,7 @@ namespace HawkIT.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Admin");
+            return RedirectToAction("Index", "Home");
         }
 
         // PROJECT CRUD
@@ -65,9 +65,18 @@ namespace HawkIT.Controllers
         [Authorize]
         public IActionResult ListProjects(string? name ,int? tagId, int? workerId)
         {
-            var projects = db.Projects.Include(p => p.Tags).Include(p => p.Workers).ToList();
-            var tags = db.Tags.ToList();
-            var workers = db.Workers.ToList();
+            var projects = db.Projects
+                .Include(p => p.Tags)
+                .Include(p => p.Workers)
+                .ToList();
+
+            var tags = db.Tags
+                .Where(t => t.Projects.Count != 0)
+                .ToList();
+
+            var workers = db.Workers
+                .Where(w => w.Projects.Count != 0)
+                .ToList();
 
             if (name != null) projects = projects
                     .Where(w => w.Name.ToLower().Contains(name.ToLower()))
@@ -207,7 +216,9 @@ namespace HawkIT.Controllers
         public IActionResult ListWorkers(string? name,int projectId, string? specialization)
         {
             var workers = db.Workers.Include(w => w.Projects).ToList();
-            var projects = db.Projects.ToList();
+            var projects = db.Projects
+                .Where(p => p.Workers.Count != 0)
+                .ToList();
 
             if(name != null) workers = workers
                     .Where(w => w.Name.ToLower().Contains(name.ToLower()))
@@ -393,7 +404,9 @@ namespace HawkIT.Controllers
         public IActionResult ListArticles(string? articleName, int? tagId)
         {
             var articles = db.Articles.Include(p => p.Tags).ToList();
-            var tags = db.Tags.ToList();
+            var tags = db.Tags
+                .Where(t => t.Articles.Count != 0)
+                .ToList();
             
             if (articleName != null) articles = articles.Where(a => a.Name.ToLower().Contains(articleName.ToLower())).ToList();
             if (tagId != null && tagId != -1)

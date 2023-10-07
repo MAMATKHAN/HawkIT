@@ -1,7 +1,13 @@
 ﻿@using HawkIT.ViewModel
 @model ArticleDetailsViewModel
-@section Styles{<link rel="stylesheet" href="~/css/Details.css"/>
-				<link rel="stylesheet" href="~/css/DetailsMobile.css"/>
+
+@{
+	ViewData["Title"] = Model.Aritcle.Name;
+}
+
+@section Styles{
+	<link rel="stylesheet" href="~/css/Details.css"/>
+	<link rel="stylesheet" href="~/css/DetailsMobile.css"/>
 }
 
 @*   локация -- где находится пользователь   *@
