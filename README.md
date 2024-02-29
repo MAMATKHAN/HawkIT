@@ -1,5 +1,6 @@
-# HawkIT
-![Логотип HawkIT](/HawkIT/wwwroot/img/logo.svg)
+<div align="center">
+  <img src="/HawkIT/wwwroot/img/logo.svg" alt="HawkIT">
+</div>
 
 ## О проекте
 
