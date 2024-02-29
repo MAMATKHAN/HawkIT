@@ -17,11 +17,11 @@ namespace HawkIT.Services
                 _smtpClient.EnableSsl = true;
 
                 NetworkCredential basicAutheticationInfo = new
-                    NetworkCredential("it.hawk.it@gmail.com", "htlqljdecdljjrrp");
+                    NetworkCredential("", "");
                 _smtpClient.Credentials = basicAutheticationInfo;
 
-                MailAddress senderMail = new MailAddress("it.hawk.it@gmail.com", sender.Email);
-                MailAddress recipientMail = new MailAddress("it.hawk.it@gmail.com", "Компания HAWKIT");
+                MailAddress senderMail = new MailAddress("", sender.Email);
+                MailAddress recipientMail = new MailAddress("", "");
                 MailMessage message = new MailMessage(senderMail, recipientMail);
 
                 MailAddress replyTo = new MailAddress(sender.Email);
