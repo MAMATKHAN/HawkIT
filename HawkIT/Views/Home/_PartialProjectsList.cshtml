@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Project>
+@{
+}
+
+    @foreach (var project in Model)
+    {
+
+        @* Карточки с проделанными работами *@
+
+        <a asp-controller="Home" asp-action="ProjectDetails" asp-route-id="@project.Id" class="made__card">
+            <div class="made__card__setting">
+                <div class="made__card__inner">
+                    @if (project.IsNewProject())
+                    {
+                        <div class="made__card__inner__recent">new</div>
+                    }
+
+                    <div class="made__card__inner__img">
+                        <img src="@project.ProjectImage" class="made__card__inner__img__in">
+                    </div>
+
+                    <div class="made__card__inner__name">@project.Name</div>
+
+                    <div class="made__card__inner__type">
+                        @if (project.Tags != null)
+                        {
+                            @foreach (var tag in project.Tags)
+                            {
+                                <div class="made__card__inner__type__txt">@tag.Name</div>
+                            }
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </a>
+    }

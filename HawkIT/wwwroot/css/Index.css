@@ -1,0 +1,626 @@
+﻿
+
+/*  intro   */
+
+
+.intro{
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.intro__gif {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    pointer-events: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+
+.intro__logo{
+    width: 533px;
+    height: 145px;
+    margin: 0 auto;
+}
+
+
+
+.intro__txt{
+    font-size: 24px;
+    margin: 0 auto;
+    margin-top: 17px;
+    color: #fff;        
+}
+
+
+
+.intro__mouse {
+    width: 0px;
+    padding: 8px 10px 18px 10px;
+    position: relative;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    margin: 0 auto;
+    margin-top: 64px;
+}
+
+
+.intro__mouse__scroll {
+    width: 2px;
+    height: 6px;
+    position: absolute;
+    left: 9px;
+    top: 8px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+
+
+.intro__mouse__scroll__active {
+    height: 11px;
+    transition: all 0.3s ease;
+}
+
+
+
+
+/*  made   */
+
+
+.made{
+    margin-top: 172px;
+}
+
+
+
+.made__txt{
+    font-size: 36px;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+
+.made__btn__line__setting {
+    overflow: scroll;
+    width: 100%;
+    touch-action: pan-x;
+    height: 50px;
+    position: relative;
+}
+
+
+.made__btn__line__setting::-webkit-scrollbar {
+    display: none;
+}
+
+
+.made__btn__line {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    width: 100%;
+    position: absolute;
+    height: 50px;
+}
+
+
+
+.made__cardline{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+
+
+
+.made__card {
+    width: 544px;
+    
+    margin-bottom: 32px;
+    border-radius: 8px;
+    background-color: #151515;
+    text-decoration: none;
+}
+
+
+
+.made__card__setting {
+    width: 543px;
+    
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    padding-top: 1px;
+}
+
+
+
+
+.made__card__setting:hover{
+    border: 1px solid #FFF;
+    transition: all 0.3s ease;
+}
+
+
+
+.made__card:nth-child(2n+1){
+    margin-right: 32px;
+}
+
+
+
+.made__card__inner {
+    margin: 16px;
+    position: relative;
+    margin-top: 60px;
+}
+
+
+.made__card__inner__recent {
+    width: 100%;
+    font-size: 16px;
+    color: #D1FB52;
+    font-weight: 600;
+    text-align: right;
+    position: absolute;
+    top: -45px;
+
+}
+
+
+
+.made__card__inner__img {
+    width: 328px;
+    height: 360px;
+    margin: 0 auto;
+    margin-top: 26px;
+}
+
+
+
+.made__card__inner__img__in{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+.made__card__inner__name {
+    font-size: 24px;
+    font-weight: 400;
+    color: #fff;
+    margin-top: 26px;
+}
+
+
+
+.made__card__inner__type{
+    display: flex;
+    justify-content: left;
+    margin-top: 8px;
+    
+}
+
+
+.made__card__inner__type__txt {
+    padding: 8px 9.72px 8px 8px;
+    background-color: #303030;
+    color: #BBBBBB;
+    border-radius: 4px;
+    margin-right: 8px;
+    margin-bottom: 10px;
+}
+
+
+
+/*  Баннер  */
+
+
+
+.banner {
+    width: 1120px;
+    height: 340px;
+    margin: 0 auto;
+    background-color: #151515;
+    overflow: hidden;
+    margin-top: 86px;
+    border-radius: 12px;
+    max-width: 95%;
+}
+
+
+
+.banner__inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+
+
+.banner__inner__backgr {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 0;
+    position: absolute;
+    transition: all 0.5s ease;
+    border-radius: 12px;
+}
+
+
+.banner__inner__txt{
+    position: absolute;
+    width: 100%;
+    font-size: 100px;
+    font-weight: 600;
+    text-align: center;
+    top: 16px;
+    color: #fff;
+    z-index: 1;
+
+}
+
+
+
+.banner__inner__img {
+    position: absolute;
+    top: 181px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+
+
+.banner__inner:hover > .banner__inner__backgr{
+    opacity: 1;
+}
+
+
+.banner__inner:hover > .banner__inner__img {
+    top: 107px;
+}
+
+
+
+
+/*  info   */
+
+
+/*   В самом конце info будет ее состояние info__active   */
+
+
+.info{
+    margin-top: 118px;
+}
+
+
+.info__txt{
+    font-size: 36px;
+    font-weight: 600;
+    color: #fff;
+}
+
+
+.info__line__setting{
+    position: relative;
+    overflow: scroll;
+    height: 57px;
+}
+
+
+.info__line__setting::-webkit-scrollbar{
+    display: none;
+}
+
+
+.info__line {
+    margin-top: 4px;
+    display: flex;
+    justify-content: left;
+}
+
+
+.info__line__btn {
+    padding: 8px 18.2px 7.19px 17px;
+    color: #fff;
+    background-color: #303030;
+    font-size: 16px;
+    margin-right: 16px;
+    border-radius: 4px;
+    margin-top: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+
+.info__line__btn__active {
+    background-color: #fff;
+    color: #151515;
+    font-weight: 400;
+}
+
+
+
+/*     info__service    */
+
+/*     информация о услугах    */
+
+
+.info__service {
+    margin-top: 12px;
+    display: none;
+    opacity: 0;
+    color: #fff;
+    transition: all 0.4s ease;
+}
+
+
+
+.info__service__artic{
+
+}
+
+
+.info__service__artic__title{
+    display: flex;
+    justify-content: left;
+    margin-top: 24px;
+}
+
+
+
+.info__service__artic__title__txt {
+    font-size: 24px;
+    margin-right: 3px;
+    
+    
+}
+
+
+
+.info__service__artic__title__img {
+    
+}
+
+
+
+.info__service__artic__txt {
+    font-size: 20px;
+    color: #BBB;
+    margin-top: 12px;
+    text-align: justify;
+}
+
+
+
+
+
+/*   info__team   */
+
+/*   информация о команде   */
+
+
+.info__team {
+    margin-top: 36px;
+    color: #fff;
+    display: none;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.info__team__inner {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.info__team__card{
+    margin-right: 32px;
+    margin-bottom: 32px;
+    width: 256px;
+    height: 312px;
+    padding-top: 1px;
+    position: relative;
+    
+}
+
+
+.info__team__card:nth-child(4n){
+    margin-right: 0px;
+}
+
+
+.info__team__card__img{
+    width: 256px;
+    height: 250px;
+    margin-left: 1px;
+    position: absolute;
+    top: 1px;
+}
+
+
+.info__team__card__block{
+    width: 254px;
+    height: 62px;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    margin-top: 250px;
+}
+
+
+.info__team__card__block__inner{
+    display: flex;
+    justify-content: left;
+    margin-left: 16px;
+    margin-top: 12px;
+}
+
+
+.info__team__card__block__inner__img{
+    width: 37px;
+    height: 37px;
+    margin-right: 12px;
+}
+
+
+
+.info__team__card__block__inner__txt{
+
+}
+
+
+.info__team__card__block__inner__txt__pos {
+    font-size: 16px;
+}
+
+
+.info__team__card__block__inner__txt__name {
+    font-size: 14px;
+    color: #9C9C9C;
+}
+
+
+
+
+/*   info__mission   */
+
+/*   Информация о миссии   */
+
+
+.info__mission {
+    margin-top: 36px;
+    color: #BBB;
+    font-size: 20px;
+    display: none;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+
+
+/*   info__active   */
+
+
+.info__active {
+    display: block;
+    
+}
+
+
+.info__anime {
+    opacity: 1;
+}
+
+
+/*   blog   */
+
+/*   блог   */
+
+
+.blog{
+    margin-top: 116px;
+    color: #fff;
+    transition: all 0.4s ease;
+}
+
+
+.blog__anime{
+    margin-top: 150px;
+}
+
+
+.blog__title{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.blog__title__txt {
+    font-size: 36px;
+    font-weight: 600;
+
+}
+
+
+
+.blog__title__btn {
+    border: 1px solid #fff;
+    padding: 12px 16px;
+    color: #fff;
+    border-radius: 4px;
+    margin-top: 12px;
+    transition: all 0.4s ease;
+    text-decoration: none;
+}
+
+
+.blog__title__btn:hover{
+    color: #000;
+    background-color: #fff;
+}
+
+
+
+.blog__cardline {
+    display: flex;
+    justify-content: left;
+    margin: 0 auto;
+    margin-top: 32px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+
+.blog__card {
+    width: 352px;
+    height: 389px;
+   
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+
+.blog__card:nth-child(3n - 2){
+    margin-right: 32px;
+    
+
+}
+
+
+.blog__card:nth-child(3n - 1){
+    margin-right: 32px;
+}
+
+
+.blog__card__img {
+    width: 352px;
+    height: 352px;
+}
+
+
+.blog__card__txt {
+    font-size: 16px;
+    margin-top: 16px;
+    text-decoration: none;
+    color: #fff;
+}

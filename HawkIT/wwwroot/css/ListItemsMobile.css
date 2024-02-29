@@ -1,0 +1,45 @@
+﻿
+/*   banner мобильная версия   */
+
+
+@media (max-width: 1180px){
+    .banner{
+        width: 100%;
+    }
+}
+
+
+/*   карточки с постами   */
+
+
+
+@media (max-width: 1180px){
+    .blog__title{
+        justify-content: center;
+    }
+
+    .blog__cardlist{
+        justify-content: center;
+    }
+
+    .blog__card:nth-child(3n - 1){
+        margin-right: 10px;
+    }
+
+    .blog__card:nth-child(3n - 2) {
+        margin-right: 10px;
+    }
+
+    .blog__card{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}
+
+
+@media (max-width: 390px) {
+    .blog__card__img {
+        width: 330px;
+        height: 330px;
+    }
+}

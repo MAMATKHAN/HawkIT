@@ -1,0 +1,137 @@
+﻿.locat {
+    color: #BBB;
+    display: flex;
+    justify-content: left;
+    margin-top: 62px;
+    font-size: 16px;
+}
+
+
+.locat__main {
+    margin-top: 1.5px;
+    margin-right: 4px;
+    text-decoration: none;
+    color: #BBB;
+}
+
+
+.locat__img{
+    margin-right: 4px;
+    width: 24px;
+    height: 24px;
+}
+
+
+.locat__case {
+    margin-top: 1.5px;
+    color: #BBB;
+    text-decoration: none;
+}
+
+
+
+/*   banner   */
+
+
+.banner{
+    width: 1120px;
+ 
+    margin-top: 17.5px;
+}
+
+
+/*   текст после баннера   */
+
+.txt {
+    color: #fff;
+    font-size: 20px;
+    margin-top: 32px;
+}
+
+
+
+/*   blog   */
+
+
+.blog {
+    margin-top: 81px;
+    color: #fff;
+   
+}
+
+
+.blog__title {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.blog__title__txt {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+
+
+/*   карточки со статьями в блоге   */
+
+
+.blog__cardlist{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+
+.blog__card{
+    width: 352px;
+    text-decoration: none;
+    color: #fff;
+    margin-top: 20px;
+}
+
+
+
+.blog__card:nth-child(3n - 2){
+    margin-right: 32px;
+}
+
+
+.blog__card:nth-child(3n - 1){
+    margin-right: 32px;
+}
+
+
+.blog__card__img {
+    width: 352px;
+    height: 352px;
+    border-radius: 8px;
+}
+
+
+.blog__card__txt {
+    font-size: 14px;
+    margin-top: 12px;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+
+
+
+.blog__card__desc {
+    display: flex;
+    justify-content: left;
+    margin-top: 4px;
+    color: #BBB;
+}
+
+
+
+.blog__card__desc__date{
+    margin-right: 8px;
+}
+

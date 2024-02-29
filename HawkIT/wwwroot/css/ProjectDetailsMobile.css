@@ -1,0 +1,126 @@
+﻿
+/*   описание в мобильной версии   */
+
+@media (max-width: 901px) {
+    .desc {
+        text-align: left;
+    }
+}
+
+
+/*   баннера в мобильной версии   */
+
+@media (max-width: 1221px){
+    .case__img{
+        width: 100%;
+    }
+}
+
+
+
+/*   люди в мобильной версии   */
+
+@media (max-width: 1180px){
+    .info__team__txt{
+        text-align: center;
+    }
+
+    .info__team__inner{
+        justify-content: center;
+    }
+
+    .doc__inner{
+        justify-content: center;
+    }
+}
+
+@media (max-width: 912px){
+    .info__team__card:nth-child(4){
+        margin-right: 32px;
+    }
+}
+
+
+@media (max-width: 540px){
+    .info__team__card {
+        margin-right: 0px;
+    }
+
+    .info__team__card:nth-child(4){
+        margin-right: 0px;
+    }
+}
+
+
+
+
+/*   документы в мобильной версии   */
+
+
+@media (max-width: 1180px){
+    .doc__txt {
+        text-align: center;
+    }
+
+    .doc__link {
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+}
+
+
+
+@media (max-width: 513px){
+    .doc__link:nth-child(5){
+        margin-right: 15px;
+    }
+}
+
+
+
+/*   другие проекты в мобильной версии   */
+
+
+@media (max-width: 1180px){
+    .project__txt{
+        text-align: center;
+    }
+
+    .project__cardlist{
+        justify-content: center;
+
+    }
+}
+
+
+@media (max-width: 1105px){
+    .project__card:nth-child(3n - 1){
+        margin-right: 0px;
+    }
+}
+
+
+
+@media (max-width: 776px) {
+    .project__card:nth-child(3n - 2) {
+        margin-right: 0px;
+    }
+
+    .project__card{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}
+
+
+@media (max-width: 430px) {
+    .project__card{
+        width: 306px;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .project__card__img {
+        margin-left: 38px;
+    }
+}

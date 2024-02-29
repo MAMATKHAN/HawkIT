@@ -1,0 +1,262 @@
+﻿
+
+/*   intro mobile ver   */
+
+
+@media (max-width: 575px){
+    .intro{
+        margin-top: 0px;
+    }
+
+    .intro__logo{
+        display: none;
+    }
+
+    .intro__txt{
+        font-size: 28px;
+        text-align: center;
+        margin-top: 0px;
+    }
+}
+
+
+
+/*   made или портфолио mobile ver   */
+
+
+
+@media (max-width: 1180px){
+    .made__cardline{
+        justify-content: space-around;
+    }
+
+    .made__txt{
+        text-align: center;
+    }
+
+    .made__card{
+        margin-top: 20px;
+    }
+
+    .made__card:nth-child(2n+1) {
+        margin-right: 0px;
+    }
+
+    .made__btn__line {
+        
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+    
+    
+
+    .made__cardline{
+        margin-top: 20px;
+        
+    }
+}
+
+
+
+@media (max-width: 575px){
+    .made__card{
+        width: 444px;
+    }
+
+    .made__card__setting{
+        width: 443px;
+    }
+
+    .made__card__inner__name{
+        margin-top: 8px;
+    }
+
+    .made__btn__line {
+        display: block;
+        touch-action: auto;
+    }
+
+    .button__type2{
+        position: absolute;
+        top: -3px;
+        
+    }
+}
+
+
+
+@media (max-width: 472px){
+    .made__card{
+        width: 343px;
+    }
+
+    .made__card__setting{
+        width: 342px;
+    }
+
+    .made__card__inner__img {
+        width: 218px;
+        height: 240px;
+        margin-top: 0px;
+    }
+
+    .made__card__inner__type{
+        flex-wrap: wrap;
+    }
+}
+
+
+
+/*   intro мобильная версия   */
+
+
+
+@media (max-width: 530px){
+    .intro__gif{
+        width: 350px;
+        height: 350px;
+        margin-top: 100px;
+    }
+}
+
+
+
+
+
+
+/*   banner мобильная версия   */
+
+
+@media (max-width: 639px){
+    .banner{
+        height: 168px;
+    }
+
+    .banner__inner__txt{
+        font-size: 50px;
+        margin-top: 33px;
+        margin-left: 16px;
+        text-align: left;
+    }
+
+    .banner__inner__img{
+        left: 100%;
+        top: 30px;
+        width: 174px;
+    }
+}
+
+
+
+@media (max-width: 474px){
+    .banner__inner__txt {
+        font-size: 32px;
+        margin-top: 43px;
+        
+    }
+}
+
+
+
+
+/*   info мобильная версия   */
+
+
+@media (max-width: 1180px) {
+    .info__txt{
+        text-align: center;
+    }
+
+    .info__line{
+        justify-content: center;
+    }
+
+    .info__team__inner{
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 901px){
+    .info__service__artic__txt{
+        text-align: left;
+    }
+}
+
+
+@media (max-width: 594px){
+    .info__line{
+        position: absolute;
+    }
+}
+
+
+@media (max-width: 534px) {
+    .info__team__card {
+        margin-right: 0px;
+    }
+}
+
+
+
+
+
+/*   blog для мобильной версии   */
+
+
+
+@media (max-width: 1180px){
+    .blog__cardline{
+        justify-content: center;
+    }
+
+    .blog__title__btn {
+        margin-top: 0px;
+    }
+}
+
+
+@media (max-width: 960px){
+    .blog__card:nth-child(3n - 1){
+        margin-right: 0px;
+    }
+
+    
+}
+
+
+@media (max-width: 776px){
+    .blog__card:nth-child(3n - 2) {
+        margin-right: 0px;
+    }
+
+    .blog__card{
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+}
+
+
+
+@media (max-width: 393px) {
+    .blog__card__img {
+        width: 330px;
+        height: 330px;
+    }
+
+    .blog__title__btn {
+        border: none;
+        padding: 0;
+        padding-top: 15px;
+    }
+}
+
+
+
+@media (max-width: 385px){
+    .blog__card__img{
+        width: 330px;
+        height: 330px;
+    }
+}

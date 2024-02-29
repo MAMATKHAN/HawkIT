@@ -1,0 +1,131 @@
+﻿.locat {
+    color: #BBB;
+    display: flex;
+    justify-content: left;
+    margin-top: 62px;
+    font-size: 16px;
+
+}
+
+
+.locat__main {
+    margin-top: 1.5px;
+    margin-right: 4px;
+    text-decoration: none;
+    color: #BBB;
+}
+
+
+.locat__img {
+    margin-right: 4px;
+    width: 24px;
+    height: 24px;
+}
+
+
+.locat__case {
+    margin-top: 1.5px;
+    margin-right: 4px;
+    text-decoration: none;
+    color: #BBB;
+}
+
+
+.locat__state {
+    margin-top: 1.5px;
+    text-decoration: none;
+    color: #BBB;
+}
+
+
+
+/*   статья   */
+
+
+
+.article{
+    margin-top: 18px;
+}
+
+
+.article__img{
+    width: 1120px;
+    height: 544px;
+    border-radius: 12px;
+}
+
+
+
+.article__name{
+    color: #fff;
+    margin-top: 32px;
+    font-size: 36px;
+    font-weight: 600;
+
+}
+
+
+
+.article__heading{
+    margin-top: 8px;
+    font-size: 24px;
+    color: #fff;
+}
+
+
+.article__txt {
+    font-size: 24px;
+    color: #BBB;
+    margin-top: 12px;
+    text-align: justify;
+}
+
+
+
+.another__state{
+    margin-top: 64px;
+    font-size: 24px;
+    color: #fff;
+}
+
+
+
+.blog__cardline {
+    display: flex;
+    justify-content: left;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+
+.blog__card {
+    width: 352px;
+    height: 389px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+
+
+.blog__card:nth-child(3n - 2){
+    margin-right: 32px;
+}
+
+
+.blog__card:nth-child(3n - 1){
+    margin-right: 32px;
+}
+
+
+.blog__card__img {
+    width: 352px;
+    
+}
+
+
+.blog__card__txt {
+    font-size: 16px;
+    margin-top: 16px;
+    text-decoration: none;
+    color: #fff;
+}

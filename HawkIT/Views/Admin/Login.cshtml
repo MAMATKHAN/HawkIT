@@ -1,0 +1,45 @@
+﻿@model LoginModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/validation-style.css" />
+</head>
+<body>
+    <div class="w-25 mx-auto mt-5 pt-5">
+        <h2 class="text-center mb-5">Admin Panel</h2>
+        <form method="post">
+            <div asp-validation-summary="All"></div>
+            <!-- Email input -->
+            <div class="form-outline mb-2">
+                <label class="form-label" asp-for="Login">Login <span class="ms-3" asp-validation-for="Login" /></label>
+                <input type="text" id="Login" name="Login" class="form-control" asp-for="Login" />
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-2">
+                <label class="form-label" asp-for="Password">Password <span class="ms-3" asp-validation-for="Password" /></label>
+                <input type="password" id="Password" name="Password" class="form-control" asp-for="Password" />
+            </div>
+
+            <!-- Submit button -->
+            <input type="submit" class="btn btn-primary btn-block" value="Sign In"/>
+
+        </form>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

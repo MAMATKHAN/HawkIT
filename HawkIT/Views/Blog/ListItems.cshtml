@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Article>
+
+@{
+	ViewData["Title"] = "Блог";
+}
+@section Styles{<link rel="stylesheet" href="~/css/ListItems.css"/>
+				<link rel="stylesheet" href="~/css/ListItemsMobile.css"/>
+}
+
+@*   локация -- где находится пользователь   *@
+
+<div class="locat">
+	<a asp-controller="Home" asp-action="Index" class="locat__main">Главная </a>
+	<img src="~/img/blog_strelocka.png" class="locat__img"/>
+	<a class="locat__case">Блог</a>
+</div>
+
+
+
+@*   баннер   *@
+
+<img src="~/img/blog__banner.png" class="banner"/>
+
+
+<div class="txt">Привет, Целевая аудитория! Вас ждут айти-рубрики, полезные советы для новичков, свежие обновления и море крутого контента!</div>
+
+
+
+@*   карточки со статьями в блоге   *@
+
+
+<div class="blog">
+	<div class="blog__title">
+		<div class=" blog__title__txt">Блог</div>
+	</div>
+
+	<div class="blog__cardlist">
+		@foreach(var article in Model) 
+		{
+			@*   Карточки со статьями в блоге   *@
+		
+			<a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id" class="blog__card">
+				<img src="@article.ArticleImage" class="blog__card__img"/>
+				<div class="blog__card__txt">@article.Name</div>
+				<div class="blog__card__desc">
+					<div class="blog__card__desc__date">@article.CreatedDate.ToShortDateString()</div>
+					@if(article.Tags != null)
+					{
+						@foreach (var tag in article.Tags)
+						{
+							<span class="blog__card__desc__type">@tag.Name </span>
+						}
+					}
+				</div>
+			</a>
+		}
+	</div>
+</div>
+
+
+
+

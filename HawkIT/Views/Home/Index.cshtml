@@ -1,0 +1,266 @@
+﻿@using HawkIT.ViewModel
+@model MainViewModel
+@{
+    ViewData["Title"] = "HawkIT";
+    var activeAll = (Model.ActiveTagId == null) ? "type2__active" : "";
+}
+
+@section Styles{<link rel="stylesheet" href="~/css/Index.css" /> 
+                <link rel="stylesheet" href="~/css/IndexMobile.css" />
+}
+
+
+@*AJAX script*@
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+@*  intro   *@
+
+
+<div class="intro">
+    <img src="~/img/intro.gif" class="intro__gif"/>
+
+    <img src="~/img/intro_logo.svg" class="intro__logo"/>
+
+    <div class="intro__txt">Студия разработки цифровых продуктов</div>
+
+    <a href="#caseList" class="intro__mouse">
+        <div class="intro__mouse__scroll"></div>
+    </a>
+</div>
+
+
+@* Что-то на подобии портфолио *@
+
+@*  made  *@
+
+
+<div class="made">
+    <div id="caseList" class="made__txt">Разработано в студии</div>
+
+    <div class="made__btn__line__setting">
+        <div  class="made__btn__line">
+
+            @*  button__type2   *@
+
+            <a class="button__type2 type2__active" tagId="-1">Все</a>
+            @foreach(var tag in Model.Tags)
+            {
+                <a class="button__type2" tagId="@tag.Id">
+                    @tag.Name
+                </a>
+            }
+
+        </div>
+    </div>
+
+    <div class="made__cardline" id="projectsList">
+        @foreach(var project in Model.Projects)
+        {
+
+            @* Карточки с проделанными работами *@
+
+            <a asp-controller="Home" asp-action="ProjectDetails" asp-route-id="@project.Id" class="made__card">
+                <div class="made__card__setting">
+                    <div class="made__card__inner">
+                        @if (project.IsNewProject())
+                        {
+                            <div class="made__card__inner__recent">new</div>
+                        }
+
+                        <div class="made__card__inner__img">
+                            <img src="@project.ProjectImage" class="made__card__inner__img__in">
+                        </div>
+
+                        <div class="made__card__inner__name">@project.Name</div>
+
+                        <div class="made__card__inner__type">
+                            @if(project.Tags != null)
+                            {
+                                @foreach (var tag in project.Tags)
+                                {
+                                    <div class="made__card__inner__type__txt">@tag.Name</div>
+                                }
+                            }
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</div>
+
+
+@*  Баннер  *@
+
+<a href="https://www.instagram.com/hawk1t/">
+    <div class="banner">
+        <div class="banner__inner">
+            <img src="~/img/banner_backgr.png" class="banner__inner__backgr"/>
+
+            <div class="banner__inner__txt">Мы в инсте</div>
+
+            <img src="~/img/banner_insta.png" class="banner__inner__img"/>
+        </div>
+    </div>
+</a>
+
+
+@*  Информация о нас, персонале и миссии  *@
+
+
+<div class="info">
+
+    <div class="info__txt">О нас</div>
+
+    <div class="info__line__setting">
+        <div class="info__line">
+
+            @*  button__type2   *@
+
+            <div class="info__line__btn info__line__btn__active">Наши услуги</div>
+            
+            <div class="info__line__btn">Наша команда</div>
+
+            <div class="info__line__btn">Наша миссия</div>
+        </div>
+    </div>
+
+    @*  Информация о нас  *@
+
+    @*  Информация о услугах  *@
+
+    <div class="info__service info__active info__anime">
+
+        @*  Статьи о услугах  *@
+
+        <div class="info__service__artic">
+            <div class="info__service__artic__title">
+                <div class="info__service__artic__title__txt">Разработка веб-приложений</div>
+
+                <img class="info__service__artic__title__img"/>
+            </div>
+
+            <div class="info__service__artic__txt">Создаём высококачественные и инновационные веб-приложения, которые отвечают потребностям современных бизнесов и предоставляют лучший пользовательский опыт. Мы объединяем техническую компетенцию, креативный дизайн и глубокое понимание бизнес-процессов для того, чтобы создать продукт, который будет успешным и удовлетворит потребности вашей аудитории.</div>
+        </div>
+
+        <div class="info__service__artic">
+            <div class="info__service__artic__title">
+                <div class="info__service__artic__title__txt">Разработка мобильных приложений</div>
+
+                <img class="info__service__artic__title__img"/>
+            </div>
+
+            <div class="info__service__artic__txt">Разрабатываем  инновационные и функциональные мобильныеприложения, которые удовлетворяют потребности современных пользователей и поддерживают ваш бизнес в цифровой эпохе. Мы объединяем техническое мастерство, дизайн и углубленное понимание пользовательских потребностей, чтобы создавать приложения, которые привлекают, удерживают и вдохновляют вашу целевую аудиторию..</div>
+        </div>
+
+        <div class="info__service__artic">
+            <div class="info__service__artic__title">
+                <div class="info__service__artic__title__txt">Разработка дизайна</div>
+
+                <img class="info__service__artic__title__img"/>
+            </div>
+
+            <div class="info__service__artic__txt">Предоставляем комплексные решения в сфере дизайна, обеспечивая эффективное визуальное представление и стратегический анализ для вашего бизнеса. Мы занимаемся разработкой новых дизайнов, редизайном существующих, созданием логотипов и анализом, чтобы помочь вам создать узнаваемый и впечатляющий облик, привлекая внимание вашей целевой аудитории.</div>
+        </div>
+    </div>
+
+    @*  Информация о комманде   *@
+
+    <div class="info__team">
+        <div class="info__team__inner">
+
+            @foreach(var worker in Model.Workers)
+            {
+                <div class="info__team__card">
+                    <img src="@worker.WorkerImage" class="info__team__card__img" />
+
+                    <div class="info__team__card__block">
+                        <div class="info__team__card__block__inner">
+                            <img src="@worker.SpecializationIcon" class="info__team__card__block__inner__img" />
+
+                            <div class="info__team__card__block__inner__txt">
+                                <div class="info__team__card__block__inner__txt__pos">@worker.Specialization</div>
+
+                                <div class="info__team__card__block__inner__txt__name">@worker.Name</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>
+
+
+    @*  Информация о миссии  *@
+
+    @*  info__mission  *@
+
+    <div class="info__mission">Мы стремимся помочь бизнесу зарабатывать больше, а пользователям с максимальным кайфом пользоваться нашими продуктами. </div>
+</div>
+
+@*   blog   *@
+
+@*   блог   *@
+
+<div class="blog">
+    <div class="blog__title">
+        <div class="blog__title__txt">Наш блог</div>
+
+        <a asp-controller="Blog" asp-action="ListItems" class="blog__title__btn">Перейти в блог</a>
+    </div>
+
+    <div class="blog__cardline">
+
+        @foreach(var article in Model.Articles)
+        {
+            <a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id" class="blog__card">
+                <img src="@article.ArticleImage" class="blog__card__img" />
+
+                <div class="blog__card__txt">@article.Name</div>
+            </a>
+        }
+        
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/base.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".button__type2").click(function (e) {
+
+                ResetActiveButton();
+                $(this).addClass("type2__active")
+                let id = $(this).attr('tagId');
+
+                e.preventDefault();
+                $('#projectsList').load('@Url.Action("PartialProjectsList", "Home")?id=' + id)
+
+                //AJAX
+                //$.ajax({
+                //    type: "GET",
+                //    url: "Home/PartialProjectsList?id=" + id,
+                //    succes: function (response) {
+                //        $("#projectsList").empty();
+                //        alert("good")
+                //        //$("#projectsList").html(response);
+                //    },
+                //    error: function (response) {
+                //        alert(response.responseText);
+                //    }
+                //});
+
+
+            });
+        });
+        function ResetActiveButton(){
+            var buttons = document.querySelectorAll(".button__type2");
+            buttons.forEach(item => item.classList.remove("type2__active"))
+        }
+    </script>
+}

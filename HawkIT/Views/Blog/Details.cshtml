@@ -1,0 +1,50 @@
+﻿@using HawkIT.ViewModel
+@model ArticleDetailsViewModel
+
+@{
+	ViewData["Title"] = Model.Aritcle.Name;
+}
+
+@section Styles{
+	<link rel="stylesheet" href="~/css/Details.css"/>
+	<link rel="stylesheet" href="~/css/DetailsMobile.css"/>
+}
+
+@*   локация -- где находится пользователь   *@
+
+<div class="locat">
+	<a asp-controller="Home" asp-action="Index" class="locat__main">Главная </a>
+	<img src="~/img/blog_strelocka.png" class="locat__img" />
+	<a asp-controller="Blog" asp-action="ListItems" class="locat__case">Блог</a>
+	<img src="~/img/blog_strelocka.png" class="locat__img"/>
+	<a class="locat__state">UX/UI дизайнер</a>
+</div>
+
+
+
+@*   статья   *@
+
+
+<div class="article">
+	<div class="article__name">@Model.Aritcle.Name</div>
+
+	<div class="article__txt">@Model.Aritcle.Text</div>
+</div>
+
+
+
+<div class="another__state">Другие статьи</div>
+
+
+<div class="blog__cardline">
+
+	@foreach (var article in Model.MoreArticles)
+	{
+		<a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id" class="blog__card">
+			<img src="@article.ArticleImage" class="blog__card__img" />
+
+			<div class="blog__card__txt">@article.Name</div>
+		</a>
+	}
+
+</div>

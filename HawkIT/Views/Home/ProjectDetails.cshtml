@@ -1,0 +1,134 @@
+﻿@using HawkIT.ViewModel
+@model ProjectDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Project.Name;
+}
+
+@functions
+{
+    public string UniqueFileNameToUsualFileName(string uniqueFileName)
+    {
+        int lenFileName = uniqueFileName.Length;
+        return uniqueFileName.Substring(0, lenFileName - 9) + uniqueFileName.Substring(lenFileName - 4);
+    }
+}
+
+@section Styles{<link rel="stylesheet" href="~/css/ProjectDetails.css"/>
+                <link rel="stylesheet" href="~/css/ProjectDetailsMobile.css"/>
+}
+
+
+@*   локация -- где находится пользователь   *@
+
+<div class="locat">
+	<a asp-controller="Home" asp-action="Index" class="locat__main">Главная </a>
+	<img src="~/img/blog_strelocka.png" class="locat__img"/>
+	<a class="locat__case">@Model.Project.Name</a>
+</div>
+
+@*   Название проекта   *@
+
+<div class="name">@Model.Project.Name</div>
+
+@*   Описание проекта   *@
+
+<div class="desc">@Model.Project.Text</div>
+
+@*   Картинки связанные с проектом   *@
+@if(Model.Project.Banners != null)
+{
+	@foreach (var banner in Model.Project.Banners.Split("||"))
+	{
+		<img src="@banner" class="case__img" />
+	}
+}
+
+
+@*  Информация о комманде   *@
+
+<div class="info__team">
+    <div class="info__team__txt">Над проектом работали</div>
+
+    <div class="info__team__inner">
+
+        @foreach (var worker in Model.Project.Workers)
+        {
+            <div class="info__team__card">
+                <img src="@worker.WorkerImage" class="info__team__card__img" />
+
+                <div class="info__team__card__block">
+                    <div class="info__team__card__block__inner">
+                        <img src="@worker.SpecializationIcon" class="info__team__card__block__inner__img" />
+
+                        <div class="info__team__card__block__inner__txt">
+                            <div class="info__team__card__block__inner__txt__pos">@worker.Specialization</div>
+
+                            <div class="info__team__card__block__inner__txt__name">@worker.Name</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+@*   Документы   *@
+
+@if (!(String.IsNullOrEmpty(Model.Project.Documents)))
+{
+    <div class="doc">
+            <div class="doc__txt">Документы проекта</div>
+
+        <div class="doc__inner">
+            @foreach(var doc in Model.Project.Documents.Split("||"))
+            {
+        
+        
+                    <a href="@doc" class="doc__link">
+                        <img src="~/img/doc.png" class="doc__link__img" />
+
+                        <div class="doc__link__txt">@UniqueFileNameToUsualFileName(doc.Split("/").Last())</div>
+                    </a>
+        
+        
+            }
+        </div>
+    </div>
+}
+
+@*Ссылки на другие проекты*@
+
+<div class="project__txt">Другие кейсы</div>
+
+<div class="project__cardlist">
+
+
+
+    @foreach(var project in Model.MoreProjects)
+    {
+
+
+        <a class="project__card" asp-controller="Home" asp-action="ProjectDetails" asp-route-id="@project.Id">@* Ссылка на проект*@
+            @if (project.IsNewProject())
+                {
+                    <div class="project__card__recent">new</div>
+                }
+            <img class="project__card__img" src="@project.ProjectImage" /> @*Изображение проекта*@
+            <div class="project__card__name" >@project.Name</div> @*Название проекта*@
+            @if(project.Tags != null)  @*Тэги проекта*@
+            {
+                <div class="project__card__taglist">
+                    @foreach (var tag in project.Tags)
+                    {
+                        <div class="project__card__tag">@tag.Name</div>
+                    }
+                </div>
+            }
+        
+        </a>
+    }
+
+</div>

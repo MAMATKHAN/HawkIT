@@ -1,0 +1,47 @@
+﻿
+/*   текст статьи в мобильной версии   */
+
+@media (max-width: 901px){
+    .article__txt{
+        text-align: left;
+    }
+
+}
+
+
+
+/*   Другие статьи   */
+
+
+@media (max-width: 1180px){
+    .blog__cardline{
+        justify-content: center;
+    }
+
+    .blog__card:nth-child(3n - 1){
+        margin-right: 10px;
+    }
+
+    .blog__card:nth-child(3n - 2) {
+        margin-right: 10px;
+    }
+
+    .blog__card{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}
+
+
+@media (max-width: 1176px) {
+    .another__state{
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 390px){
+    .blog__card__img{
+        width: 330px;
+    }
+}

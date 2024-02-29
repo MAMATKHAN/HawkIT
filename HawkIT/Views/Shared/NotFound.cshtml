@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/css/NotFound.css"/>
+    <link rel="stylesheet" href="~/css/NotFoundMobile.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Not Found</title>
+</head>
+<body>
+    <div class="container">
+        <div class="info">
+            <img src="~/img/404.png" class="info__404"/>
+            <div class="info__txt">Cтраница не найдена</div>
+            <a asp-controller="Home" asp-action="Index" class="info__link">
+                <div class="info__link__txt">На главную</div>
+                <img src="~/img/left_arrow.png" class="info__link__img"/>
+            </a>
+        </div>
+
+        <img src="~/img/moon.png" class="moon"/>
+    </div>
+</body>
+</html>

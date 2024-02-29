@@ -1,0 +1,50 @@
+﻿@media (max-width: 1281px){
+    .info{
+        margin-top: 15%;
+    }
+
+    .moon{
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .info {
+        margin-top: 10%;
+    }
+
+    .info__404{
+        width: 250px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .info {
+        margin-top: 10%;
+        width: 100%;
+    }
+
+    .info__404 {
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    .info__txt{
+        font-size: 19px;
+    }
+
+    .info__link{
+        width: 150px;
+
+    }
+
+    .info__link__txt{
+        font-size: 19px;
+        margin: 0 auto;
+    }
+}

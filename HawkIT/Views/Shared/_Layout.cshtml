@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="stylesheet" href="~/css/Layout.css"/>
+    <link rel="stylesheet" href="~/css/LayoutMobile.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur&display=swap" rel="stylesheet">
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+
+    <div class="fam__backgr"></div>
+
+    @*  начинается header   *@
+
+    <header class="header">
+        <div class="header__inner">
+
+            @*  логотип  *@
+
+            <a asp-controller="Home" asp-action="Index">
+                <img src="~/img/logo.svg" class="header__inner__logo" />
+            </a>
+            
+            <div class="header__inner__contact">
+                <div class="header__inner__contact__txt">Свяжитесь с нами</div>
+
+                <div class="header__inner__contact__call">
+                    <img src="~/img/phone.svg" class="header__inner__contact__call__img"/>
+
+                    <div class="header__inner__contact__call__number">8 (928) 937–16–30</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+
+    <div class="container">
+            @RenderBody()
+    </div>
+
+
+    @*   Форма для обсуждения   *@
+
+
+     <div class="form form__anime">
+         <div class="form__touch"></div>
+
+        <div class="form__title">
+            <div class="form__title__txt">Заполните форму для отправки заявки</div>
+
+            <img src="~/img/form_exit.png" class="form__title__img"/>
+        </div>
+
+        <div class="form__inner">
+            <div class="form__inner__top">
+                <div class="form__inner__top__inp">
+                    <div class="form__inner__top__inp__txt">Ваше имя*</div>
+                    <input name="name" id="name" class="form__inner__top__inp__value" autocomplete="off"/>
+                    <img src="~/img/red__x.png" class="form__inner__top__inp__x"/>
+                    <img src="~/img/green_check.png" class="form__inner__top__inp__mark"/>
+                </div>
+
+                <div class="form__inner__top__inp">
+                    <div class="form__inner__top__inp__txt">Юзернейм в телеграм</div>
+                    <input name="telegram" id="telegram" class="form__inner__top__inp__value" autocomplete="off"/> 
+                    <img src="~/img/red__x.png" class="form__inner__top__inp__x"/>
+                    <img src="~/img/green_check.png" class="form__inner__top__inp__mark"/>
+                </div>
+
+                <div class="form__inner__top__inp">
+                    <div class="form__inner__top__inp__txt">Электронная почта*</div>
+                    <input name="email" id="email" class="form__inner__top__inp__value" autocomplete="off"/>
+                    <img src="~/img/red__x.png" class="form__inner__top__inp__x"/>
+                    <img src="~/img/green_check.png" class="form__inner__top__inp__mark"/>
+                </div>
+
+                <div class="form__inner__top__inp">
+                    <div class="form__inner__top__inp__txt">Номер телефона</div>
+                    <input name="phone" id="phone" class="form__inner__top__inp__value" autocomplete="off"/>
+                    <img src="~/img/red__x.png" class="form__inner__top__inp__x"/>
+                    <img src="~/img/green_check.png" class="form__inner__top__inp__mark"/>
+                </div>
+            </div>
+
+            <div class="form__inner__txt">Расскажите о заявке</div>
+
+            <div class="form__inner__post">Не более 2000 символов</div>
+
+           
+            <div class="form__inner__comm" >
+                <textarea name="message" id="message" type="text" class="form__inner__comm__txt"></textarea>
+            </div>
+
+            <button class="form__inner__btn" disabled>
+                <div class="form__inner__btn__block">
+                    <svg class="form__btn__setting">
+                        <circle class="form__btn__loader" cx=10 cy=10 r=8></circle>
+                    </svg>
+                </div>
+
+                Отправить заявку
+
+            </button>
+
+            <div class="form__inner__info">Нажимая кнопку «Отправить заявку», я даю своё согласие на 
+                <a class="form__inner__info__link">обработку персональных данных</a>
+            </div>
+        </div>
+
+    </div>
+
+
+    @*   успешный попат   *@
+
+    <div class="popat__succ popat__succ__anime">
+        <div class="popat__succ__block">
+            <div class="popat__succ__block__touch"></div>
+        </div>
+        <div class="popat__succ__inner">
+            <img src="~/img/face__succ.png" class="popat__succ__face"/>
+
+            <img src="~/img/succ__x.png" class="popat__succ__close"/>
+
+            <div class="popat__succ__main">Ваша заявка успешно отправлена</div>
+
+            <div class="popat__succ__post">После обработки заявки, вам напишет наш менеджер</div>
+
+            <div class="popat__succ__btn">Отлично</div>
+        </div>
+    </div>
+
+
+
+    @*   ошибочный попат   *@
+
+
+
+    <div class="popat__err popat__err__anime">
+        <div class="popat__err__block">
+            <div class="popat__err__block__touch"></div>
+        </div>
+        <div class="popat__err__inner">
+            <img src="~/img/face_err.png" class="popat__err__face"/>
+
+            <img src="~/img/succ__x.png" class="popat__err__close"/>
+
+            <div class="popat__err__main">Упс....Что-то пошло не так</div>
+
+            <div class="popat__err__post">Попробуйте отправить заявку снова</div>
+
+            <div class="popat__err__btn">Повторить снова</div>
+        </div>
+    </div>
+
+
+
+
+    @*  начинается footer   *@
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__inner__desc">© 2023 HAWKIT. All rights reserved.</div>
+
+            <div class="footer__inner__call">
+                    <img src="~/img/phone.svg" class="footer__inner__call__img"/>
+
+                    <div class="footer__inner__call__number">8 (928) 937–16–30</div>
+            </div>
+
+            <div class="footer__inner__txt">Свяжитесь с нами</div>
+
+            @*  button__type1   *@
+
+            <div class="button__type1">Обсудить проект</div>
+            
+        </div>
+    </footer>
+
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>*@
+
+
+    <script src="~/js/site.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
